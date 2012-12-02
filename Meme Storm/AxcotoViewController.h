@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AxcotoViewController : UIViewController
+@interface AxcotoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (unsafe_unretained, nonatomic) IBOutlet UITableView *memeSourceTable;
+
+
+- (void) loadMemeSource;
 
 @end

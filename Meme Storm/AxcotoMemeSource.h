@@ -9,5 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface AxcotoMemeSource : NSObject
+{
+    NSMutableArray * meme;
+}
+@property (unsafe_unretained) int currentPage;
+@property (unsafe_unretained) NSString * currentMeme;
+
+
+- (BOOL) hasUpdate;
+- (void) previous;
+- (void) next;
 
 @end

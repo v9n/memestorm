@@ -10,10 +10,13 @@
 
 @class AxcotoViewController;
 
+
 @interface AxcotoAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) AxcotoViewController *viewController;
+
+@property (nonatomic, retain) UINavigationController *navController;
 
 @end

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AxcotoMemeDetailViewController : UIViewController
+@interface AxcotoMemeDetailViewController : UIViewController <UIScrollViewDelegate>
+
+@property (strong, nonatomic) NSString *memeSource ;
+
+@property (unsafe_unretained, nonatomic) IBOutlet UIScrollView *imgContainer;
+@property (strong, nonatomic) IBOutlet UIImageView *imgViewUi;
 
 @end

@@ -12,16 +12,26 @@
 
 @implementation AxcotoAppDelegate
 
+@synthesize navController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    UIViewController *rootView;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[AxcotoViewController alloc] initWithNibName:@"AxcotoViewController_iPhone" bundle:nil];
+        rootView = [[AxcotoViewController alloc] initWithNibName:@"AxcotoViewController_iPhone" bundle:nil];
     } else {
-        self.viewController = [[AxcotoViewController alloc] initWithNibName:@"AxcotoViewController_iPad" bundle:nil];
+        rootView = [[AxcotoViewController alloc] initWithNibName:@"AxcotoViewController_iPad" bundle:nil];
     }
-    self.window.rootViewController = self.viewController;
+//    self.window.rootViewController = self.viewController;
+//    [self.window makeKeyAndVisible];
+//    return YES;
+    
+    self.navController = [[UINavigationController alloc] initWithRootViewController:rootView];
+    
+    //template code
+    [[self window] setRootViewController:navController];
     [self.window makeKeyAndVisible];
     return YES;
 }
