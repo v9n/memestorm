@@ -24,6 +24,20 @@
 		174739ED1669E58100C25A72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C51669E58100C25A72 /* Foundation.framework */; };
 		174739F51669E58100C25A72 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 174739F31669E58100C25A72 /* InfoPlist.strings */; };
 		174739F81669E58100C25A72 /* Meme_StormTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 174739F71669E58100C25A72 /* Meme_StormTests.m */; };
+		176982E9166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */; };
+		176982EA166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */; };
+		176982EB166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */; };
+		176982EC166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */; };
+		176982F0166ABFAD0091B88D /* AxcotoMemeSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */; };
+		176982F1166ABFAD0091B88D /* AxcotoMemeSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */; };
+		176982F6166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */; };
+		176982F7166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */; };
+		17698305166AC23A0091B88D /* IMG_0086.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698302166AC23A0091B88D /* IMG_0086.JPG */; };
+		17698306166AC23A0091B88D /* IMG_0086.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698302166AC23A0091B88D /* IMG_0086.JPG */; };
+		17698307166AC23A0091B88D /* IMG_0087.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698303166AC23A0091B88D /* IMG_0087.JPG */; };
+		17698308166AC23A0091B88D /* IMG_0087.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698303166AC23A0091B88D /* IMG_0087.JPG */; };
+		17698309166AC23A0091B88D /* IMG_0088.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698304166AC23A0091B88D /* IMG_0088.JPG */; };
+		1769830A166AC23A0091B88D /* IMG_0088.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698304166AC23A0091B88D /* IMG_0088.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +74,16 @@
 		174739F41669E58100C25A72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		174739F61669E58100C25A72 /* Meme_StormTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Meme_StormTests.h; sourceTree = "<group>"; };
 		174739F71669E58100C25A72 /* Meme_StormTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Meme_StormTests.m; sourceTree = "<group>"; };
+		176982E6166ABA670091B88D /* AxcotoMemeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxcotoMemeDetailViewController.h; sourceTree = "<group>"; };
+		176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeDetailViewController.m; sourceTree = "<group>"; };
+		176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AxcotoMemeDetailViewController.xib; sourceTree = "<group>"; };
+		176982EE166ABFAC0091B88D /* AxcotoMemeSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxcotoMemeSource.h; sourceTree = "<group>"; };
+		176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeSource.m; sourceTree = "<group>"; };
+		176982F4166AC0950091B88D /* AxcotoMemeSourceFunnymama.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxcotoMemeSourceFunnymama.h; sourceTree = "<group>"; };
+		176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeSourceFunnymama.m; sourceTree = "<group>"; };
+		17698302166AC23A0091B88D /* IMG_0086.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0086.JPG; sourceTree = "<group>"; };
+		17698303166AC23A0091B88D /* IMG_0087.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0087.JPG; sourceTree = "<group>"; };
+		17698304166AC23A0091B88D /* IMG_0088.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0088.JPG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,12 +143,12 @@
 		174739C91669E58100C25A72 /* Meme Storm */ = {
 			isa = PBXGroup;
 			children = (
+				176982F2166ABFB50091B88D /* Classes */,
+				176982F8166AC2090091B88D /* Resources */,
 				174739D21669E58100C25A72 /* AxcotoAppDelegate.h */,
 				174739D31669E58100C25A72 /* AxcotoAppDelegate.m */,
-				174739DB1669E58100C25A72 /* AxcotoViewController.h */,
-				174739DC1669E58100C25A72 /* AxcotoViewController.m */,
-				174739DE1669E58100C25A72 /* AxcotoViewController_iPhone.xib */,
-				174739E11669E58100C25A72 /* AxcotoViewController_iPad.xib */,
+				176982ED166ABA9F0091B88D /* MemeDetail */,
+				176982E5166A93D80091B88D /* MemeList */,
 				174739CA1669E58100C25A72 /* Supporting Files */,
 			);
 			path = "Meme Storm";
@@ -161,6 +185,56 @@
 				174739F31669E58100C25A72 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		176982E5166A93D80091B88D /* MemeList */ = {
+			isa = PBXGroup;
+			children = (
+				174739DB1669E58100C25A72 /* AxcotoViewController.h */,
+				174739DC1669E58100C25A72 /* AxcotoViewController.m */,
+				174739DE1669E58100C25A72 /* AxcotoViewController_iPhone.xib */,
+				174739E11669E58100C25A72 /* AxcotoViewController_iPad.xib */,
+			);
+			name = MemeList;
+			sourceTree = "<group>";
+		};
+		176982ED166ABA9F0091B88D /* MemeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				176982E6166ABA670091B88D /* AxcotoMemeDetailViewController.h */,
+				176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */,
+				176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */,
+			);
+			name = MemeDetail;
+			sourceTree = "<group>";
+		};
+		176982F2166ABFB50091B88D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				176982F3166AC07C0091B88D /* Source */,
+				176982EE166ABFAC0091B88D /* AxcotoMemeSource.h */,
+				176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		176982F3166AC07C0091B88D /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				176982F4166AC0950091B88D /* AxcotoMemeSourceFunnymama.h */,
+				176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		176982F8166AC2090091B88D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				17698302166AC23A0091B88D /* IMG_0086.JPG */,
+				17698303166AC23A0091B88D /* IMG_0087.JPG */,
+				17698304166AC23A0091B88D /* IMG_0088.JPG */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +315,10 @@
 				174739DA1669E58100C25A72 /* Default-568h@2x.png in Resources */,
 				174739E01669E58100C25A72 /* AxcotoViewController_iPhone.xib in Resources */,
 				174739E31669E58100C25A72 /* AxcotoViewController_iPad.xib in Resources */,
+				176982EB166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */,
+				17698305166AC23A0091B88D /* IMG_0086.JPG in Resources */,
+				17698307166AC23A0091B88D /* IMG_0087.JPG in Resources */,
+				17698309166AC23A0091B88D /* IMG_0088.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +327,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				174739F51669E58100C25A72 /* InfoPlist.strings in Resources */,
+				176982EC166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */,
+				17698306166AC23A0091B88D /* IMG_0086.JPG in Resources */,
+				17698308166AC23A0091B88D /* IMG_0087.JPG in Resources */,
+				1769830A166AC23A0091B88D /* IMG_0088.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +360,9 @@
 				174739D01669E58100C25A72 /* main.m in Sources */,
 				174739D41669E58100C25A72 /* AxcotoAppDelegate.m in Sources */,
 				174739DD1669E58100C25A72 /* AxcotoViewController.m in Sources */,
+				176982E9166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */,
+				176982F0166ABFAD0091B88D /* AxcotoMemeSource.m in Sources */,
+				176982F6166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +371,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				174739F81669E58100C25A72 /* Meme_StormTests.m in Sources */,
+				176982EA166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */,
+				176982F1166ABFAD0091B88D /* AxcotoMemeSource.m in Sources */,
+				176982F7166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +481,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Meme Storm/Meme Storm-Prefix.pch";
 				INFOPLIST_FILE = "Meme Storm/Meme Storm-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -404,6 +493,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Meme Storm/Meme Storm-Prefix.pch";
 				INFOPLIST_FILE = "Meme Storm/Meme Storm-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -462,6 +552,7 @@
 				174739FD1669E58100C25A72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		174739FE1669E58100C25A72 /* Build configuration list for PBXNativeTarget "Meme StormTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +561,7 @@
 				17473A001669E58100C25A72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
