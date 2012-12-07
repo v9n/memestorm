@@ -38,6 +38,7 @@
 		17698308166AC23A0091B88D /* IMG_0087.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698303166AC23A0091B88D /* IMG_0087.JPG */; };
 		17698309166AC23A0091B88D /* IMG_0088.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698304166AC23A0091B88D /* IMG_0088.JPG */; };
 		1769830A166AC23A0091B88D /* IMG_0088.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698304166AC23A0091B88D /* IMG_0088.JPG */; };
+		17E7E635166B638D005D7E87 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E633166B638D005D7E87 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		17698302166AC23A0091B88D /* IMG_0086.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0086.JPG; sourceTree = "<group>"; };
 		17698303166AC23A0091B88D /* IMG_0087.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0087.JPG; sourceTree = "<group>"; };
 		17698304166AC23A0091B88D /* IMG_0088.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0088.JPG; sourceTree = "<group>"; };
+		17E7E633166B638D005D7E87 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		17E7E634166B638D005D7E87 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +214,8 @@
 		176982F2166ABFB50091B88D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				17E7E633166B638D005D7E87 /* JSONKit.m */,
+				17E7E634166B638D005D7E87 /* JSONKit.h */,
 				176982F3166AC07C0091B88D /* Source */,
 				176982EE166ABFAC0091B88D /* AxcotoMemeSource.h */,
 				176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */,
@@ -363,6 +368,7 @@
 				176982E9166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */,
 				176982F0166ABFAD0091B88D /* AxcotoMemeSource.m in Sources */,
 				176982F6166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */,
+				17E7E635166B638D005D7E87 /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,7 +438,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vinh Nguyen (63C8TVC926)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vinh Nguyen (63C8TVC926)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -447,6 +454,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "9F18D4DC-BDBB-4DA9-96F8-0397E043EFC9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -461,6 +470,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vinh Nguyen (63C8TVC926)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -469,6 +479,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "9F18D4DC-BDBB-4DA9-96F8-0397E043EFC9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSONKit.h"
 
-@interface AxcotoMemeDetailViewController : UIViewController <UIScrollViewDelegate>
+@interface AxcotoMemeDetailViewController : UIViewController <UIScrollViewDelegate> {
+    int currentMemeIndex;
+    int currentMemePage;
+    NSMutableArray * memesList;
+    NSString * docRoot;
+}
 
 @property (strong, nonatomic) NSString *memeSource ;
 
