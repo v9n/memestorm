@@ -54,7 +54,11 @@
     
     imgViewUi.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
     NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/funnymama/1_0.jpg"];
+    //imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
+    NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
+    imgPath = [resourcePath stringByAppendingFormat:@"toxic_angel.jpg"];;
     imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
+    
     [imgContainer addSubview:imgViewUi];
     imgContainer.contentSize = [imgViewUi frame].size;
     
