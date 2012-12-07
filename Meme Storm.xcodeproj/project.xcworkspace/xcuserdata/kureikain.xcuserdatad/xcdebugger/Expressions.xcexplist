@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[AxcotoMemeDetailViewController loadImageAtPage:withIndex:]:AxcotoMemeDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "imgPath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[AxcotoMemeDetailViewController loadImage:]:AxcotoMemeDetailViewController.m">
          <PersistentStrings>
             <PersistentString

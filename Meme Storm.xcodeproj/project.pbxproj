@@ -24,6 +24,7 @@
 		174739ED1669E58100C25A72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C51669E58100C25A72 /* Foundation.framework */; };
 		174739F51669E58100C25A72 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 174739F31669E58100C25A72 /* InfoPlist.strings */; };
 		174739F81669E58100C25A72 /* Meme_StormTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 174739F71669E58100C25A72 /* Meme_StormTests.m */; };
+		174C70F2167206D100E33600 /* toxic_angel.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 174C70F1167206D100E33600 /* toxic_angel.jpg */; };
 		176982E9166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */; };
 		176982EA166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */; };
 		176982EB166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */; };
@@ -32,12 +33,6 @@
 		176982F1166ABFAD0091B88D /* AxcotoMemeSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */; };
 		176982F6166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */; };
 		176982F7166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */; };
-		17698305166AC23A0091B88D /* IMG_0086.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698302166AC23A0091B88D /* IMG_0086.JPG */; };
-		17698306166AC23A0091B88D /* IMG_0086.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698302166AC23A0091B88D /* IMG_0086.JPG */; };
-		17698307166AC23A0091B88D /* IMG_0087.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698303166AC23A0091B88D /* IMG_0087.JPG */; };
-		17698308166AC23A0091B88D /* IMG_0087.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698303166AC23A0091B88D /* IMG_0087.JPG */; };
-		17698309166AC23A0091B88D /* IMG_0088.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698304166AC23A0091B88D /* IMG_0088.JPG */; };
-		1769830A166AC23A0091B88D /* IMG_0088.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 17698304166AC23A0091B88D /* IMG_0088.JPG */; };
 		17E7E635166B638D005D7E87 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E633166B638D005D7E87 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
@@ -75,6 +70,7 @@
 		174739F41669E58100C25A72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		174739F61669E58100C25A72 /* Meme_StormTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Meme_StormTests.h; sourceTree = "<group>"; };
 		174739F71669E58100C25A72 /* Meme_StormTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Meme_StormTests.m; sourceTree = "<group>"; };
+		174C70F1167206D100E33600 /* toxic_angel.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = toxic_angel.jpg; sourceTree = "<group>"; };
 		176982E6166ABA670091B88D /* AxcotoMemeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxcotoMemeDetailViewController.h; sourceTree = "<group>"; };
 		176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeDetailViewController.m; sourceTree = "<group>"; };
 		176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AxcotoMemeDetailViewController.xib; sourceTree = "<group>"; };
@@ -82,9 +78,6 @@
 		176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeSource.m; sourceTree = "<group>"; };
 		176982F4166AC0950091B88D /* AxcotoMemeSourceFunnymama.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxcotoMemeSourceFunnymama.h; sourceTree = "<group>"; };
 		176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeSourceFunnymama.m; sourceTree = "<group>"; };
-		17698302166AC23A0091B88D /* IMG_0086.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0086.JPG; sourceTree = "<group>"; };
-		17698303166AC23A0091B88D /* IMG_0087.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0087.JPG; sourceTree = "<group>"; };
-		17698304166AC23A0091B88D /* IMG_0088.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0088.JPG; sourceTree = "<group>"; };
 		17E7E633166B638D005D7E87 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		17E7E634166B638D005D7E87 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -235,9 +228,7 @@
 		176982F8166AC2090091B88D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				17698302166AC23A0091B88D /* IMG_0086.JPG */,
-				17698303166AC23A0091B88D /* IMG_0087.JPG */,
-				17698304166AC23A0091B88D /* IMG_0088.JPG */,
+				174C70F1167206D100E33600 /* toxic_angel.jpg */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -321,9 +312,7 @@
 				174739E01669E58100C25A72 /* AxcotoViewController_iPhone.xib in Resources */,
 				174739E31669E58100C25A72 /* AxcotoViewController_iPad.xib in Resources */,
 				176982EB166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */,
-				17698305166AC23A0091B88D /* IMG_0086.JPG in Resources */,
-				17698307166AC23A0091B88D /* IMG_0087.JPG in Resources */,
-				17698309166AC23A0091B88D /* IMG_0088.JPG in Resources */,
+				174C70F2167206D100E33600 /* toxic_angel.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,9 +322,6 @@
 			files = (
 				174739F51669E58100C25A72 /* InfoPlist.strings in Resources */,
 				176982EC166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */,
-				17698306166AC23A0091B88D /* IMG_0086.JPG in Resources */,
-				17698308166AC23A0091B88D /* IMG_0087.JPG in Resources */,
-				1769830A166AC23A0091B88D /* IMG_0088.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
