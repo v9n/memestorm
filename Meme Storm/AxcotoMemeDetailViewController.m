@@ -22,7 +22,7 @@
 @implementation AxcotoMemeDetailViewController
 
 @synthesize memeSource;
-@synthesize imgContainer, imgViewUi;
+@synthesize imgContainer, imgViewUi, loader;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,7 +45,7 @@
     currentMemeIndex = 0; //show the first picture
     currentMemePage = 0;
     memesList = [NSMutableArray arrayWithCapacity:5]; //NSMutuableArrat auto expand when needed. This is just to allocate an enought amount for initalize this array. So, 5 is an affordable number for this purpose.
-    [memesList insertObject:@"sasa" atIndex:0];
+    [memesList insertObject:@"marked_bound_page" atIndex:0];
     [self download];
     
     imgContainer.bouncesZoom = YES;
@@ -53,8 +53,8 @@
     imgContainer.clipsToBounds = YES;
     
     imgViewUi.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
-    NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/funnymama/121708_v0_460x.jpg"];
-    imgViewUi = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
+    NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/funnymama/1_0.jpg"];
+    imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
     [imgContainer addSubview:imgViewUi];
     imgContainer.contentSize = [imgViewUi frame].size;
     
@@ -89,13 +89,21 @@
 }
 
 - (void) download {
+    currentMemePage++;
+    currentMemeIndex=0;
+    [self download:1 andShow:YES];
+}
+
+- (void) download:(NSUInteger)pageToDownload  andShow:(Boolean) show{
     
-       NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * doc = [path objectAtIndex:0];
     NSString * memeFolder = [doc stringByAppendingPathComponent:@"meme/funnymama"];
+    //[imgContainer setHidden:TRUE];
+    [loader startAnimating];
     
     dispatch_async(dispatch_get_global_queue(0,0), ^{
-        [self fetchFromSource];
+        [self fetchFromSource:pageToDownload];
         
         if (![[NSFileManager defaultManager] fileExistsAtPath:memeFolder]) {
             //try to create if not existed yet
@@ -109,21 +117,30 @@
             }
         }
         
-        NSArray * urls = [memesList objectAtIndex:currentMemePage];
+        NSArray * urls = [memesList objectAtIndex:pageToDownload];
         for (int i=0; i< [urls count]; i++) {
             NSData * imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:(NSString *) [[urls objectAtIndex:i] objectForKey:@"src"] ]];
-            NSString * memeFile = [memeFolder stringByAppendingPathComponent:[NSString stringWithFormat:@"/%d.jpg", i]];
+            NSString * memeFile = [memeFolder stringByAppendingPathComponent:[NSString stringWithFormat:@"/%d_%d.jpg", pageToDownload, i]];
+            
+            NSLog(@"INFO: attempting to create file %@", memeFile);
             [imageData writeToFile:memeFile atomically:YES];
+        }
+        [loader stopAnimating];
+        [imgContainer setHidden:FALSE];
+        if (show) {
+            [self loadImage:0];
         }
     });
 }
 
+
 /**
 * fetchFromSource should be in Asyntask or run on anothe thread instad of meain thread ot avoid block ui
 **/
-- (void) fetchFromSource {
+- (void) fetchFromSource:(NSUInteger)pageToDownload {
+    //NSString * url = [@"http://127.0.0.1:9393/m/funnymama/" stringByAppendingFormat:@"%d", currentMemePage++];
+    NSString * url = [@"http://meme-storm.herokuapp.com/m/funnymama/" stringByAppendingFormat:@"%d", pageToDownload];
     
-    NSString * url = [@"http://127.0.0.1:9393/m/funnymama/" stringByAppendingFormat:@"%d", currentMemePage++];
     NSData * dataSource = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     NSArray * memes = (NSArray *)[dataSource objectFromJSONData];
     NSLog(@"%@", memes);
@@ -144,6 +161,7 @@
 - (void)viewDidUnload {
     [self setImgContainer:nil];
     [self setImgViewUi:nil];
+    [self setLoader:nil];
     [super viewDidUnload];
 }
 
@@ -169,22 +187,55 @@
 }
 
 - (void) handleRightSwipe:(UISwipeGestureRecognizer *) swipeGestureRecognizer {
-    [self loadImage:1];
-    //[self download];
-    NSLog(@"%d", currentMemeIndex);
-}
-
-- (void) handleLeftSwipe:(UISwipeGestureRecognizer *) swipeGestureRecognizer {
     [self loadImage:-1];
     NSLog(@"%d", currentMemeIndex);
 }
 
+- (void) handleLeftSwipe:(UISwipeGestureRecognizer *) swipeGestureRecognizer {
+    [self loadImage:1];
+    NSLog(@"%d", currentMemeIndex);
+}
+
 - (void) loadImage:(int)id {
-    currentMemeIndex = currentMemeIndex + id;
-    NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/funnymama/%d.jpg", id];
-    NSLog(@"%@", imgPath);
-    if ([[NSFileManager defaultManager] fileExistsAtPath:imgPath]) {
-        imgViewUi.image = [NSData dataWithContentsOfFile:imgPath];
+    if (id<0 && currentMemePage==1 && currentMemeIndex==0) {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No more!"
+                                                          message:@"You are viewing the first meme."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
+        return;
+    }
+    
+    if (id<0 && currentMemePage>0) {
+        currentMemeIndex = currentMemeIndex + id;
+        if (currentMemeIndex==-1) {
+            currentMemePage = currentMemePage -1;
+            currentMemeIndex = [[memesList objectAtIndex:currentMemePage] count];
+        }
+        [self loadImageAtPage:currentMemePage withIndex:currentMemeIndex];
+        return;
+    }
+    
+    if (id>=0 && currentMemeIndex < [[memesList objectAtIndex:currentMemePage] count]) {
+        currentMemeIndex = currentMemeIndex + id;
+        [self loadImageAtPage:currentMemePage withIndex:currentMemeIndex];
+    } else {
+        currentMemePage++;
+        currentMemeIndex = 0;
+        [self download:currentMemePage andShow:YES];
+    }
+}
+
+- (void) loadImageAtPage:(NSUInteger) page withIndex:(int)index {
+    @try {
+        NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/funnymama/%d_%d.jpg", currentMemePage, currentMemeIndex];
+        NSLog(@"%@", imgPath);
+        if ([[NSFileManager defaultManager] fileExistsAtPath:imgPath]) {
+            imgViewUi.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]];
+        }
+    } @catch (NSException * e) {
+        NSLog(@"%@", e);
     }
 }
 

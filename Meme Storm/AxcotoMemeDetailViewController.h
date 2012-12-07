@@ -21,4 +21,7 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIScrollView *imgContainer;
 @property (strong, nonatomic) IBOutlet UIImageView *imgViewUi;
 
+@property (unsafe_unretained, nonatomic) IBOutlet UIActivityIndicatorView *loader;
+
+
 @end
