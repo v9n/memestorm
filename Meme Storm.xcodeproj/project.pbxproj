@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170EB24D1673E55A0045F6CA /* SourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EB24C1673E55A0045F6CA /* SourceCell.m */; };
+		170EB2501673E5800045F6CA /* SourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 170EB24F1673E5800045F6CA /* SourceCell.xib */; };
 		174739C41669E58100C25A72 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C31669E58100C25A72 /* UIKit.framework */; };
 		174739C61669E58100C25A72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C51669E58100C25A72 /* Foundation.framework */; };
 		174739C81669E58100C25A72 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C71669E58100C25A72 /* CoreGraphics.framework */; };
@@ -33,6 +35,8 @@
 		176982F1166ABFAD0091B88D /* AxcotoMemeSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */; };
 		176982F6166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */; };
 		176982F7166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */; };
+		17DCB172167B3BB800A06BD6 /* Prefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DCB171167B3BB800A06BD6 /* Prefs.m */; };
+		17DCB173167B3BB800A06BD6 /* Prefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DCB171167B3BB800A06BD6 /* Prefs.m */; };
 		17E7E635166B638D005D7E87 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E633166B638D005D7E87 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
@@ -47,6 +51,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		170EB24B1673E55A0045F6CA /* SourceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceCell.h; sourceTree = "<group>"; };
+		170EB24C1673E55A0045F6CA /* SourceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceCell.m; sourceTree = "<group>"; };
+		170EB24F1673E5800045F6CA /* SourceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SourceCell.xib; sourceTree = "<group>"; };
 		174739BF1669E58100C25A72 /* Meme Storm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Meme Storm.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		174739C31669E58100C25A72 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		174739C51669E58100C25A72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -78,6 +85,8 @@
 		176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeSource.m; sourceTree = "<group>"; };
 		176982F4166AC0950091B88D /* AxcotoMemeSourceFunnymama.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxcotoMemeSourceFunnymama.h; sourceTree = "<group>"; };
 		176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeSourceFunnymama.m; sourceTree = "<group>"; };
+		17DCB170167B3BB800A06BD6 /* Prefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefs.h; sourceTree = "<group>"; };
+		17DCB171167B3BB800A06BD6 /* Prefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Prefs.m; sourceTree = "<group>"; };
 		17E7E633166B638D005D7E87 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		17E7E634166B638D005D7E87 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,6 +199,9 @@
 				174739DC1669E58100C25A72 /* AxcotoViewController.m */,
 				174739DE1669E58100C25A72 /* AxcotoViewController_iPhone.xib */,
 				174739E11669E58100C25A72 /* AxcotoViewController_iPad.xib */,
+				170EB24B1673E55A0045F6CA /* SourceCell.h */,
+				170EB24C1673E55A0045F6CA /* SourceCell.m */,
+				170EB24F1673E5800045F6CA /* SourceCell.xib */,
 			);
 			name = MemeList;
 			sourceTree = "<group>";
@@ -212,6 +224,8 @@
 				176982F3166AC07C0091B88D /* Source */,
 				176982EE166ABFAC0091B88D /* AxcotoMemeSource.h */,
 				176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */,
+				17DCB170167B3BB800A06BD6 /* Prefs.h */,
+				17DCB171167B3BB800A06BD6 /* Prefs.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -313,6 +327,7 @@
 				174739E31669E58100C25A72 /* AxcotoViewController_iPad.xib in Resources */,
 				176982EB166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */,
 				174C70F2167206D100E33600 /* toxic_angel.jpg in Resources */,
+				170EB2501673E5800045F6CA /* SourceCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +370,8 @@
 				176982F0166ABFAD0091B88D /* AxcotoMemeSource.m in Sources */,
 				176982F6166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */,
 				17E7E635166B638D005D7E87 /* JSONKit.m in Sources */,
+				170EB24D1673E55A0045F6CA /* SourceCell.m in Sources */,
+				17DCB172167B3BB800A06BD6 /* Prefs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +383,7 @@
 				176982EA166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */,
 				176982F1166ABFAD0091B88D /* AxcotoMemeSource.m in Sources */,
 				176982F7166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */,
+				17DCB173167B3BB800A06BD6 /* Prefs.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

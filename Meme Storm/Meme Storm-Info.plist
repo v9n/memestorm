@@ -34,6 +34,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>LSEnvironment</key>
+	<dict>
+		<key>ENVIRONMENT</key>
+		<string>DEV</string>
+		<key>SERVER_URL</key>
+		<string>http://meme-storm.herokuapp.com</string>
+	</dict>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

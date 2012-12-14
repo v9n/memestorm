@@ -8,6 +8,7 @@
 
 #import "AxcotoViewController.h"
 #import "AxcotoMemeDetailViewController.h"
+#import "SourceCell.h"
 
 @interface AxcotoViewController ()
 
@@ -43,6 +44,24 @@
 }
 
 - (void) loadMemeSource {
+//    NSString * s1 = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"ENVIRONMENT"];
+
+    NSString * s1= [[[NSProcessInfo processInfo] environment] objectForKey:@"ENVIRONMENT"];
+    NSLog(@"%@", s1);
+  
+    
+    //NSString * url = @"http://meme-storm.herokuapp.com/m/list";
+    NSString * url = @"http://127.0.0.1:9393/m/list";
+    
+    NSData *s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+    
+    NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * f = [path objectAtIndex:0];
+    f = [f stringByAppendingString:@"/source.json"];
+    [s writeToFile:f atomically:TRUE];
+    memeSourceData = (NSArray *)[s objectFromJSONData];
+    NSLog(@"%@", memeSourceData);
+    [self.memeSourceTable reloadData];
     
 }
 
@@ -53,7 +72,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    return @"Meme Sources";
+    return @"";//@"Meme Sources";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -65,10 +84,19 @@
 {
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    
+    SourceCell * cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        NSArray * objects = [[NSBundle mainBundle] loadNibNamed:@"SourceCell" owner:self options:nil];
+        for (id currentObject in objects) {
+            if ([currentObject isKindOfClass:[UITableViewCell class]])
+            {
+                cell = (SourceCell *) currentObject;
+                break;
+            }
+        }
     }
     
     cell.textLabel.text = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"name"];

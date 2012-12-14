@@ -53,10 +53,17 @@
     imgContainer.clipsToBounds = YES;
     
     imgViewUi.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
-    NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/funnymama/1_0.jpg"];
+    NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/d.jpg"];
     //imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
-    NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
-    imgPath = [resourcePath stringByAppendingFormat:@"toxic_angel.jpg"];;
+    NSString * resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/toxic_angel.jpg"];
+    
+    NSFileManager * fileMan = [NSFileManager defaultManager];
+    if ([fileMan fileExistsAtPath:imgPath]==FALSE) {
+        NSError * error;
+        [fileMan copyItemAtPath:resourcePath toPath:imgPath error:&error];
+        NSLog(@"%@", error);
+    }
+    
     imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
     
     [imgContainer addSubview:imgViewUi];
@@ -143,7 +150,7 @@
 **/
 - (void) fetchFromSource:(NSUInteger)pageToDownload {
     //NSString * url = [@"http://127.0.0.1:9393/m/funnymama/" stringByAppendingFormat:@"%d", currentMemePage++];
-    NSString * url = [@"http://meme-storm.herokuapp.com/m/funnymama/" stringByAppendingFormat:@"%d", pageToDownload];
+    NSString * url = [NSString stringWithFormat:@"http://meme-storm.herokuapp.com/m/%@/%d", memeSource,pageToDownload];
     
     NSData * dataSource = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     NSArray * memes = (NSArray *)[dataSource objectFromJSONData];
