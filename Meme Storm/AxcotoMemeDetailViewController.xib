@@ -36,7 +36,7 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIProgressView" id="884209387">
+					<object class="IBUIProgressView" id="422805161">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{85, 248}, {150, 11}}</string>
@@ -51,17 +51,17 @@
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">268</int>
 						<array class="NSMutableArray" key="NSSubviews"/>
-						<string key="NSFrame">{{0, 44}, {320, 524}}</string>
+						<string key="NSFrameSize">{320, 437}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="884209387"/>
+						<reference key="NSNextKeyView" ref="422805161"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{320, 568}</string>
+				<string key="NSFrame">{{0, 64}, {320, 504}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="884972655"/>
@@ -71,6 +71,10 @@
 					<object class="NSColorSpace" key="NSCustomColorSpace">
 						<int key="NSID">2</int>
 					</object>
+				</object>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
+					<bool key="IBUIPrompted">NO</bool>
 				</object>
 				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
 					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
@@ -114,7 +118,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">downloadProgress</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="884209387"/>
+						<reference key="destination" ref="422805161"/>
 					</object>
 					<int key="connectionID">77</int>
 				</object>
@@ -131,8 +135,8 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
+							<reference ref="422805161"/>
 							<reference ref="884972655"/>
-							<reference ref="884209387"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -155,7 +159,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">76</int>
-						<reference key="object" ref="884209387"/>
+						<reference key="object" ref="422805161"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>

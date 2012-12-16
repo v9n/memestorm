@@ -116,11 +116,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    DetailViewController *dvController = [[DetailViewController alloc] initWithNibName:@"DetailView" bundle:[NSBundle mainBundle]];
-//    [self.navigationController pushViewController:dvController animated:YES];
-//    [dvController release];
-//    dvController = nil;
     [self readMemeFor:@"funnymama"];
 }
 

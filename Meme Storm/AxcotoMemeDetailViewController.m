@@ -279,19 +279,37 @@
         
         NSLog(@"About to load: %@", imgPath);
         if ([[NSFileManager defaultManager] fileExistsAtPath:imgPath]) {
+            //So, we need to remove old view
+            for (UIView * v in imgContainer.subviews) {
+                if ([v isKindOfClass:[UIImageView class]]) {
+                    [v removeFromSuperview];
+                }
+            }
+            imgViewUi = nil; //Release it? not sure, need to be do an instrucment
             
-            UIImage * v = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]];
-            //imgViewUi.image = v;
-            [imgViewUi setImage:v];
-            //imgViewUi.frame = CGRectMake(0, 0, v.size.width, v.size.height);
+                        imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
+                
+                        [imgContainer addSubview:imgViewUi];
             
-            imgContainer.contentSize = [imgViewUi frame].size;
-            float zoomScale = [imgContainer frame].size.width / v.size.width;            
-            [imgContainer setZoomScale:zoomScale];
-            [imgContainer setMinimumZoomScale:zoomScale];
-            //[imgViewUi se
-            NSLog(@"[INFO] Loading new image with width %f", v.size.width);
-            NSLog(@"[INFO] Loading new image with height %f", v.size.height);
+                        imgContainer.contentSize = [imgViewUi frame].size;
+                        // calculate minimum scale to perfectly fit image width, and begin at that scale
+                        float minimumScale = [imgContainer frame].size.width  / [imgViewUi frame].size.width;
+                        imgContainer.minimumZoomScale = minimumScale;
+                        imgContainer.zoomScale = minimumScale;
+                        //imageScrollView.maximumZoomScale = 1.0;
+            
+//            UIImage * v = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]];
+//            //imgViewUi.image = v;
+//            [imgViewUi setImage:v];
+//            //imgViewUi.frame = CGRectMake(0, 0, v.size.width, v.size.height);
+//            
+//            imgContainer.contentSize = [imgViewUi frame].size;
+//            float zoomScale = [imgContainer frame].size.width / v.size.width;            
+//            [imgContainer setZoomScale:zoomScale];
+//            [imgContainer setMinimumZoomScale:zoomScale];
+//            //[imgViewUi se
+//            NSLog(@"[INFO] Loading new image with width %f", v.size.width);
+//            NSLog(@"[INFO] Loading new image with height %f", v.size.height);
             
             
 //            imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
