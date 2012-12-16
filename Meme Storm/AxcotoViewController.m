@@ -19,17 +19,17 @@
     NSArray *memeSourceData;
 }
 
+@synthesize downloadProgress;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    memeSourceData = [NSArray arrayWithObjects: [NSDictionary dictionaryWithObjectsAndKeys: @"funnymama.com", @"url", @"Funny Mama", @"name", nil],  [NSDictionary dictionaryWithObjectsAndKeys: @"LolHapens.com", @"url", @"LolHappens", @"name", nil],  nil];
     
-    [self setTitle:@"Meme Storm"];
+    //memeSourceData = [NSArray alloc] i;// [NSArray arrayWithObjects: [NSDictionary dictionaryWithObjectsAndKeys: @"funnymama.com", @"url", @"Funny Mama", @"name", nil],  [NSDictionary dictionaryWithObjectsAndKeys: @"LolHapens.com", @"url", @"LolHappens", @"name", nil],  nil];
     
+    [self setTitle:@"Meme Storm"];    
     [self loadMemeSource];
-    
-	// Do any additional setup after loading the view, typically from a nib.
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,29 +40,41 @@
 
 - (void)viewDidUnload {
     [self setMemeSourceTable:nil];
+    [self setDownloadProgress:nil];
+    [self setDownloadProgress:nil];
     [super viewDidUnload];
 }
 
 - (void) loadMemeSource {
 //    NSString * s1 = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"ENVIRONMENT"];
-
-    NSString * s1= [[[NSProcessInfo processInfo] environment] objectForKey:@"ENVIRONMENT"];
-    NSLog(@"%@", s1);
-  
     
-    //NSString * url = @"http://meme-storm.herokuapp.com/m/list";
-    NSString * url = @"http://127.0.0.1:9393/m/list";
+    [downloadProgress startAnimating];
     
-    NSData *s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
-    
-    NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * f = [path objectAtIndex:0];
-    f = [f stringByAppendingString:@"/source.json"];
-    [s writeToFile:f atomically:TRUE];
-    memeSourceData = (NSArray *)[s objectFromJSONData];
-    NSLog(@"%@", memeSourceData);
-    [self.memeSourceTable reloadData];
-    
+    dispatch_async(dispatch_get_global_queue(0,0), ^ {
+        
+        NSString * s1= [[[NSProcessInfo processInfo] environment] objectForKey:@"ENVIRONMENT"];
+        NSLog(@"%@", s1);
+        
+        
+        NSString * url = @"http://meme-storm.herokuapp.com/m/list";
+        //NSString * url = @"http://127.0.0.1:9393/m/list";
+        NSLog(@"Start to load meme source at: %@", url);
+        NSData *s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+        
+        NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString * f = [path objectAtIndex:0];
+        f = [f stringByAppendingString:@"/source.json"];
+        [s writeToFile:f atomically:TRUE];
+        memeSourceData = (NSArray *)[s objectFromJSONData];
+        NSLog(@"Meme Source Data: %@", memeSourceData);
+        
+        //Update UI on mean thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.memeSourceTable reloadData];
+            [downloadProgress stopAnimating];
+        });
+        
+    });
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

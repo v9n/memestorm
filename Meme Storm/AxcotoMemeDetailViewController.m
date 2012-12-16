@@ -22,7 +22,7 @@
 @implementation AxcotoMemeDetailViewController
 
 @synthesize memeSource;
-@synthesize imgContainer, imgViewUi, loader;
+@synthesize imgContainer, imgViewUi, downloadProgress;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,7 +38,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setTitle:[@"Meme Browser" stringByAppendingString: self.memeSource]];
-    
+        
     NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     docRoot = [path objectAtIndex:0];
     
@@ -48,6 +48,11 @@
     [memesList insertObject:@"marked_bound_page" atIndex:0];
     [self download];
     
+    [self setUpImageViewer];
+    [self bindSwipeEvent];    
+}
+
+- (void) setUpImageViewer {
     imgContainer.bouncesZoom = YES;
     imgContainer.delegate = self;
     imgContainer.clipsToBounds = YES;
@@ -65,10 +70,16 @@
     }
     
     imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
-    
     [imgContainer addSubview:imgViewUi];
     imgContainer.contentSize = [imgViewUi frame].size;
-    
+    // calculate minimum scale to perfectly fit image width, and begin at that scale
+    float minimumScale = [imgContainer frame].size.width  / [imgViewUi frame].size.width;
+    imgContainer.minimumZoomScale = minimumScale;
+    imgContainer.zoomScale = minimumScale;
+    //imageScrollView.maximumZoomScale = 1.0;
+}
+
+- (void) bindSwipeEvent {
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
     
@@ -78,20 +89,15 @@
     UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
     rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
     rightSwipe.numberOfTouchesRequired = 1;
-    [imgContainer addGestureRecognizer:rightSwipe];    
+    [imgContainer addGestureRecognizer:rightSwipe];
     
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipe:)];
     leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
     leftSwipe.numberOfTouchesRequired = 1;
     [imgContainer addGestureRecognizer:leftSwipe];
-    
-    // calculate minimum scale to perfectly fit image width, and begin at that scale
-    float minimumScale = [imgContainer frame].size.width  / [imgViewUi frame].size.width;
-    //imageScrollView.maximumZoomScale = 1.0;
-    imgContainer.minimumZoomScale = minimumScale;
-    imgContainer.zoomScale = minimumScale;
-    
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -110,13 +116,16 @@
     NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * doc = [path objectAtIndex:0];
     NSString * memeFolder = [doc stringByAppendingPathComponent:@"meme/funnymama"];
-    //[imgContainer setHidden:TRUE];
-    [loader startAnimating];
     
+    [downloadProgress setHidden:FALSE];
+    [downloadProgress setProgress:0 animated:YES];
+    //We cannot run it on main queu to avoid block UI thread
     dispatch_async(dispatch_get_global_queue(0,0), ^{
-        [self fetchFromSource:pageToDownload];
         
-        if (![[NSFileManager defaultManager] fileExistsAtPath:memeFolder]) {
+        [self fetchFromSource:pageToDownload];
+        NSFileManager * fileMan = [NSFileManager defaultManager];
+        
+        if (![fileMan fileExistsAtPath:memeFolder]) {
             //try to create if not existed yet
             NSError * e;
             NSLog(@"Trying to validate memeFolder %@", memeFolder);
@@ -129,18 +138,43 @@
         }
         
         NSArray * urls = [memesList objectAtIndex:pageToDownload];
+        NSURL * fileUrl;
+        NSData * imageData;
+        NSString * memeFile;
+        float totalProgress;
         for (int i=0; i< [urls count]; i++) {
-            NSData * imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:(NSString *) [[urls objectAtIndex:i] objectForKey:@"src"] ]];
-            NSString * memeFile = [memeFolder stringByAppendingPathComponent:[NSString stringWithFormat:@"/%d_%d.jpg", pageToDownload, i]];
+            fileUrl = [NSURL URLWithString:(NSString *) [[urls objectAtIndex:i] objectForKey:@"src"] ];
+            memeFile = [memeFolder stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@.jpg", [fileUrl lastPathComponent]]]; //pageToDownload, i]];
             
-            NSLog(@"INFO: attempting to create file %@", memeFile);
-            [imageData writeToFile:memeFile atomically:YES];
+            if ([fileMan fileExistsAtPath:memeFile]) {
+                NSLog(@"INFO: File %@ is existed in cache folder. Ignore downloading", memeFile);
+                
+            } else {
+                NSLog(@"INFO: attempting to download file %@", memeFile);
+                imageData = [NSData dataWithContentsOfURL:fileUrl];
+                NSLog(@"INFO: attempting to create file %@", memeFile);
+                [imageData writeToFile:memeFile atomically:YES];
+                NSLog(@"Download completed: %f", totalProgress);
+                // We are updating UI so let do it on mean thread
+                
+            }
+            totalProgress = (float)(i+1) / (float)[urls count];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [downloadProgress setProgress:totalProgress];
+                [downloadProgress setNeedsDisplay];
+            });
         }
-        [loader stopAnimating];
-        [imgContainer setHidden:FALSE];
-        if (show) {
-            [self loadImage:0];
-        }
+        
+        // We are updating UI so let do it on mean thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [imgContainer setHidden:FALSE];
+            if (show) {
+                [self loadImage:0];
+            }
+            [downloadProgress setHidden:TRUE];
+        });
+        
+        
     });
 }
 
@@ -149,30 +183,22 @@
 * fetchFromSource should be in Asyntask or run on anothe thread instad of meain thread ot avoid block ui
 **/
 - (void) fetchFromSource:(NSUInteger)pageToDownload {
-    //NSString * url = [@"http://127.0.0.1:9393/m/funnymama/" stringByAppendingFormat:@"%d", currentMemePage++];
+    
     NSString * url = [NSString stringWithFormat:@"http://meme-storm.herokuapp.com/m/%@/%d", memeSource,pageToDownload];
+    //NSString * url = [NSString stringWithFormat:@"http://127.0.0.1:9393/m/%@/%d", memeSource,pageToDownload];
+    NSLog(@"Start to fetch from this URL%@", url);
     
     NSData * dataSource = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     NSArray * memes = (NSArray *)[dataSource objectFromJSONData];
     NSLog(@"%@", memes);
-    
-    //if ([memesList objectAtIndex:currentMemePage]==nil) {
-        [memesList insertObject:memes atIndex:currentMemePage];
-//    } else {
-//        [memesList replaceObjectAtIndex:currentMemePage withObject:memes];
-//    }
-    
-//    memesList[currentMemePage] = [NSMutableArray arrayWithCapacity:memes.count];
-//    for (int i=0; i<[memes count]; i++) {
-//        memesList[currentMemePage][i] = (NSString *)[[memes objectAtIndex:i] objectForKey:@"src"];
-//    }
-    //[sourceInput writeToFile:[docRoot stringByAppendingFormat:@"%@",@"json.txt"] atomically:YES];
+   [memesList insertObject:memes atIndex:currentMemePage];
+
 }
 
 - (void)viewDidUnload {
     [self setImgContainer:nil];
     [self setImgViewUi:nil];
-    [self setLoader:nil];
+    [self setDownloadProgress:nil];
     [super viewDidUnload];
 }
 
@@ -202,9 +228,16 @@
     NSLog(@"%d", currentMemeIndex);
 }
 
+/**
+ Don't move if we are downling. Wait until it finishes
+ */
 - (void) handleLeftSwipe:(UISwipeGestureRecognizer *) swipeGestureRecognizer {
-    [self loadImage:1];
-    NSLog(@"%d", currentMemeIndex);
+    if ([downloadProgress isHidden]) {
+        [self loadImage:1];
+        NSLog(@"%d", currentMemeIndex);
+    } else {
+        NSLog(@"INFO: %@", @"We are downloading data for next page. plz wait until it finsihes");
+    }
 }
 
 - (void) loadImage:(int)id {
@@ -228,7 +261,7 @@
         return;
     }
     
-    if (id>=0 && currentMemeIndex < [[memesList objectAtIndex:currentMemePage] count]) {
+    if (id>=0 && (currentMemeIndex +1 < [[memesList objectAtIndex:currentMemePage] count])) {
         currentMemeIndex = currentMemeIndex + id;
         [self loadImageAtPage:currentMemePage withIndex:currentMemeIndex];
     } else {
@@ -240,10 +273,36 @@
 
 - (void) loadImageAtPage:(NSUInteger) page withIndex:(int)index {
     @try {
-        NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/funnymama/%d_%d.jpg", currentMemePage, currentMemeIndex];
-        NSLog(@"%@", imgPath);
+        NSURL * fileUrl = [NSURL URLWithString:[[[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex] objectForKey:@"src"]];
+        //NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/funnymama/%d_%d.jpg", currentMemePage, currentMemeIndex];
+        NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/funnymama/%@.jpg", [fileUrl lastPathComponent]];
+        
+        NSLog(@"About to load: %@", imgPath);
         if ([[NSFileManager defaultManager] fileExistsAtPath:imgPath]) {
-            imgViewUi.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]];
+            
+            UIImage * v = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]];
+            //imgViewUi.image = v;
+            [imgViewUi setImage:v];
+            //imgViewUi.frame = CGRectMake(0, 0, v.size.width, v.size.height);
+            
+            imgContainer.contentSize = [imgViewUi frame].size;
+            float zoomScale = [imgContainer frame].size.width / v.size.width;            
+            [imgContainer setZoomScale:zoomScale];
+            [imgContainer setMinimumZoomScale:zoomScale];
+            //[imgViewUi se
+            NSLog(@"[INFO] Loading new image with width %f", v.size.width);
+            NSLog(@"[INFO] Loading new image with height %f", v.size.height);
+            
+            
+//            imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
+//            [imgContainer addSubview:imgViewUi];
+//            imgContainer.contentSize = [imgViewUi frame].size;
+//            // calculate minimum scale to perfectly fit image width, and begin at that scale
+//            float minimumScale = [imgContainer frame].size.width  / [imgViewUi frame].size.width;
+//            imgContainer.minimumZoomScale = minimumScale;
+//            imgContainer.zoomScale = minimumScale;
+//            //imageScrollView.maximumZoomScale = 1.0;
+            
         }
     } @catch (NSException * e) {
         NSLog(@"%@", e);

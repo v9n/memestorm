@@ -18,10 +18,11 @@
 
 @property (strong, nonatomic) NSString *memeSource ;
 
+@property (unsafe_unretained, nonatomic) IBOutlet UIProgressView *downloadProgress;
+
 @property (unsafe_unretained, nonatomic) IBOutlet UIScrollView *imgContainer;
 @property (strong, nonatomic) IBOutlet UIImageView *imgViewUi;
 
-@property (unsafe_unretained, nonatomic) IBOutlet UIActivityIndicatorView *loader;
 
 
 @end

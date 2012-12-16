@@ -12,6 +12,8 @@
 
 @property (unsafe_unretained, nonatomic) IBOutlet UITableView *memeSourceTable;
 
+@property (unsafe_unretained, nonatomic) IBOutlet UIActivityIndicatorView *downloadProgress;
+
 
 - (void) loadMemeSource;
 
