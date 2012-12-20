@@ -111,12 +111,13 @@
         }
     }
     
-    cell.textLabel.text = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"name"];
+    cell.textLabel.text = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"t"];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self readMemeFor:@"funnymama"];
+    NSString * s = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"name"];
+    [self readMemeFor:s];
 }
 
 -(IBAction)readMemeFor:(id)sender{

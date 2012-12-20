@@ -38,7 +38,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setTitle:[@"Meme Browser" stringByAppendingString: self.memeSource]];
-        
+    [[self navigationController] setNavigationBarHidden:TRUE];
+    
     NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     docRoot = [path objectAtIndex:0];
     
@@ -183,9 +184,24 @@
 * fetchFromSource should be in Asyntask or run on anothe thread instad of meain thread ot avoid block ui
 **/
 - (void) fetchFromSource:(NSUInteger)pageToDownload {
+    //get '/m/:source/:section,:start_id,:end_id:,:quantity' do |source,section,start_id,end_id,quantity|
+    NSString * start_id;
+    NSString * end_id;
+    NSUInteger section;
+    int quantity = 0;
+    section = pageToDownload;
+    if (pageToDownload<=2) {
+        start_id = @"0";
+        end_id = @"0";
+        quantity = 0;
+    } else {
+        start_id = [[memesList objectAtIndex:(pageToDownload - 1)] objectAtIndex:0];
+        end_id = [[memesList objectAtIndex:(pageToDownload - 1)] lastObject];
+        quantity = [[memesList objectAtIndex:(pageToDownload -1)] count];
+    }
+    //NSString * url = [NSString stringWithFormat:@"http://meme-storm.herokuapp.com/m/%@/%d,%@,%@,%d", memeSource,//pageToDownload, start_id, end_id, quantity];
+    NSString * url = [NSString stringWithFormat:@"http://127.0.0.1:9393/m/%@/%d,%@,%@,%d", memeSource,pageToDownload, start_id, end_id, quantity];
     
-    NSString * url = [NSString stringWithFormat:@"http://meme-storm.herokuapp.com/m/%@/%d", memeSource,pageToDownload];
-    //NSString * url = [NSString stringWithFormat:@"http://127.0.0.1:9393/m/%@/%d", memeSource,pageToDownload];
     NSLog(@"Start to fetch from this URL%@", url);
     
     NSData * dataSource = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
@@ -255,7 +271,7 @@
         currentMemeIndex = currentMemeIndex + id;
         if (currentMemeIndex==-1) {
             currentMemePage = currentMemePage -1;
-            currentMemeIndex = [[memesList objectAtIndex:currentMemePage] count];
+            currentMemeIndex = [[memesList objectAtIndex:currentMemePage] count] -1;
         }
         [self loadImageAtPage:currentMemePage withIndex:currentMemeIndex];
         return;
