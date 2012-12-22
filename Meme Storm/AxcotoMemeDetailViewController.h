@@ -14,6 +14,7 @@
     int currentMemePage;
     NSMutableArray * memesList;
     NSString * docRoot;
+
 }
 
 @property (strong, nonatomic) NSString *memeSource ;
@@ -23,6 +24,13 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIScrollView *imgContainer;
 @property (strong, nonatomic) IBOutlet UIImageView *imgViewUi;
 
+@property (strong, nonatomic) UIImageView * prevImgView;
+@property (strong, nonatomic) UIImageView * currentImgView;
+@property (strong, nonatomic) UIImageView * nextImgView;
+
+@property (strong, nonatomic) UIScrollView * prevScroolView;
+@property (strong, nonatomic) UIScrollView * currentScroolView;
+@property (strong, nonatomic) UIScrollView * nextScroolView;
 
 
 @end
