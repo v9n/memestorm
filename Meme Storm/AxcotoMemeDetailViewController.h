@@ -22,6 +22,10 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIProgressView *downloadProgress;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIScrollView *imgContainer;
+
+
+@property (unsafe_unretained, nonatomic) IBOutlet UIToolbar *toolbar;
+
 @property (strong, nonatomic) IBOutlet UIImageView *imgViewUi;
 
 @property (strong, nonatomic) UIImageView * prevImgView;

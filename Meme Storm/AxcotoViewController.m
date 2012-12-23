@@ -59,7 +59,21 @@
         NSString * url = @"http://meme-storm.herokuapp.com/m/list";
         //NSString * url = @"http://127.0.0.1:9393/m/list";
         NSLog(@"Start to load meme source at: %@", url);
-        NSData *s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+        
+        NSData *s;
+        int attempt =0;
+        do
+        {
+            attempt++;
+            NSLog(@"Attempt #%d to get memesource list", attempt);
+            @try {
+                
+                s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+            }
+            @catch (NSException * e){
+                NSLog(@"Fail at attempt #%d. Error:%@", attempt, e);
+            }
+        } while (attempt<=2 && s==Nil);
         
         NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString * f = [path objectAtIndex:0];
@@ -70,8 +84,19 @@
         
         //Update UI on mean thread
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.memeSourceTable reloadData];
-            [downloadProgress stopAnimating];
+            if (memeSourceData==NULL) {
+                [downloadProgress stopAnimating];
+                UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Cannot fetch meme data!"
+                                                                  message:@"Check your data connection then open the app again."
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
+                [message show];                
+                return;
+            } else {
+                [self.memeSourceTable reloadData];
+                [downloadProgress stopAnimating];
+            }
         });
         
     });

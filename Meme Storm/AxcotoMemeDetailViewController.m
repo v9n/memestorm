@@ -24,6 +24,10 @@
 @synthesize memeSource;
 @synthesize imgContainer, imgViewUi, downloadProgress;
 
+@synthesize prevScroolView, currentScroolView, nextScroolView;
+@synthesize prevImgView, currentImgView, nextImgView;
+@synthesize toolbar;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -50,7 +54,7 @@
     [self download];
     
     [self setUpImageViewer];
-    [self bindSwipeEvent];    
+    //[self bindSwipeEvent];
 }
 
 - (void) setUpImageViewer {
@@ -78,27 +82,47 @@
     imgContainer.minimumZoomScale = minimumScale;
     imgContainer.zoomScale = minimumScale;
     //imageScrollView.maximumZoomScale = 1.0;
+    
+    
+    prevScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320, 960)];
+    nextScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320, 960)];
+    currentScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320, 960)];
+    
+    prevScroolView.contentSize = CGSizeMake(520, 1040);
+    [prevScroolView setDelegate:self];
+    self.prevScroolView.minimumZoomScale=0.5;
+    self.prevScroolView.maximumZoomScale=6.0;
+    
+    [imgContainer addSubview: prevScroolView];
+    [imgContainer addSubview: nextScroolView];
+    [imgContainer addSubview: currentScroolView];
+    
 }
 
+/**
+ We use paging of UIScrollView now so we don't need this anymore
+ */
 - (void) bindSwipeEvent {
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
-    UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap)];
+    [imgContainer addGestureRecognizer:singleTap];
+
+//    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+//    UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
     
-    [imgViewUi addGestureRecognizer:doubleTap];
-    [imgViewUi addGestureRecognizer:twoFingerTap];
-    
-    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
-    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
-    rightSwipe.numberOfTouchesRequired = 1;
-    [imgContainer addGestureRecognizer:rightSwipe];
-    
-    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipe:)];
-    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
-    leftSwipe.numberOfTouchesRequired = 1;
-    [imgContainer addGestureRecognizer:leftSwipe];
+//    [imgViewUi addGestureRecognizer:doubleTap];
+//    [imgViewUi addGestureRecognizer:twoFingerTap];
+//    
+//    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
+//    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+//    rightSwipe.numberOfTouchesRequired = 1;
+//    [imgContainer addGestureRecognizer:rightSwipe];
+//    
+//    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipe:)];
+//    leftSwipe.direction = UISwipeGestureRecognizerDirectionLeft;
+//    leftSwipe.numberOfTouchesRequired = 1;
+//    [imgContainer addGestureRecognizer:leftSwipe];
+
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -215,13 +239,8 @@
     [self setImgContainer:nil];
     [self setImgViewUi:nil];
     [self setDownloadProgress:nil];
+    [self setToolbar:nil];
     [super viewDidUnload];
-}
-
-
-// Implement a single scroll view delegate method
-- (UIView*)viewForZoomingInScrollView:(UIScrollView *)aScrollView {
-    return imgViewUi;
 }
 
 #pragma mark Gesture method
@@ -230,6 +249,17 @@
     float newScale = [imgContainer zoomScale] * ZOOM_STEP;
     CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
     [imgContainer zoomToRect:zoomRect animated:YES];
+}
+
+- (void)handleSingleTap
+{
+    static Boolean clicked = FALSE;
+    clicked = !clicked;
+    //[self.navigationController setNavigationBarHidden:YES animated:YES];
+    //Or if you aren't using a nav controller just someToolbar.hidden = YES;
+    [toolbar setHidden:clicked];
+    //toolbar.layer.zPosition =1;
+    
 }
 
 - (void)handleTwoFingerTap:(UIGestureRecognizer *)gestureRecognizer {
@@ -344,7 +374,7 @@
 }
 
 
-#pragma mark Utility methods
+#pragma mark UIScroolViewDelegate method
 
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
     
@@ -363,5 +393,9 @@
     return zoomRect;
 }
 
+#pragma mark UIScroolViewDelegate method
+- (UIView*)viewForZoomingInScrollView:(UIScrollView *)aScrollView {
+    return imgViewUi;
+}
 
 @end
