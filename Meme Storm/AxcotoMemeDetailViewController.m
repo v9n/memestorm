@@ -54,17 +54,17 @@
     [self download];
     
     [self setUpImageViewer];
-    //[self bindSwipeEvent];
+    [self bindSwipeEvent];
 }
 
 - (void) setUpImageViewer {
     imgContainer.bouncesZoom = YES;
     imgContainer.delegate = self;
     imgContainer.clipsToBounds = YES;
+    imgContainer.pagingEnabled = YES;
     
-    imgViewUi.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
+//    imgViewUi.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
     NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/d.jpg"];
-    //imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
     NSString * resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/toxic_angel.jpg"];
     
     NSFileManager * fileMan = [NSFileManager defaultManager];
@@ -73,29 +73,34 @@
         [fileMan copyItemAtPath:resourcePath toPath:imgPath error:&error];
         NSLog(@"%@", error);
     }
-    
-    imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
-    [imgContainer addSubview:imgViewUi];
-    imgContainer.contentSize = [imgViewUi frame].size;
-    // calculate minimum scale to perfectly fit image width, and begin at that scale
-    float minimumScale = [imgContainer frame].size.width  / [imgViewUi frame].size.width;
-    imgContainer.minimumZoomScale = minimumScale;
-    imgContainer.zoomScale = minimumScale;
-    //imageScrollView.maximumZoomScale = 1.0;
+//
+//    imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
+//    [imgContainer addSubview:imgViewUi];
+//    imgContainer.contentSize = [imgViewUi frame].size;
+//    // calculate minimum scale to perfectly fit image width, and begin at that scale
+//    float minimumScale = [imgContainer frame].size.width  / [imgViewUi frame].size.width;
+//    imgContainer.minimumZoomScale = minimumScale;
+//    imgContainer.zoomScale = minimumScale;
+//    //imageScrollView.maximumZoomScale = 1.0;
     
     
     prevScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320, 960)];
-    nextScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320, 960)];
-    currentScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320, 960)];
-    
-    prevScroolView.contentSize = CGSizeMake(520, 1040);
-    [prevScroolView setDelegate:self];
-    self.prevScroolView.minimumZoomScale=0.5;
-    self.prevScroolView.maximumZoomScale=6.0;
+    nextScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(320,0,320, 960)];
+    currentScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(640,0,320, 960)];
     
     [imgContainer addSubview: prevScroolView];
     [imgContainer addSubview: nextScroolView];
     [imgContainer addSubview: currentScroolView];
+    [imgContainer setDelegate:self];
+    imgContainer.contentSize = CGSizeMake(960, 960);
+    
+    [currentScroolView setDelegate:self]; //zooming, we always use the currentScroolView to display image.
+    currentScroolView.minimumZoomScale=0.5;
+    currentScroolView.maximumZoomScale=6.0;
+    
+    currentImgView =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
+    [currentScroolView addSubview:currentImgView];
+    currentScroolView.contentSize = [currentImgView frame].size;
     
 }
 
@@ -396,6 +401,24 @@
 #pragma mark UIScroolViewDelegate method
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)aScrollView {
     return imgViewUi;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *) sender
+{
+    //So we are moving forward
+    if (imgContainer.contentOffset.x>imgContainer.frame.size.width)
+    {
+        //Fill in the new image
+        
+    }
+    
+    if (imgContainer.contentOffset.x < imgContainer.frame.size.width)
+    {
+        
+    }
+    
+    //we will always come back the center one to keep infinitg scrool effect
+    [imgContainer scrollRectToVisible:CGRectMake(320, 0, 320, 600) animated:NO];
 }
 
 @end
