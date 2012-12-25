@@ -26,8 +26,6 @@
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIToolbar *toolbar;
 
-@property (strong, nonatomic) IBOutlet UIImageView *imgViewUi;
-
 @property (strong, nonatomic) UIImageView * prevImgView;
 @property (strong, nonatomic) UIImageView * currentImgView;
 @property (strong, nonatomic) UIImageView * nextImgView;

@@ -72,7 +72,7 @@
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">268</int>
 						<array class="NSMutableArray" key="NSSubviews"/>
-						<string key="NSFrameSize">{320, 504}</string>
+						<string key="NSFrameSize">{320, 548}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="422805161"/>
@@ -230,7 +230,6 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="downloadProgress">UIProgressView</string>
 						<string key="imgContainer">UIScrollView</string>
-						<string key="imgViewUi">UIImageView</string>
 						<string key="toolbar">UIToolbar</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -241,10 +240,6 @@
 						<object class="IBToOneOutletInfo" key="imgContainer">
 							<string key="name">imgContainer</string>
 							<string key="candidateClassName">UIScrollView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="imgViewUi">
-							<string key="name">imgViewUi</string>
-							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="toolbar">
 							<string key="name">toolbar</string>
