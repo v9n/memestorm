@@ -14,7 +14,7 @@
     int currentMemePage;
     NSMutableArray * memesList;
     NSString * docRoot;
-
+    float screenHeigh;
 }
 
 @property (strong, nonatomic) NSString *memeSource ;

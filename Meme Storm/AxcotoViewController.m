@@ -24,12 +24,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     //memeSourceData = [NSArray alloc] i;// [NSArray arrayWithObjects: [NSDictionary dictionaryWithObjectsAndKeys: @"funnymama.com", @"url", @"Funny Mama", @"name", nil],  [NSDictionary dictionaryWithObjectsAndKeys: @"LolHapens.com", @"url", @"LolHappens", @"name", nil],  nil];
     
     [self setTitle:@"Meme Storm"];    
     [self loadMemeSource];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,32 +51,39 @@
     dispatch_async(dispatch_get_global_queue(0,0), ^ {
         
         NSString * s1= [[[NSProcessInfo processInfo] environment] objectForKey:@"ENVIRONMENT"];
-        NSLog(@"%@", s1);
-        
-        
-        NSString * url = @"http://meme-storm.herokuapp.com/m/list";
-        //NSString * url = @"http://127.0.0.1:9393/m/list";
-        NSLog(@"Start to load meme source at: %@", url);
-        
-        NSData *s;
-        int attempt =0;
-        do
-        {
-            attempt++;
-            NSLog(@"Attempt #%d to get memesource list", attempt);
-            @try {
-                
-                s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
-            }
-            @catch (NSException * e){
-                NSLog(@"Fail at attempt #%d. Error:%@", attempt, e);
-            }
-        } while (attempt<=2 && s==Nil);
+        NSLog(@"Environment %@", s1);        
         
         NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString * f = [path objectAtIndex:0];
         f = [f stringByAppendingString:@"/source.json"];
-        [s writeToFile:f atomically:TRUE];
+                
+        NSString * url = @"http://meme-storm.herokuapp.com/m/list";
+        //NSString * url = @"http://127.0.0.1:9393/m/list";
+        NSLog(@"Start to load meme source at: %@", url);
+        
+        NSFileManager * fileMan = [NSFileManager defaultManager];
+        NSData *s;
+        int attempt =0;
+        
+        if ([fileMan fileExistsAtPath:f]) {
+            NSLog(@"Read memeSource form cache: %@", f);
+            s = [[NSData alloc] initWithContentsOfFile:f];
+        } else {
+            do
+            {
+                attempt++;
+                NSLog(@"Attempt #%d to get memesource list", attempt);
+                @try {
+                    s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+                }
+                @catch (NSException * e){
+                    NSLog(@"Fail at attempt #%d. Error:%@", attempt, e);
+                }
+            } while (attempt<=2 && s==Nil);
+            
+            [s writeToFile:f atomically:TRUE];
+        }
+        
         memeSourceData = (NSArray *)[s objectFromJSONData];
         NSLog(@"Meme Source Data: %@", memeSourceData);
         
@@ -149,6 +154,7 @@
     AxcotoMemeDetailViewController *secondView = [[AxcotoMemeDetailViewController alloc]
                                     initWithNibName:@"AxcotoMemeDetailViewController"
                                     bundle:nil];
+    NSLog(@"Selected source: %@", (NSString *) sender);
     [secondView setMemeSource:(NSString *)sender];
     
     [[self navigationController] pushViewController:secondView animated:YES];

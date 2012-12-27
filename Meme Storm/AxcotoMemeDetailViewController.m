@@ -12,7 +12,6 @@
 //#import "TapDetectingImageView.h"
 
 #define ZOOM_STEP 1.5
-
 @interface AxcotoMemeDetailViewController ()
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center;
 @end
@@ -39,7 +38,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self setTitle:[@"Meme Browser" stringByAppendingString: self.memeSource]];
+    [self setTitle:self.memeSource];
     
     [[self navigationController] setNavigationBarHidden:TRUE];
     [[self toolbar] setHidden:TRUE];
@@ -53,6 +52,9 @@
     [memesList insertObject:@"marked_bound_page" atIndex:0];
     [self download];
     
+    CGRect c = [[UIScreen mainScreen] bounds];
+    screenHeigh = c.size.height;
+    NSLog(@"Screen height is %f", screenHeigh);
     [self setUpImageViewer];
     [self bindSwipeEvent];
 }
@@ -60,11 +62,13 @@
 - (void) setUpImageViewer {
     imgContainer.delegate = self;
     imgContainer.pagingEnabled = YES;
+    imgContainer.frame = CGRectMake(0, 0, 320, screenHeigh);
+    NSLog(@"The height of imgContainer is %f", imgContainer.frame.size.height);
     
     //imgContainer.bouncesZoom = YES;
-    //imgContainer.clipsToBounds = YES;
-    
+    //imgContainer.clipsToBounds = YES;    
 //    imgViewUi.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
+    
     NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/d.jpg"];
     NSString * resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/toxic_angel.jpg"];
     
@@ -74,25 +78,15 @@
         [fileMan copyItemAtPath:resourcePath toPath:imgPath error:&error];
         NSLog(@"%@", error);
     }
-//
-//    imgViewUi =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
-//    [imgContainer addSubview:imgViewUi];
-//    imgContainer.contentSize = [imgViewUi frame].size;
-//    // calculate minimum scale to perfectly fit image width, and begin at that scale
-//    float minimumScale = [imgContainer frame].size.width  / [imgViewUi frame].size.width;
-//    imgContainer.minimumZoomScale = minimumScale;
-//    imgContainer.zoomScale = minimumScale;
-//    //imageScrollView.maximumZoomScale = 1.0;
-    
-    
-    prevScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320, 960)];
-    nextScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(640,0,320, 960)];
-    currentScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(320,0,320, 960)];
+  
+    prevScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320, screenHeigh)];
+    currentScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(320,0,320, screenHeigh)];
+    nextScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(640,0,320, screenHeigh)];
     
     [imgContainer addSubview: prevScroolView];    
     [imgContainer addSubview: currentScroolView];
     [imgContainer addSubview: nextScroolView];
-    imgContainer.contentSize = CGSizeMake(960, 960);
+    imgContainer.contentSize = CGSizeMake(960, screenHeigh);
     
     [currentScroolView setDelegate:self]; //zooming, we always use the currentScroolView to display image.
     currentScroolView.minimumZoomScale=0.5;
@@ -101,22 +95,8 @@
     currentImgView =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
     [currentScroolView addSubview:currentImgView];
     currentScroolView.contentSize = [currentImgView frame].size;
-    
-    
-    [imgContainer scrollRectToVisible:CGRectMake(320, 0, 320, 600) animated:NO];
-    
-//    UILabel * lbl1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 200, 200)];
-//    [lbl1 setText:@"lablel 1"];
-//    
-//    UILabel * lbl2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 200, 200)];
-//    [lbl2 setText:@"lablel 2"];
-//        
-//    UILabel * lbl3 = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 200, 200)];
-//    [lbl3 setText:@"lablel 3"];
-//    [prevScroolView addSubview:lbl1];
-//    [currentScroolView addSubview:lbl2];
-//    [nextScroolView addSubview:lbl3];
-    
+        
+    [imgContainer scrollRectToVisible:CGRectMake(320, 0, 320, screenHeigh) animated:NO];
 }
 
 /**
@@ -273,14 +253,8 @@
 {
     static Boolean clicked = FALSE;
     clicked = !clicked;
-    //[self.navigationController setNavigationBarHidden:YES animated:YES];
-    //Or if you aren't using a nav controller just someToolbar.hidden = YES;
-    //[toolbar setHidden:clicked];
-    
     [[self navigationController] setNavigationBarHidden:clicked];
     [[self toolbar] setHidden:clicked];
-    
-    //toolbar.layer.zPosition =1;
     
 }
 
@@ -347,24 +321,40 @@
         
         NSLog(@"About to load: %@", imgPath);
         if ([[NSFileManager defaultManager] fileExistsAtPath:imgPath]) {
-            //So, we need to remove old view
+            //So, we need to remove old image view
             for (UIView * v in currentScroolView.subviews) {
                 if ([v isKindOfClass:[UIImageView class]]) {
                     [v removeFromSuperview];
                 }
             }
             
+            UIImage * img = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]];
+            NSLog(@"Original size of this image is: %fx%f", img.size.width, img.size.height);
             currentImgView = nil; //Release it? not sure, need to be do an instrucment
-            currentImgView =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
-                
+            currentImgView =[[UIImageView alloc] initWithImage:img];
+            currentImgView.frame = CGRectMake(0, 0, img.size.width, img.size.height);
+            
             [currentScroolView addSubview:currentImgView];
             
             currentScroolView.contentSize = [currentImgView frame].size;
+            //currentScroolView.frame = CGRectMake(0, 320, 320, screenHeigh);
             // calculate minimum scale to perfectly fit image width, and begin at that scale
             float minimumScale = [currentScroolView frame].size.width  / [currentImgView frame].size.width;
+            
+            //Recenter the zoom images
+            float h = minimumScale * [currentImgView frame].size.height;
+            NSLog(@"Size after scale is: %fx%f", [currentScroolView frame].size.width, h);
+            if ( h < screenHeigh) {
+                //currentImgView.frame = CGRectMake(0, (screenHeigh - h)/2, img.size.width, img.size.height);
+ //               currentImgView.frame = CGRectMake(0, (screenHeigh - h)/2, [currentScroolView frame].size.width, h);
+                currentScroolView.frame = CGRectMake(320, (screenHeigh - h)/2, 320, h);
+            } else {
+                currentScroolView.frame = CGRectMake(320, 0, 320, screenHeigh);
+                //currentImgView.frame = CGRectMake(0, 0, img.size.width, img.size.height);
+            }
             currentScroolView.minimumZoomScale = minimumScale;
             currentScroolView.zoomScale = minimumScale;
-            //imageScrollView.maximumZoomScale = 1.0;
+            currentScroolView.maximumZoomScale = 6.0;
         }
     } @catch (NSException * e) {
         NSLog(@"%@", e);
@@ -372,24 +362,24 @@
 }
 
 
-//#pragma mark UIScroolViewDelegate method
-//
-//- (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
-//    
-//    CGRect zoomRect;
-//    
-//    // the zoom rect is in the content view's coordinates.
-//    //    At a zoom scale of 1.0, it would be the size of the imageScrollView's bounds.
-//    //    As the zoom scale decreases, so more content is visible, the size of the rect grows.
-//    zoomRect.size.height = [imgContainer frame].size.height / scale;
-//    zoomRect.size.width  = [imgContainer frame].size.width  / scale;
-//    
-//    // choose an origin so as to get the right center.
-//    zoomRect.origin.x    = center.x - (zoomRect.size.width  / 2.0);
-//    zoomRect.origin.y    = center.y - (zoomRect.size.height / 2.0);
-//    
-//    return zoomRect;
-//}
+#pragma mark UIScroolViewDelegate method
+
+- (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
+    
+    CGRect zoomRect;
+    
+    // the zoom rect is in the content view's coordinates.
+    //    At a zoom scale of 1.0, it would be the size of the imageScrollView's bounds.
+    //    As the zoom scale decreases, so more content is visible, the size of the rect grows.
+    zoomRect.size.height = [currentScroolView frame].size.height / scale;
+    zoomRect.size.width  = [currentScroolView frame].size.width  / scale;
+    
+    // choose an origin so as to get the right center.
+    zoomRect.origin.x    = center.x - (zoomRect.size.width  / 2.0);
+    zoomRect.origin.y    = center.y - (zoomRect.size.height / 2.0);
+    
+    return zoomRect;
+}
 
 #pragma mark UIScroolViewDelegate method
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)aScrollView {
@@ -414,7 +404,7 @@
     }
     
     //we will always come back the center one to keep infinitg scrool effect
-    [imgContainer scrollRectToVisible:CGRectMake(320, 0, 320, 600) animated:NO];
+    [imgContainer scrollRectToVisible:CGRectMake(320, 0, 320, screenHeigh) animated:NO];
 }
 
 @end
