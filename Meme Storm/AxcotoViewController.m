@@ -67,6 +67,12 @@
         
         if ([fileMan fileExistsAtPath:f]) {
             NSLog(@"Read memeSource form cache: %@", f);
+            NSError * e;
+            NSDictionary * attr = [fileMan attributesOfItemAtPath:f error:&e];
+            if (attr !=nil) {
+                NSDate * d = [attr objectForKey:NSFileCreationDate];
+                NSLog(@"The cache is created at %@", d);
+            }
             s = [[NSData alloc] initWithContentsOfFile:f];
         } else {
             do
