@@ -223,7 +223,7 @@
         end_id = [[memesList objectAtIndex:(pageToDownload - 1)] lastObject];
         quantity = [[memesList objectAtIndex:(pageToDownload -1)] count];
     }
-    NSString * url = [NSString stringWithFormat:@"http://meme-storm.herokuapp.com/m/%@/%d,%@,%@,%d", memeSource,pageToDownload, start_id, end_id, quantity];
+    NSString * url = [NSString stringWithFormat:@"http://meme.axcoto.com/m/%@/%d,%@,%@,%d", memeSource,pageToDownload, start_id, end_id, quantity];
     //NSString * url = [NSString stringWithFormat:@"http://127.0.0.1:9393/m/%@/%d,%@,%@,%d", memeSource,pageToDownload, start_id, end_id, quantity];
     
     NSLog(@"Start to fetch from this URL%@", url);
