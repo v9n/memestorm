@@ -62,7 +62,7 @@
         NSLog(@"Start to load meme source at: %@", url);
         
         NSFileManager * fileMan = [NSFileManager defaultManager];
-        NSData *s;
+        NSData *s = Nil;
         int attempt =0;
         
         if ([fileMan fileExistsAtPath:f]) {
@@ -71,24 +71,28 @@
             NSDictionary * attr = [fileMan attributesOfItemAtPath:f error:&e];
             if (attr !=nil) {
                 NSDate * d = [attr objectForKey:NSFileCreationDate];
-                NSLog(@"The cache is created at %@", d);
+                NSLog(@"The cache is created at %@\n. This is was %f seconds ago", d, [d timeIntervalSinceNow]);
+                if ([d timeIntervalSinceNow] + 24 * 3600 > 0) {
+                    s = [[NSData alloc] initWithContentsOfFile:f];
+                }
             }
-            s = [[NSData alloc] initWithContentsOfFile:f];
-        } else {
-            do
+        
+        } 
+            while (attempt<=2 && s==Nil)
             {
                 attempt++;
                 NSLog(@"Attempt #%d to get memesource list", attempt);
                 @try {
                     s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+                    [s writeToFile:f atomically:TRUE];
+                    
                 }
                 @catch (NSException * e){
                     NSLog(@"Fail at attempt #%d. Error:%@", attempt, e);
                 }
-            } while (attempt<=2 && s==Nil);
+            }
             
-            [s writeToFile:f atomically:TRUE];
-        }
+        
         
         memeSourceData = (NSArray *)[s objectFromJSONData];
         NSLog(@"Meme Source Data: %@", memeSourceData);
