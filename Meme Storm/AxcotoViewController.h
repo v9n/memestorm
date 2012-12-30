@@ -16,5 +16,5 @@
 
 
 - (void) loadMemeSource;
-
+- (void) cleanMemeCache;
 @end

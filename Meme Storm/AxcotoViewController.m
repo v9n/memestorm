@@ -177,6 +177,9 @@
 
 }
 
-
+- (void) cleanMemeCache
+{
+    
+}
 
 @end
