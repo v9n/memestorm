@@ -73,7 +73,10 @@
                 NSDate * d = [attr objectForKey:NSFileCreationDate];
                 NSLog(@"The cache is created at %@\n. This is was %f seconds ago", d, [d timeIntervalSinceNow]);
                 if ([d timeIntervalSinceNow] + 24 * 3600 > 0) {
+                    NSLog(@"There is no need to fetch the data");
                     s = [[NSData alloc] initWithContentsOfFile:f];
+                } else {
+                    NSLog(@"There is need to fetch the data");
                 }
             }
         

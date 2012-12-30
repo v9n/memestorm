@@ -38,6 +38,7 @@
 		17DCB172167B3BB800A06BD6 /* Prefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DCB171167B3BB800A06BD6 /* Prefs.m */; };
 		17DCB173167B3BB800A06BD6 /* Prefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DCB171167B3BB800A06BD6 /* Prefs.m */; };
 		17E7E635166B638D005D7E87 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E633166B638D005D7E87 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FBD2EAE2168FF2E800D8B0BA /* AXMemeMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD2EAE1168FF2E800D8B0BA /* AXMemeMeta.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,8 @@
 		17DCB171167B3BB800A06BD6 /* Prefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Prefs.m; sourceTree = "<group>"; };
 		17E7E633166B638D005D7E87 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		17E7E634166B638D005D7E87 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		FBD2EAE0168FF2E800D8B0BA /* AXMemeMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXMemeMeta.h; sourceTree = "<group>"; };
+		FBD2EAE1168FF2E800D8B0BA /* AXMemeMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXMemeMeta.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +229,8 @@
 				176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */,
 				17DCB170167B3BB800A06BD6 /* Prefs.h */,
 				17DCB171167B3BB800A06BD6 /* Prefs.m */,
+				FBD2EAE0168FF2E800D8B0BA /* AXMemeMeta.h */,
+				FBD2EAE1168FF2E800D8B0BA /* AXMemeMeta.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 				17E7E635166B638D005D7E87 /* JSONKit.m in Sources */,
 				170EB24D1673E55A0045F6CA /* SourceCell.m in Sources */,
 				17DCB172167B3BB800A06BD6 /* Prefs.m in Sources */,
+				FBD2EAE2168FF2E800D8B0BA /* AXMemeMeta.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

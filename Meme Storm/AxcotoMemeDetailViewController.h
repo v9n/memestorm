@@ -34,5 +34,7 @@
 @property (strong, nonatomic) UIScrollView * currentScroolView;
 @property (strong, nonatomic) UIScrollView * nextScroolView;
 
+@property (unsafe_unretained, nonatomic) IBOutlet UIToolbar *metaMemeView;
+
 
 @end

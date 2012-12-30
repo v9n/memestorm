@@ -238,6 +238,7 @@
     [self setImgContainer:nil];
     [self setDownloadProgress:nil];
     [self setToolbar:nil];
+    [self setMetaMemeView:nil];
     [super viewDidUnload];
 }
 

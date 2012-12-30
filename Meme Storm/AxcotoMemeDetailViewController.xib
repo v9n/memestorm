@@ -152,6 +152,14 @@
 					</object>
 					<int key="connectionID">80</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">metaMemeView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="675652296"/>
+					</object>
+					<int key="connectionID">81</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -223,7 +231,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">80</int>
+			<int key="maxID">81</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -233,6 +241,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="downloadProgress">UIProgressView</string>
 						<string key="imgContainer">UIScrollView</string>
+						<string key="metaMemeView">UIToolbar</string>
 						<string key="toolbar">UIToolbar</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -243,6 +252,10 @@
 						<object class="IBToOneOutletInfo" key="imgContainer">
 							<string key="name">imgContainer</string>
 							<string key="candidateClassName">UIScrollView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="metaMemeView">
+							<string key="name">metaMemeView</string>
+							<string key="candidateClassName">UIToolbar</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="toolbar">
 							<string key="name">toolbar</string>
