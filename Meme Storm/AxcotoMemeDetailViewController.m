@@ -144,6 +144,7 @@
     
     [downloadProgress setHidden:FALSE];
     [downloadProgress setProgress:0 animated:YES];
+    downloading = YES;
     //We cannot run it on main queu to avoid block UI thread
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         
@@ -187,6 +188,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [downloadProgress setProgress:totalProgress];
                 [downloadProgress setNeedsDisplay];
+                downloading = NO;
             });
         }
         
@@ -214,19 +216,27 @@
     NSUInteger section;
     int quantity = 0;
     section = pageToDownload;
-    if (pageToDownload<=2) {
+    if (pageToDownload==1) {
         start_id = @"0";
         end_id = @"0";
-        quantity = 0;
-    } else {
-        start_id = [[memesList objectAtIndex:(pageToDownload - 1)] objectAtIndex:0];
-        end_id = [[memesList objectAtIndex:(pageToDownload - 1)] lastObject];
+        quantity = 10;
+    } else //(pageToDownload==2) {
+//        start_id = @"0";
+//        end_id = @"0";
+//        quantity = [[memesList objectAtIndex:(pageToDownload -1)] count];
+//    } else {
+    {
+        start_id = [[[memesList objectAtIndex:(pageToDownload - 1)] objectAtIndex:0] objectForKey:@"id"];
+        end_id = [[[memesList objectAtIndex:(pageToDownload - 1)] lastObject] objectForKey:@"id"];
         quantity = [[memesList objectAtIndex:(pageToDownload -1)] count];
     }
+    
     NSString * url = [NSString stringWithFormat:@"http://meme.axcoto.com/m/%@/%d,%@,%@,%d", memeSource,pageToDownload, start_id, end_id, quantity];
     //NSString * url = [NSString stringWithFormat:@"http://127.0.0.1:9393/m/%@/%d,%@,%@,%d", memeSource,pageToDownload, start_id, end_id, quantity];
     
     NSLog(@"Start to fetch from this URL%@", url);
+    
+    int attempt =1;
     
     NSData * dataSource = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     NSArray * memes = (NSArray *)[dataSource objectFromJSONData];
@@ -390,20 +400,27 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *) sender
 {
-    //So we are moving forward
-    if (imgContainer.contentOffset.x>imgContainer.frame.size.width)
+    if (downloading)
     {
-        //Fill in the new image
-        [self loadImage:1];
-        NSLog(@"%d", currentMemeIndex);
+        NSLog(@"Downloading new data so ignore it");
     }
-    
-    if (imgContainer.contentOffset.x < imgContainer.frame.size.width)
+    else
     {
-        [self loadImage:-1];
-        NSLog(@"%d", currentMemeIndex);
-    }
+        //So we are moving forward
+        if (imgContainer.contentOffset.x>imgContainer.frame.size.width)
+        {
+            //Fill in the new image
+            [self loadImage:1];
+            NSLog(@"%d", currentMemeIndex);
+        }
     
+        if (imgContainer.contentOffset.x < imgContainer.frame.size.width)
+        {
+            [self loadImage:-1];
+            NSLog(@"%d", currentMemeIndex);
+        } 
+        
+    }
     //we will always come back the center one to keep infinitg scrool effect
     [imgContainer scrollRectToVisible:CGRectMake(320, 0, 320, screenHeigh) animated:NO];
 }

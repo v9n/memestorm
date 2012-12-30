@@ -15,6 +15,7 @@
     NSMutableArray * memesList;
     NSString * docRoot;
     float screenHeigh;
+    bool downloading;
 }
 
 @property (strong, nonatomic) NSString *memeSource ;
