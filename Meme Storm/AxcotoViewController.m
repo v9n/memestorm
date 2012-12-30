@@ -57,7 +57,7 @@
         NSString * f = [path objectAtIndex:0];
         f = [f stringByAppendingString:@"/source.json"];
                 
-        NSString * url = @"http://meme-storm.herokuapp.com/m/list";
+        NSString * url = @"http://meme.axcoto.com/m/list";
         //NSString * url = @"http://127.0.0.1:9393/m/list";
         NSLog(@"Start to load meme source at: %@", url);
         
@@ -147,7 +147,10 @@
         }
     }
     
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"t"];
+    cell.detailTextLabel.text = @"Funny pic";
+    
     return cell;
 }
 
