@@ -14,7 +14,24 @@
 
 + (AXConfig *) instance
 {
-    self.instance = [[AXConfig alloc] init];
-    return self.instance;
+    static dispatch_once_t once;
+    static AXConfig *instance;
+    dispatch_once(&once, ^ { instance = [[AXConfig alloc] init];});
+    return instance;
 }
+
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+    }
+    return self;
+}
+
+- (id) read:(NSString *)name
+{
+    
+}
+
 @end

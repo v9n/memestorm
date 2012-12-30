@@ -10,10 +10,8 @@
 
 @interface AXConfig : NSObject
 {
-    AXConfig * instance;
-    
 }
 
-+ (AXConfig *) getInstance;
-- (id) getConfig;
++ (AXConfig *) instance;
+- (id) read:(NSString *)name;
 @end
