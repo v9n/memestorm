@@ -26,6 +26,7 @@
 @synthesize prevImgView, currentImgView, nextImgView;
 @synthesize toolbar;
 @synthesize memeShareBar, metaCommentBar, metaCommentLblBar, metaLikeBar, metaLikeLblBar;
+@synthesize memeTitleLbl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -71,6 +72,7 @@
     //imgContainer.bouncesZoom = YES;
     //imgContainer.clipsToBounds = YES;    
 //    imgViewUi.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
+    memeTitleLbl.frame = CGRectMake(0, screenHeigh - metaMemeView.frame.size.height - memeTitleLbl.frame.size.height, 320, memeTitleLbl.frame.size.height);
     
     NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/d.jpg"];
     NSString * resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/toxic_angel.jpg"];
@@ -258,6 +260,7 @@
     [self setMemeShareBar:nil];
     [self setMetaCommentLblBar:nil];
     [self setMetaLikeLblBar:nil];
+    [self setMemeTitleLbl:nil];
     [super viewDidUnload];
 }
 
@@ -275,7 +278,7 @@
     clicked = !clicked;
     [[self navigationController] setNavigationBarHidden:clicked];
     [[self toolbar] setHidden:clicked];
-    
+    [[self memeTitleLbl] setHidden:clicked];
 }
 
 - (void)handleTwoFingerTap:(UIGestureRecognizer *)gestureRecognizer {
@@ -343,6 +346,7 @@
         
         [metaCommentLblBar setTitle:commentCount];
         [metaCommentLblBar setTitle:likeCount];
+        [memeTitleLbl setText:[memeToLoad objectForKey:@"title"]];
         
         NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/%@/%@", self.memeSource, [fileUrl lastPathComponent]];
         
