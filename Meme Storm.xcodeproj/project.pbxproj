@@ -41,6 +41,12 @@
 		17F9B208169048B300A02C52 /* AXConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F9B206169048B300A02C52 /* AXConfig.m */; };
 		17F9B2121692907A00A02C52 /* AXMemeCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F9B2101692907A00A02C52 /* AXMemeCommentViewController.m */; };
 		17F9B2131692907A00A02C52 /* AXMemeCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17F9B2111692907A00A02C52 /* AXMemeCommentViewController.xib */; };
+		FBB5200D16954B3300891FBA /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB5200916954B3300891FBA /* comment.png */; };
+		FBB5200E16954B3300891FBA /* comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB5200A16954B3300891FBA /* comment@2x.png */; };
+		FBB5200F16954B3300891FBA /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB5200B16954B3300891FBA /* like.png */; };
+		FBB5201016954B3300891FBA /* like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB5200C16954B3300891FBA /* like@2x.png */; };
+		FBB5201416955D0E00891FBA /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB5201216955D0E00891FBA /* share@2x.png */; };
+		FBB5201516955D0E00891FBA /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB5201316955D0E00891FBA /* share.png */; };
 		FBD2EAE2168FF2E800D8B0BA /* AXMemeMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD2EAE1168FF2E800D8B0BA /* AXMemeMeta.m */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +104,12 @@
 		17F9B20F1692907A00A02C52 /* AXMemeCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXMemeCommentViewController.h; sourceTree = "<group>"; };
 		17F9B2101692907A00A02C52 /* AXMemeCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXMemeCommentViewController.m; sourceTree = "<group>"; };
 		17F9B2111692907A00A02C52 /* AXMemeCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AXMemeCommentViewController.xib; sourceTree = "<group>"; };
+		FBB5200916954B3300891FBA /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment.png; sourceTree = "<group>"; };
+		FBB5200A16954B3300891FBA /* comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment@2x.png"; sourceTree = "<group>"; };
+		FBB5200B16954B3300891FBA /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
+		FBB5200C16954B3300891FBA /* like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@2x.png"; sourceTree = "<group>"; };
+		FBB5201216955D0E00891FBA /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
+		FBB5201316955D0E00891FBA /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		FBD2EAE0168FF2E800D8B0BA /* AXMemeMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXMemeMeta.h; sourceTree = "<group>"; };
 		FBD2EAE1168FF2E800D8B0BA /* AXMemeMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXMemeMeta.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -260,9 +272,23 @@
 		176982F8166AC2090091B88D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FBB5200816954B3300891FBA /* icon */,
 				174C70F1167206D100E33600 /* toxic_angel.jpg */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		FBB5200816954B3300891FBA /* icon */ = {
+			isa = PBXGroup;
+			children = (
+				FBB5201216955D0E00891FBA /* share@2x.png */,
+				FBB5201316955D0E00891FBA /* share.png */,
+				FBB5200916954B3300891FBA /* comment.png */,
+				FBB5200A16954B3300891FBA /* comment@2x.png */,
+				FBB5200B16954B3300891FBA /* like.png */,
+				FBB5200C16954B3300891FBA /* like@2x.png */,
+			);
+			path = icon;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,6 +373,12 @@
 				174C70F2167206D100E33600 /* toxic_angel.jpg in Resources */,
 				170EB2501673E5800045F6CA /* SourceCell.xib in Resources */,
 				17F9B2131692907A00A02C52 /* AXMemeCommentViewController.xib in Resources */,
+				FBB5200D16954B3300891FBA /* comment.png in Resources */,
+				FBB5200E16954B3300891FBA /* comment@2x.png in Resources */,
+				FBB5200F16954B3300891FBA /* like.png in Resources */,
+				FBB5201016954B3300891FBA /* like@2x.png in Resources */,
+				FBB5201416955D0E00891FBA /* share@2x.png in Resources */,
+				FBB5201516955D0E00891FBA /* share.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
