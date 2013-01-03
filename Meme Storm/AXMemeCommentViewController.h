@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AXMemeCommentViewController : UIViewController
+@interface AXMemeCommentViewController : UIViewController <UIWebViewDelegate>
+
+@property (unsafe_unretained, nonatomic) IBOutlet UIWebView *webView;
+
+@property NSString * commentUrl;
+
+- (void) loadCommentsView;
 
 @end
