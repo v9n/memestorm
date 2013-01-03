@@ -252,6 +252,9 @@
     [self setDownloadProgress:nil];
     [self setToolbar:nil];
     [self setMetaMemeView:nil];
+    [self setMetaCommentBar:nil];
+    [self setMetaLikeBar:nil];
+    [self setMemeShareBar:nil];
     [super viewDidUnload];
 }
 

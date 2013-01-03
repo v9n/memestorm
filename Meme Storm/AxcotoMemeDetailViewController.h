@@ -35,6 +35,14 @@
 @property (strong, nonatomic) UIScrollView * currentScroolView;
 @property (strong, nonatomic) UIScrollView * nextScroolView;
 
+@property (unsafe_unretained, nonatomic) IBOutlet UIBarButtonItem *metaCommentBar;
+
+@property (unsafe_unretained, nonatomic) IBOutlet UIBarButtonItem *metaLikeBar;
+
+@property (unsafe_unretained, nonatomic) IBOutlet UIBarButtonItem *memeShareBar;
+
+
+
 @property (unsafe_unretained, nonatomic) IBOutlet UIToolbar *metaMemeView;
 
 - (IBAction)showComment:(id)sender;
