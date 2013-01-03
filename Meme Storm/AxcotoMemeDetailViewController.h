@@ -36,7 +36,9 @@
 @property (strong, nonatomic) UIScrollView * nextScroolView;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIBarButtonItem *metaCommentBar;
+@property (unsafe_unretained, nonatomic) IBOutlet UIBarButtonItem *metaCommentLblBar;
 
+@property (unsafe_unretained, nonatomic) IBOutlet UIBarButtonItem *metaLikeLblBar;
 @property (unsafe_unretained, nonatomic) IBOutlet UIBarButtonItem *metaLikeBar;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIBarButtonItem *memeShareBar;

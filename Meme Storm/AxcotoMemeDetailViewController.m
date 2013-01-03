@@ -25,6 +25,7 @@
 @synthesize prevScroolView, currentScroolView, nextScroolView;
 @synthesize prevImgView, currentImgView, nextImgView;
 @synthesize toolbar;
+@synthesize memeShareBar, metaCommentBar, metaCommentLblBar, metaLikeBar, metaLikeLblBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -255,6 +256,8 @@
     [self setMetaCommentBar:nil];
     [self setMetaLikeBar:nil];
     [self setMemeShareBar:nil];
+    [self setMetaCommentLblBar:nil];
+    [self setMetaLikeLblBar:nil];
     [super viewDidUnload];
 }
 
@@ -332,8 +335,15 @@
 
 - (void) loadImageAtPage:(NSUInteger) page withIndex:(int)index {
     @try {
-        NSURL * fileUrl = [NSURL URLWithString:[[[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex] objectForKey:@"src"]];
-        //NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/funnymama/%d_%d.jpg", currentMemePage, currentMemeIndex];
+        NSDictionary * memeToLoad = [[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex];
+        NSURL * fileUrl = [NSURL URLWithString:[memeToLoad objectForKey:@"src"]];
+        
+        NSString * likeCount = [[memeToLoad objectForKey:@"info"] objectForKey:@"like"];
+        NSString * commentCount = [[memeToLoad objectForKey:@"info"] objectForKey:@"comment"];
+        
+        [metaCommentLblBar setTitle:commentCount];
+        [metaCommentLblBar setTitle:likeCount];
+        
         NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/%@/%@", self.memeSource, [fileUrl lastPathComponent]];
         
         NSLog(@"About to load: %@", imgPath);
