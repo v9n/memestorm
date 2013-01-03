@@ -431,6 +431,8 @@
 - (IBAction)showComment:(id)sender {
     AXMemeCommentViewController * commetViewController;
     commetViewController = [[AXMemeCommentViewController alloc] initWithNibName:@"AXMemeCommentViewController" bundle:nil];
+    commetViewController.commentUrl = [[[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex] objectForKey:@"comment_url"];
+    NSLog(@"About to load %@", commetViewController.commentUrl);
     
     [UIView beginAnimations:@"animation" context:nil];
     [self.navigationController pushViewController:commetViewController animated:NO];
