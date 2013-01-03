@@ -37,5 +37,6 @@
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIToolbar *metaMemeView;
 
+- (IBAction)showComment:(id)sender;
 
 @end

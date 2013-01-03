@@ -115,6 +115,11 @@
                 [self.memeSourceTable reloadData];
                 [downloadProgress stopAnimating];
             }
+            
+            //Clean old cache
+            //@TODO make it smater
+            [self cleanMemeCache];
+            
         });
         
     });
@@ -179,6 +184,20 @@
 
 - (void) cleanMemeCache
 {
+    NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * doc = [path objectAtIndex:0];
+    
+    NSString * memeFolder = [doc stringByAppendingFormat:@"/meme/%@",@"funnymama"];
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSError *error = nil;
+    for (NSString *file in [fm contentsOfDirectoryAtPath:memeFolder error:&error]) {
+        NSLog(@"About to remove file: %@", [memeFolder stringByAppendingPathComponent:file]);
+        BOOL success = [fm removeItemAtPath:[memeFolder stringByAppendingPathComponent:file] error:&error];
+        if (!success || error) {
+            // it failed.
+        }
+    }
     
 }
 
