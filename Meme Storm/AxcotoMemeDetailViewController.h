@@ -42,6 +42,7 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIBarButtonItem *metaLikeBar;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIBarButtonItem *memeShareBar;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *memeTitleLbl;
 
 
 
