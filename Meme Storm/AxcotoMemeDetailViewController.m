@@ -7,6 +7,7 @@
 //
 
 #import "AxcotoMemeDetailViewController.h"
+#import "AXMemeCommentViewController.h"
 
 //#import "ImageZoomingViewController.h"
 //#import "TapDetectingImageView.h"
@@ -19,7 +20,7 @@
 @implementation AxcotoMemeDetailViewController
 
 @synthesize memeSource;
-@synthesize imgContainer, downloadProgress;
+@synthesize imgContainer, downloadProgress, metaMemeView;
 
 @synthesize prevScroolView, currentScroolView, nextScroolView;
 @synthesize prevImgView, currentImgView, nextImgView;
@@ -65,6 +66,7 @@
     imgContainer.frame = CGRectMake(0, 0, 320, screenHeigh);
     NSLog(@"The height of imgContainer is %f", imgContainer.frame.size.height);
     
+    metaMemeView.frame = CGRectMake(0, screenHeigh - metaMemeView.frame.size.height, metaMemeView.frame.size.width, metaMemeView.frame.size.height);
     //imgContainer.bouncesZoom = YES;
     //imgContainer.clipsToBounds = YES;    
 //    imgViewUi.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
@@ -97,6 +99,7 @@
     currentScroolView.contentSize = [currentImgView frame].size;
         
     [imgContainer scrollRectToVisible:CGRectMake(320, 0, 320, screenHeigh) animated:NO];
+    
 }
 
 /**
@@ -423,6 +426,16 @@
     }
     //we will always come back the center one to keep infinitg scrool effect
     [imgContainer scrollRectToVisible:CGRectMake(320, 0, 320, screenHeigh) animated:NO];
+}
+
+- (IBAction)showComment:(id)sender {
+    AXMemeCommentViewController * commetViewController;
+    commetViewController = [[AXMemeCommentViewController alloc] initWithNibName:@"AXMemeCommentViewController" bundle:nil];
+    
+    [UIView beginAnimations:@"animation" context:nil];
+    [self.navigationController pushViewController:commetViewController animated:NO];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+    [UIView commitAnimations];
 }
 
 @end
