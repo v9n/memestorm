@@ -20,6 +20,7 @@
 }
 
 @synthesize downloadProgress;
+@synthesize avatarFolder;
 
 - (void)viewDidLoad
 {
@@ -82,7 +83,6 @@
         
         }
         
-        NSString * avatarFolder;
         avatarFolder = [[path objectAtIndex:0] stringByAppendingPathComponent:@"avatar"];
         if (![fileMan fileExistsAtPath:avatarFolder]) {
             NSError * e;
@@ -98,7 +98,6 @@
             }
             
         }
-        
         
             while (attempt<=2 && s==Nil)
             {
@@ -206,8 +205,10 @@
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.nameLbl.text = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"t"];
-    //cell.detailTextLabel.text = @"Funny pic";
-    
+    NSString * avatarFile = [avatarFolder stringByAppendingPathComponent:[[[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"name"] stringByAppendingString:@".png"]];
+    NSLog(@"Load thumbnail image %@", avatarFile);
+    //cell.thumbImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:avatarFile]];
+    cell.thumbImageView.image = [UIImage imageWithContentsOfFile:avatarFile];
     return cell;
 }
 
@@ -234,16 +235,19 @@
     
     NSString * memeFolder = [doc stringByAppendingFormat:@"/meme/%@",@"funnymama"];
     
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSError *error = nil;
-    for (NSString *file in [fm contentsOfDirectoryAtPath:memeFolder error:&error]) {
-        NSLog(@"About to remove file: %@", [memeFolder stringByAppendingPathComponent:file]);
-        BOOL success = [fm removeItemAtPath:[memeFolder stringByAppendingPathComponent:file] error:&error];
-        if (!success || error) {
-            // it failed.
+    for (int i=0; i<[memeSourceData count]; i++) {
+        memeFolder = [doc stringByAppendingFormat:@"/meme/%@", [[memeSourceData objectAtIndex:i] objectForKey:@"name"]];
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSError *error = nil;
+        for (NSString *file in [fm contentsOfDirectoryAtPath:memeFolder error:&error]) {
+            NSLog(@"About to remove file: %@", [memeFolder stringByAppendingPathComponent:file]);
+            BOOL success = [fm removeItemAtPath:[memeFolder stringByAppendingPathComponent:file] error:&error];
+            if (!success || error) {
+                // it failed.
+                NSLog(@"Cannot clean item %@", [memeFolder stringByAppendingPathComponent:file]);
+            }
         }
     }
-    
 }
 
 @end
