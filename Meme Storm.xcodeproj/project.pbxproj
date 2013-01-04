@@ -35,6 +35,7 @@
 		176982F1166ABFAD0091B88D /* AxcotoMemeSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */; };
 		176982F6166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */; };
 		176982F7166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */; };
+		17706E5C169664530013C6CB /* avatar in Resources */ = {isa = PBXBuildFile; fileRef = 17706E5B169664530013C6CB /* avatar */; };
 		17DCB172167B3BB800A06BD6 /* Prefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DCB171167B3BB800A06BD6 /* Prefs.m */; };
 		17DCB173167B3BB800A06BD6 /* Prefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DCB171167B3BB800A06BD6 /* Prefs.m */; };
 		17E7E635166B638D005D7E87 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E7E633166B638D005D7E87 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -95,6 +96,7 @@
 		176982EF166ABFAC0091B88D /* AxcotoMemeSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeSource.m; sourceTree = "<group>"; };
 		176982F4166AC0950091B88D /* AxcotoMemeSourceFunnymama.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxcotoMemeSourceFunnymama.h; sourceTree = "<group>"; };
 		176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeSourceFunnymama.m; sourceTree = "<group>"; };
+		17706E5B169664530013C6CB /* avatar */ = {isa = PBXFileReference; lastKnownFileType = folder; name = avatar; path = Resources/avatar; sourceTree = "<group>"; };
 		17DCB170167B3BB800A06BD6 /* Prefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefs.h; sourceTree = "<group>"; };
 		17DCB171167B3BB800A06BD6 /* Prefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Prefs.m; sourceTree = "<group>"; };
 		17E7E633166B638D005D7E87 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 		176982F8166AC2090091B88D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				17706E5B169664530013C6CB /* avatar */,
 				FBB5200816954B3300891FBA /* icon */,
 				174C70F1167206D100E33600 /* toxic_angel.jpg */,
 			);
@@ -379,6 +382,7 @@
 				FBB5201016954B3300891FBA /* like@2x.png in Resources */,
 				FBB5201416955D0E00891FBA /* share@2x.png in Resources */,
 				FBB5201516955D0E00891FBA /* share.png in Resources */,
+				17706E5C169664530013C6CB /* avatar in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
