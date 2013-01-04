@@ -10,7 +10,7 @@
 
 @implementation SourceCell
 
-@synthesize  txtLabel;
+@synthesize  thumbImageView, langImageView, nameLbl;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

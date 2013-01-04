@@ -10,5 +10,11 @@
 
 @interface SourceCell : UITableViewCell
 
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *txtLabel;
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *thumbImageView;
+
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *langImageView;
+
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *nameLbl;
+
+
 @end
