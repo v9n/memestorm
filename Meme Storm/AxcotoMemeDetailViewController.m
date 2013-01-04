@@ -242,7 +242,7 @@
     
     NSLog(@"Start to fetch from this URL%@", url);
     
-    int attempt =1;
+    
     
     NSData * dataSource = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     NSArray * memes = (NSArray *)[dataSource objectFromJSONData];
