@@ -14,7 +14,7 @@
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIActivityIndicatorView *downloadProgress;
 
-
+@property NSString * avatarFolder;
 - (void) loadMemeSource;
 - (void) cleanMemeCache;
 @end
