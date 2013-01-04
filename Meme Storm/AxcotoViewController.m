@@ -80,7 +80,26 @@
                 }
             }
         
-        } 
+        }
+        
+        NSString * avatarFolder;
+        avatarFolder = [[path objectAtIndex:0] stringByAppendingPathComponent:@"avatar"];
+        if (![fileMan fileExistsAtPath:avatarFolder]) {
+            NSError * e;
+            NSLog(@"Trying to create avatar folder");
+            if ([fileMan createDirectoryAtPath:avatarFolder withIntermediateDirectories:YES attributes:nil error:&e])
+            {
+                NSLog(@"%@", @"Success to create memeFolder");
+            }
+            else
+            {
+                NSLog(@"[%@] ERROR: attempting to create avatar directory", [self class]);
+                NSAssert( FALSE, @"Failed to create directory maybe out of disk space?");
+            }
+            
+        }
+        
+        
             while (attempt<=2 && s==Nil)
             {
                 attempt++;
@@ -95,9 +114,35 @@
                 }
             }
             
-        
+        if (s==nil) {
+            
+            return;
+        }
         
         memeSourceData = (NSArray *)[s objectFromJSONData];
+        
+        //Fetch avatar
+        for (int count=0; count<[memeSourceData count]; count++) {
+            attempt = 0; s=nil;
+            NSString * url = [[memeSourceData objectAtIndex:count] objectForKey:@"i"];
+            NSString * avatarFileName = [[[memeSourceData objectAtIndex:count] objectForKey:@"name"] stringByAppendingString:@".png"];
+            avatarFileName = [avatarFolder stringByAppendingPathComponent:avatarFileName];
+            if (![fileMan fileExistsAtPath:avatarFileName]) {                
+                while (attempt<=2 && s==Nil)
+                {
+                    attempt++;
+                    NSLog(@"Attempt #%d to get avatar", attempt);
+                    @try {
+                        s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+                        [s writeToFile:avatarFileName atomically:TRUE];
+                    }
+                    @catch (NSException * e){
+                        NSLog(@"Fail at attempt #%d. Error:%@", attempt, e);
+                    }
+                }
+            }
+        }
+        
         NSLog(@"Meme Source Data: %@", memeSourceData);
         
         //Update UI on mean thread
@@ -160,8 +205,8 @@
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"t"];
-    cell.detailTextLabel.text = @"Funny pic";
+    cell.nameLbl.text = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"t"];
+    //cell.detailTextLabel.text = @"Funny pic";
     
     return cell;
 }
