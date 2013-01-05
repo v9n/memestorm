@@ -11,6 +11,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "GLOBAL">
+         <PersistentStrings>
+            <PersistentString
+               value = "[memesList objectAtIndex:1]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[AxcotoMemeDetailViewController loadImage:]:AxcotoMemeDetailViewController.m">
          <PersistentStrings>
             <PersistentString
