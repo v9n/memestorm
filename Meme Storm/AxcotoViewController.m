@@ -162,7 +162,7 @@
             
             //Clean old cache
             //@TODO make it smater
-            [self cleanMemeCache];
+            //[self cleanMemeCache];
             
         });
         

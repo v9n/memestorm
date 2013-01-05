@@ -31,7 +31,7 @@
 
 - (id) read:(NSString *)name
 {
-    
+ return @"...";
 }
 
 @end
