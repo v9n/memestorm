@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "JSONKit.h"
 
+NSString * const AXMemeBackground;
 @interface AxcotoMemeDetailViewController : UIViewController <UIScrollViewDelegate> {
     int currentMemeIndex;
     int currentMemePage;
