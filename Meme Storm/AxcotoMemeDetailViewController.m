@@ -13,6 +13,8 @@
 //#import "TapDetectingImageView.h"
 
 #define ZOOM_STEP 1.5
+NSString * const AXMemeBackground = @"bg.png";
+
 @interface AxcotoMemeDetailViewController ()
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center;
 @end
@@ -75,7 +77,7 @@
     memeTitleLbl.frame = CGRectMake(0, screenHeigh - metaMemeView.frame.size.height - memeTitleLbl.frame.size.height, 320, memeTitleLbl.frame.size.height);
     
     NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/d.jpg"];
-    NSString * resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/toxic_angel.jpg"];
+    NSString * resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/%@", AXMemeBackground];
     
     NSFileManager * fileMan = [NSFileManager defaultManager];
     if ([fileMan fileExistsAtPath:imgPath]==FALSE) {
