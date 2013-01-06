@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		170EB24D1673E55A0045F6CA /* SourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EB24C1673E55A0045F6CA /* SourceCell.m */; };
 		170EB2501673E5800045F6CA /* SourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 170EB24F1673E5800045F6CA /* SourceCell.xib */; };
+		174072371699806A009B1D6E /* icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 174072361699806A009B1D6E /* icon-57.png */; };
+		1740723A16998089009B1D6E /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 1740723916998089009B1D6E /* icon-114.png */; };
+		1740723C169980E4009B1D6E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1740723B169980E4009B1D6E /* Default.png */; };
+		1740723E169980FE009B1D6E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1740723D169980FE009B1D6E /* Default@2x.png */; };
+		1740724016998130009B1D6E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1740723F16998130009B1D6E /* Default-568h@2x.png */; };
+		174072421699815F009B1D6E /* ipad-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 174072411699815F009B1D6E /* ipad-72.png */; };
+		174072441699816B009B1D6E /* ipad-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 174072431699816B009B1D6E /* ipad-144.png */; };
+		17407248169982FE009B1D6E /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 17407247169982FE009B1D6E /* bg.png */; };
 		174739C41669E58100C25A72 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C31669E58100C25A72 /* UIKit.framework */; };
 		174739C61669E58100C25A72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C51669E58100C25A72 /* Foundation.framework */; };
 		174739C81669E58100C25A72 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C71669E58100C25A72 /* CoreGraphics.framework */; };
@@ -26,7 +34,6 @@
 		174739ED1669E58100C25A72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C51669E58100C25A72 /* Foundation.framework */; };
 		174739F51669E58100C25A72 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 174739F31669E58100C25A72 /* InfoPlist.strings */; };
 		174739F81669E58100C25A72 /* Meme_StormTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 174739F71669E58100C25A72 /* Meme_StormTests.m */; };
-		174C70F2167206D100E33600 /* toxic_angel.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 174C70F1167206D100E33600 /* toxic_angel.jpg */; };
 		176982E9166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */; };
 		176982EA166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */; };
 		176982EB166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */; };
@@ -65,6 +72,14 @@
 		170EB24B1673E55A0045F6CA /* SourceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceCell.h; sourceTree = "<group>"; };
 		170EB24C1673E55A0045F6CA /* SourceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceCell.m; sourceTree = "<group>"; };
 		170EB24F1673E5800045F6CA /* SourceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SourceCell.xib; sourceTree = "<group>"; };
+		174072361699806A009B1D6E /* icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-57.png"; sourceTree = "<group>"; };
+		1740723916998089009B1D6E /* icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-114.png"; sourceTree = "<group>"; };
+		1740723B169980E4009B1D6E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		1740723D169980FE009B1D6E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		1740723F16998130009B1D6E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		174072411699815F009B1D6E /* ipad-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-72.png"; sourceTree = "<group>"; };
+		174072431699816B009B1D6E /* ipad-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-144.png"; sourceTree = "<group>"; };
+		17407247169982FE009B1D6E /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		174739BF1669E58100C25A72 /* Meme Storm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Meme Storm.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		174739C31669E58100C25A72 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		174739C51669E58100C25A72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -88,7 +103,6 @@
 		174739F41669E58100C25A72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		174739F61669E58100C25A72 /* Meme_StormTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Meme_StormTests.h; sourceTree = "<group>"; };
 		174739F71669E58100C25A72 /* Meme_StormTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Meme_StormTests.m; sourceTree = "<group>"; };
-		174C70F1167206D100E33600 /* toxic_angel.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = toxic_angel.jpg; sourceTree = "<group>"; };
 		176982E6166ABA670091B88D /* AxcotoMemeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxcotoMemeDetailViewController.h; sourceTree = "<group>"; };
 		176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeDetailViewController.m; sourceTree = "<group>"; };
 		176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AxcotoMemeDetailViewController.xib; sourceTree = "<group>"; };
@@ -143,6 +157,13 @@
 		174739B41669E58100C25A72 = {
 			isa = PBXGroup;
 			children = (
+				174072431699816B009B1D6E /* ipad-144.png */,
+				174072411699815F009B1D6E /* ipad-72.png */,
+				1740723F16998130009B1D6E /* Default-568h@2x.png */,
+				1740723D169980FE009B1D6E /* Default@2x.png */,
+				1740723B169980E4009B1D6E /* Default.png */,
+				1740723916998089009B1D6E /* icon-114.png */,
+				174072361699806A009B1D6E /* icon-57.png */,
 				174739C91669E58100C25A72 /* Meme Storm */,
 				174739F01669E58100C25A72 /* Meme StormTests */,
 				174739C21669E58100C25A72 /* Frameworks */,
@@ -274,9 +295,9 @@
 		176982F8166AC2090091B88D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				17407247169982FE009B1D6E /* bg.png */,
 				17706E5B169664530013C6CB /* avatar */,
 				FBB5200816954B3300891FBA /* icon */,
-				174C70F1167206D100E33600 /* toxic_angel.jpg */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -373,7 +394,6 @@
 				174739E01669E58100C25A72 /* AxcotoViewController_iPhone.xib in Resources */,
 				174739E31669E58100C25A72 /* AxcotoViewController_iPad.xib in Resources */,
 				176982EB166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */,
-				174C70F2167206D100E33600 /* toxic_angel.jpg in Resources */,
 				170EB2501673E5800045F6CA /* SourceCell.xib in Resources */,
 				17F9B2131692907A00A02C52 /* AXMemeCommentViewController.xib in Resources */,
 				FBB5200D16954B3300891FBA /* comment.png in Resources */,
@@ -383,6 +403,14 @@
 				FBB5201416955D0E00891FBA /* share@2x.png in Resources */,
 				FBB5201516955D0E00891FBA /* share.png in Resources */,
 				17706E5C169664530013C6CB /* avatar in Resources */,
+				174072371699806A009B1D6E /* icon-57.png in Resources */,
+				1740723A16998089009B1D6E /* icon-114.png in Resources */,
+				1740723C169980E4009B1D6E /* Default.png in Resources */,
+				1740723E169980FE009B1D6E /* Default@2x.png in Resources */,
+				1740724016998130009B1D6E /* Default-568h@2x.png in Resources */,
+				174072421699815F009B1D6E /* ipad-72.png in Resources */,
+				174072441699816B009B1D6E /* ipad-144.png in Resources */,
+				17407248169982FE009B1D6E /* bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
