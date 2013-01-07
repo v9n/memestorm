@@ -71,7 +71,7 @@
 
 // Read It Later - http://readitlaterlist.com/api/signup/
 - (NSString*)readItLaterKey {
-	return @"45aT6Vfvg66eWNebybd680gu13pdba3d";
+	return @"11388-eb66014a5b3f78055f0d2880";
 }
 // Diigo - http://diigo.com/api_dev
 -(NSString*)diigoKey {
@@ -179,7 +179,7 @@
 }
 
 - (NSString*)readabilityConsumerKey {
-	return @"ctruman";
+	return @"11388-eb66014a5b3f78055f0d2880";
 }
 
 - (NSString*)readabilitySecret {

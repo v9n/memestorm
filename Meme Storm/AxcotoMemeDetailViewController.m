@@ -492,8 +492,10 @@ Caculate which image we should load and show on screen
  */
 - (IBAction)share:(id)sender {
     // Create the item to share (in this example, a url)
-    NSURL *url = [NSURL URLWithString:@"http://getsharekit.com"];
-    SHKItem *item = [SHKItem URL:url title:@"ShareKit is Awesome!" contentType:SHKURLContentTypeWebpage];
+    NSDictionary * ameme = [[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex];
+    NSURL *url = [NSURL URLWithString:[ameme objectForKey:@"url"]];
+    NSLog(@"URL %@\nTitle: %@", url, [ameme objectForKey:@"title"]);
+    SHKItem *item = [SHKItem URL:url title:[ameme objectForKey:@"title"] contentType:SHKURLContentTypeWebpage];
     
     // Get the ShareKit action sheet
     SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
