@@ -25,10 +25,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //memeSourceData = [NSArray alloc] i;// [NSArray arrayWithObjects: [NSDictionary dictionaryWithObjectsAndKeys: @"funnymama.com", @"url", @"Funny Mama", @"name", nil],  [NSDictionary dictionaryWithObjectsAndKeys: @"LolHapens.com", @"url", @"LolHappens", @"name", nil],  nil];
-    
-    [self setTitle:@"Meme Storm"];    
+    [self drawUi];
+    [self setTitle:@"Meme Storm"];
     [self loadMemeSource];
+}
+
+- (void) drawUi
+{
+    if ([[UINavigationBar class]respondsToSelector:@selector(appearance)]) {
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"toolbar-bg"] forBarMetrics:UIBarMetricsDefault];
+    }
 }
 
 - (void)didReceiveMemoryWarning

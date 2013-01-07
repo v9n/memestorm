@@ -23,6 +23,8 @@
 		170EB2501673E5800045F6CA /* SourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 170EB24F1673E5800045F6CA /* SourceCell.xib */; };
 		17163532169A469800AE7482 /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 171634EA169A462400AE7482 /* libShareKit.a */; };
 		17163533169A46A700AE7482 /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 171634EC169A462400AE7482 /* ShareKit.bundle */; };
+		17163536169A563F00AE7482 /* toolbar-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17163534169A563F00AE7482 /* toolbar-bg@2x.png */; };
+		17163537169A563F00AE7482 /* toolbar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 17163535169A563F00AE7482 /* toolbar-bg.png */; };
 		174072371699806A009B1D6E /* icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 174072361699806A009B1D6E /* icon-57.png */; };
 		1740723A16998089009B1D6E /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 1740723916998089009B1D6E /* icon-114.png */; };
 		1740723C169980E4009B1D6E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1740723B169980E4009B1D6E /* Default.png */; };
@@ -351,6 +353,8 @@
 		170EB24C1673E55A0045F6CA /* SourceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceCell.m; sourceTree = "<group>"; };
 		170EB24F1673E5800045F6CA /* SourceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SourceCell.xib; sourceTree = "<group>"; };
 		171634B9169A462300AE7482 /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = Submodules/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
+		17163534169A563F00AE7482 /* toolbar-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar-bg@2x.png"; path = "design/toolbar-bg@2x.png"; sourceTree = SOURCE_ROOT; };
+		17163535169A563F00AE7482 /* toolbar-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar-bg.png"; path = "design/toolbar-bg.png"; sourceTree = SOURCE_ROOT; };
 		172088D4169A4155007BACF3 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		174072361699806A009B1D6E /* icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-57.png"; sourceTree = "<group>"; };
 		1740723916998089009B1D6E /* icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-114.png"; sourceTree = "<group>"; };
@@ -647,6 +651,8 @@
 		176982F8166AC2090091B88D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				17163534169A563F00AE7482 /* toolbar-bg@2x.png */,
+				17163535169A563F00AE7482 /* toolbar-bg.png */,
 				17407247169982FE009B1D6E /* bg.png */,
 				17706E5B169664530013C6CB /* avatar */,
 				FBB5200816954B3300891FBA /* icon */,
@@ -1013,6 +1019,8 @@
 				174072421699815F009B1D6E /* ipad-72.png in Resources */,
 				174072441699816B009B1D6E /* ipad-144.png in Resources */,
 				17407248169982FE009B1D6E /* bg.png in Resources */,
+				17163536169A563F00AE7482 /* toolbar-bg@2x.png in Resources */,
+				17163537169A563F00AE7482 /* toolbar-bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
