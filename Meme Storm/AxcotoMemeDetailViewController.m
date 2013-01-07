@@ -9,6 +9,7 @@
 #import "AxcotoMemeDetailViewController.h"
 #import "AXMemeCommentViewController.h"
 
+#import "SHK.h"
 //#import "ImageZoomingViewController.h"
 //#import "TapDetectingImageView.h"
 
@@ -64,6 +65,9 @@ NSString * const AXMemeBackground = @"bg.png";
     [self bindSwipeEvent];
 }
 
+/**
+ Prepare controller and object. Set their location, initalizr their value or so
+ */
 - (void) setUpImageViewer {
     imgContainer.delegate = self;
     imgContainer.pagingEnabled = YES;
@@ -138,12 +142,18 @@ NSString * const AXMemeBackground = @"bg.png";
     // Dispose of any resources that can be recreated.
 }
 
+/**
+ Default download command to download the first page after main view is loaded
+ */
 - (void) download {
     currentMemePage++;
     currentMemeIndex=0;
     [self download:1 andShow:YES];
 }
 
+/**
+ Download the data via the other thread and device if we should show sth after finishing
+ */
 - (void) download:(NSUInteger)pageToDownload  andShow:(Boolean) show{
     
     NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -207,6 +217,7 @@ NSString * const AXMemeBackground = @"bg.png";
                 [self loadImage:0];
             }
             [downloadProgress setHidden:TRUE];
+            [downloadProgress setProgress:0 animated:NO];
         });
         
         
@@ -271,15 +282,21 @@ NSString * const AXMemeBackground = @"bg.png";
     [imgContainer zoomToRect:zoomRect animated:YES];
 }
 
+/**
+ Hide and unhide toolbar, topbar when touching the screen
+ */
 - (void)handleSingleTap
 {
     static Boolean clicked = FALSE;
-    clicked = !clicked;
     [[self navigationController] setNavigationBarHidden:clicked];
     [[self toolbar] setHidden:clicked];
     [[self memeTitleLbl] setHidden:clicked];
+    clicked = !clicked;    
 }
 
+/**
+ Zooming via pinching with two finger
+ */
 - (void)handleTwoFingerTap:(UIGestureRecognizer *)gestureRecognizer {
     // two-finger tap zooms out
     float newScale = [imgContainer zoomScale] / ZOOM_STEP;
@@ -287,6 +304,9 @@ NSString * const AXMemeBackground = @"bg.png";
     [imgContainer zoomToRect:zoomRect animated:YES];
 }
 
+/**
+ Move to next meme
+ */
 - (void) handleRightSwipe:(UISwipeGestureRecognizer *) swipeGestureRecognizer {
     [self loadImage:-1];
     NSLog(@"%d", currentMemeIndex);
@@ -304,6 +324,9 @@ NSString * const AXMemeBackground = @"bg.png";
     }
 }
 
+/**
+Caculate which image we should load and show on screen
+ */
 - (void) loadImage:(int)id {
     if (id<0 && currentMemePage==1 && currentMemeIndex==0) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No more!"
@@ -335,6 +358,10 @@ NSString * const AXMemeBackground = @"bg.png";
     }
 }
 
+/**
+ Show a specified to view. We use UIViewScrool and implement a effect of infinitive scrool.
+ Basically, we have 3 sub view inside a scroolview. Once we swipte to previous or next view, we load the imgae for the middle view and force UIScroolView come back to this view after finishing navigating.
+ */
 - (void) loadImageAtPage:(NSUInteger) page withIndex:(int)index {
     @try {
         NSDictionary * memeToLoad = [[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex];
@@ -444,6 +471,9 @@ NSString * const AXMemeBackground = @"bg.png";
     [imgContainer scrollRectToVisible:CGRectMake(320, 0, 320, screenHeigh) animated:NO];
 }
 
+/**
+ Show comment view with a WEBUIVIew to loading a comment web page (usually a facebook social comment plugin)
+ */
 - (IBAction)showComment:(id)sender {
     AXMemeCommentViewController * commetViewController;
     commetViewController = [[AXMemeCommentViewController alloc] initWithNibName:@"AXMemeCommentViewController" bundle:nil];
@@ -454,6 +484,26 @@ NSString * const AXMemeBackground = @"bg.png";
     [self.navigationController pushViewController:commetViewController animated:NO];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
     [UIView commitAnimations];
+}
+
+/**
+ ShareKit comes to play at this moment. 
+ It handles sharing featue via twitter and facebook
+ */
+- (IBAction)share:(id)sender {
+    // Create the item to share (in this example, a url)
+    NSURL *url = [NSURL URLWithString:@"http://getsharekit.com"];
+    SHKItem *item = [SHKItem URL:url title:@"ShareKit is Awesome!" contentType:SHKURLContentTypeWebpage];
+    
+    // Get the ShareKit action sheet
+    SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
+    
+    // ShareKit detects top view controller (the one intended to present ShareKit UI) automatically,
+    // but sometimes it may not find one. To be safe, set it explicitly
+    [SHK setRootViewController:self];
+    
+    // Display the action sheet
+    [actionSheet showFromToolbar:self.metaMemeView];
 }
 
 @end
