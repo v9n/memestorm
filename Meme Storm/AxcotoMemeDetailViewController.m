@@ -15,6 +15,7 @@
 
 #define ZOOM_STEP 1.5
 NSString * const AXMemeBackground = @"bg.png";
+NSString * const AXBarBkgImg = @"toolbar-bg";
 
 @interface AxcotoMemeDetailViewController ()
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center;
@@ -28,7 +29,7 @@ NSString * const AXMemeBackground = @"bg.png";
 @synthesize prevScroolView, currentScroolView, nextScroolView;
 @synthesize prevImgView, currentImgView, nextImgView;
 @synthesize toolbar;
-@synthesize memeShareBar, metaCommentBar, metaCommentLblBar, metaLikeBar, metaLikeLblBar;
+@synthesize memeShareBar, memeCommentButton, memeLikeButton;
 @synthesize memeTitleLbl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -75,10 +76,18 @@ NSString * const AXMemeBackground = @"bg.png";
     NSLog(@"The height of imgContainer is %f", imgContainer.frame.size.height);
     
     metaMemeView.frame = CGRectMake(0, screenHeigh - metaMemeView.frame.size.height, metaMemeView.frame.size.width, metaMemeView.frame.size.height);
+    
+    if ([metaMemeView respondsToSelector:@selector(setBackgroundImage:forToolbarPosition:barMetrics:)]) {
+        [metaMemeView setBackgroundImage:[UIImage imageNamed:@"toolbar-bg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+    } else {
+        [metaMemeView insertSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar-bg"]] atIndex:0];
+    }
+    
     //imgContainer.bouncesZoom = YES;
     //imgContainer.clipsToBounds = YES;    
 //    imgViewUi.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
-    memeTitleLbl.frame = CGRectMake(0, screenHeigh - metaMemeView.frame.size.height - memeTitleLbl.frame.size.height, 320, memeTitleLbl.frame.size.height);
+    memeTitleLbl.frame = CGRectMake(0, metaMemeView.frame.origin.y - metaMemeView.frame.size.height - memeTitleLbl.frame.size.height, 320, memeTitleLbl.frame.size.height);
+    [memeTitleLbl setBackgroundColor:[[UIColor alloc] initWithRed:0.0 green:0.0 blue:0.0 alpha:0.7]];
     
     NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/d.jpg"];
     NSString * resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/%@", AXMemeBackground];
@@ -265,12 +274,10 @@ NSString * const AXMemeBackground = @"bg.png";
     [self setDownloadProgress:nil];
     [self setToolbar:nil];
     [self setMetaMemeView:nil];
-    [self setMetaCommentBar:nil];
-    [self setMetaLikeBar:nil];
     [self setMemeShareBar:nil];
-    [self setMetaCommentLblBar:nil];
-    [self setMetaLikeLblBar:nil];
     [self setMemeTitleLbl:nil];
+    [self setMemeCommentButton:nil];
+    [self setMemeLikeButton:nil];
     [super viewDidUnload];
 }
 
@@ -370,8 +377,9 @@ Caculate which image we should load and show on screen
         NSString * likeCount = [[memeToLoad objectForKey:@"info"] objectForKey:@"like"];
         NSString * commentCount = [[memeToLoad objectForKey:@"info"] objectForKey:@"comment"];
         
-        [metaCommentLblBar setTitle:commentCount];
-        [metaCommentLblBar setTitle:likeCount];
+        [memeCommentButton setTitle:commentCount forState:UIControlStateNormal];
+        [memeLikeButton setTitle:likeCount forState:UIControlStateNormal];
+        
         [memeTitleLbl setText:[memeToLoad objectForKey:@"title"]];
         
         NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/%@/%@", self.memeSource, [fileUrl lastPathComponent]];
