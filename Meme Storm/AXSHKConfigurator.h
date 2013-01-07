@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DefaultSHKConfigurator.h"
 
-@interface AXSHKConfigurator : NSObject
+@interface AXSHKConfigurator : DefaultSHKConfigurator
 
 @end

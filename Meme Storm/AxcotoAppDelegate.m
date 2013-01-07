@@ -7,8 +7,12 @@
 //
 
 #import "AxcotoAppDelegate.h"
-
 #import "AxcotoViewController.h"
+
+#import "SHKTwitter.h"
+#import "SHKFacebook.h"
+#import "SHKConfiguration.h"
+#import "AXSHKConfigurator.h"
 
 @implementation AxcotoAppDelegate
 
@@ -16,6 +20,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    DefaultSHKConfigurator *configurator = [[AXSHKConfigurator alloc] init] ;
+    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     UIViewController *rootView;
@@ -24,9 +31,6 @@
     } else {
         rootView = [[AxcotoViewController alloc] initWithNibName:@"AxcotoViewController_iPad" bundle:nil];
     }
-//    self.window.rootViewController = self.viewController;
-//    [self.window makeKeyAndVisible];
-//    return YES;
     
     self.navController = [[UINavigationController alloc] initWithRootViewController:rootView];
     
