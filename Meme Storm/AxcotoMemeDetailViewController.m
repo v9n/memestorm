@@ -10,6 +10,8 @@
 #import "AXMemeCommentViewController.h"
 
 #import "SHK.h"
+#import "UIBarButtonItem+StyledButton.h"
+
 //#import "ImageZoomingViewController.h"
 //#import "TapDetectingImageView.h"
 
@@ -82,6 +84,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     } else {
         [metaMemeView insertSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar-bg"]] atIndex:0];
     }
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(dismissModalViewController)];  
     
     //imgContainer.bouncesZoom = YES;
     //imgContainer.clipsToBounds = YES;    
