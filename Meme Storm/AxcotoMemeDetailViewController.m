@@ -72,22 +72,21 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
  Prepare controller and object. Set their location, initalizr their value or so
  */
 - (void) setUpImageViewer {
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(showMemeListView)];
     imgContainer.delegate = self;
     imgContainer.pagingEnabled = YES;
     imgContainer.frame = CGRectMake(0, 0, 320, screenHeigh);
     NSLog(@"The height of imgContainer is %f", imgContainer.frame.size.height);
     
     metaMemeView.frame = CGRectMake(0, screenHeigh - metaMemeView.frame.size.height, metaMemeView.frame.size.width, metaMemeView.frame.size.height);
-    
     if ([metaMemeView respondsToSelector:@selector(setBackgroundImage:forToolbarPosition:barMetrics:)]) {
         [metaMemeView setBackgroundImage:[UIImage imageNamed:@"toolbar-bg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
     } else {
         [metaMemeView insertSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar-bg"]] atIndex:0];
     }
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(dismissModalViewController)];  
     
-    //imgContainer.bouncesZoom = YES;
-    //imgContainer.clipsToBounds = YES;    
+    imgContainer.bouncesZoom = YES;
+    imgContainer.clipsToBounds = YES;
 //    imgViewUi.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
     memeTitleLbl.frame = CGRectMake(0, metaMemeView.frame.origin.y - metaMemeView.frame.size.height - memeTitleLbl.frame.size.height, 320, memeTitleLbl.frame.size.height);
     [memeTitleLbl setBackgroundColor:[[UIColor alloc] initWithRed:0.0 green:0.0 blue:0.0 alpha:0.7]];
@@ -120,6 +119,11 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     currentScroolView.contentSize = [currentImgView frame].size;
         
     [imgContainer scrollRectToVisible:CGRectMake(320, 0, 320, screenHeigh) animated:NO];
+    
+}
+
+- (void) positionViewer
+{
     
 }
 
@@ -517,6 +521,11 @@ Caculate which image we should load and show on screen
     
     // Display the action sheet
     [actionSheet showFromToolbar:self.metaMemeView];
+}
+
+- (void) showMemeListView
+{    
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 @end
