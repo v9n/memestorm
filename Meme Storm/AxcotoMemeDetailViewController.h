@@ -49,4 +49,6 @@ NSString * const AXMemeBackground;
 - (IBAction)showComment:(id)sender;
 
 - (IBAction)share:(id)sender;
+
+- (void) showMemeListView;
 @end
