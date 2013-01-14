@@ -16,6 +16,7 @@ NSString * const AXMemeBackground;
     NSMutableArray * memesList;
     NSString * docRoot;
     float screenHeigh;
+    float screenWidth;
     bool downloading;
 }
 
@@ -51,4 +52,8 @@ NSString * const AXMemeBackground;
 - (IBAction)share:(id)sender;
 
 - (void) showMemeListView;
+
+- (void)caculateViewerDim;
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
+
 @end
