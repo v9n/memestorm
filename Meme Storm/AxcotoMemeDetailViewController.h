@@ -18,6 +18,8 @@ NSString * const AXMemeBackground;
     float screenHeigh;
     float screenWidth;
     bool downloading;
+    
+    CGSize currentImageSize;
 }
 
 @property (strong, nonatomic) NSString *memeSource ;

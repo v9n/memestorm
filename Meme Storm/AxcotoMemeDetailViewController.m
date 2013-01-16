@@ -66,14 +66,14 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     switch (interfaceOrientation)
     {
         case UIInterfaceOrientationLandscapeLeft:
-        case UIInterfaceOrientationLandscapeRight:
-            screenHeigh = c.size.height;
-            screenWidth = c.size.width;
+        case UIInterfaceOrientationLandscapeRight:            
+            screenHeigh = c.size.width;
+            screenWidth = c.size.height;
             break;
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown:
-            screenHeigh = c.size.width;
-            screenWidth = c.size.height;
+            screenHeigh = c.size.height;
+            screenWidth = c.size.width;
             break;
     }
     
@@ -101,7 +101,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     
     imgContainer.bouncesZoom = YES;
     imgContainer.clipsToBounds = YES;
-//    imgViewUi.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
     memeTitleLbl.frame = CGRectMake(0, metaMemeView.frame.origin.y - metaMemeView.frame.size.height - memeTitleLbl.frame.size.height, screenWidth, memeTitleLbl.frame.size.height);
     [memeTitleLbl setBackgroundColor:[[UIColor alloc] initWithRed:0.0 green:0.0 blue:0.0 alpha:0.7]];
     
@@ -118,6 +117,9 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     prevScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,screenWidth, screenHeigh)];
     currentScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(screenWidth * 1,0,screenWidth, screenHeigh)];
     nextScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(screenWidth * 2,0,screenWidth, screenHeigh)];
+
+    //currentScroolView.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
+    
     
     [imgContainer addSubview: prevScroolView];    
     [imgContainer addSubview: currentScroolView];
@@ -142,16 +144,18 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 - (void) caculateViewerDim:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     CGRect c = [[UIScreen mainScreen] bounds];
-    switch (fromInterfaceOrientation)
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    switch (interfaceOrientation)
     {
-        case UIDeviceOrientationLandscapeLeft:
-        case UIDeviceOrientationLandscapeRight:
-            screenHeigh = c.size.height;
-            screenWidth = c.size.width;
-            break;
-        case UIDeviceOrientationPortrait:
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
             screenHeigh = c.size.width;
             screenWidth = c.size.height;
+            break;
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown:
+            screenHeigh = c.size.height;
+            screenWidth = c.size.width;
             break;
     }
 }
@@ -164,24 +168,16 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     NSLog(@"Oriented is: %d", fromInterfaceOrientation);
     [self caculateViewerDim:fromInterfaceOrientation];
     imgContainer.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
-    metaMemeView.frame = CGRectMake(0, screenHeigh - metaMemeView.frame.size.height, metaMemeView.frame.size.width, metaMemeView.frame.size.height);
-    memeTitleLbl.frame = CGRectMake(0, metaMemeView.frame.origin.y - metaMemeView.frame.size.height - memeTitleLbl.frame.size.height, screenWidth, memeTitleLbl.frame.size.height);
+    
+//    metaMemeView.frame = CGRectMake(0, screenHeigh - metaMemeView.frame.size.height, metaMemeView.frame.size.width, metaMemeView.frame.size.height);
+//    
+    memeTitleLbl.frame = CGRectMake(0, metaMemeView.frame.origin.y - memeTitleLbl.frame.size.height, screenWidth, memeTitleLbl.frame.size.height);
     prevScroolView.frame = CGRectMake(0,0,screenWidth, screenHeigh);
     currentScroolView.frame = CGRectMake(screenWidth * 1,0,screenWidth, screenHeigh);
     nextScroolView.frame = CGRectMake(screenWidth * 2,0, screenWidth, screenHeigh);
     imgContainer.contentSize = CGSizeMake(screenWidth * 3, screenHeigh);
     currentScroolView.contentSize = [currentImgView frame].size;
     [imgContainer scrollRectToVisible:CGRectMake(screenWidth * 1, 0, screenWidth * 1, screenHeigh) animated:NO];
-    
-}
-
-- (void) positionViewer
-{
-    
-    prevScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320, screenHeigh)];
-    
-    currentScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(320,0,320, screenHeigh)];
-    nextScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(640,0,320, screenHeigh)];
     
 }
 
@@ -463,6 +459,7 @@ Caculate which image we should load and show on screen
             currentImgView = nil; //Release it? not sure, need to be do an instrucment
             currentImgView =[[UIImageView alloc] initWithImage:img];
             currentImgView.frame = CGRectMake(0, 0, img.size.width, img.size.height);
+            currentImageSize = CGSizeMake(img.size.width, img.size.height);
             
             [currentScroolView addSubview:currentImgView];
             
@@ -471,18 +468,39 @@ Caculate which image we should load and show on screen
             float minimumScale = [currentScroolView frame].size.width  / [currentImgView frame].size.width;
             
             //Recenter the zoom images
-            float h = minimumScale * [currentImgView frame].size.height;
-            NSLog(@"Size after scale is: %fx%f", [currentScroolView frame].size.width, h);
-            if ( h < screenHeigh) {
-                //currentImgView.frame = CGRectMake(0, (screenHeigh - h)/2, img.size.width, img.size.height);
- //               currentImgView.frame = CGRectMake(0, (screenHeigh - h)/2, [currentScroolView frame].size.width, h);
-                currentScroolView.frame = CGRectMake(screenWidth, (screenHeigh - h)/2, screenWidth, h);
-            } else {
-                currentScroolView.frame = CGRectMake(screenWidth, 0, screenWidth, screenHeigh);
-                //currentImgView.frame = CGRectMake(0, 0, img.size.width, img.size.height);
+            
+            UIInterfaceOrientation direction = [[UIApplication sharedApplication] statusBarOrientation];
+            switch (direction)
+            {
+                case UIInterfaceOrientationLandscapeLeft:
+                case UIInterfaceOrientationLandscapeRight:
+                {
+                    currentScroolView.frame = CGRectMake(screenWidth, 0, screenWidth, screenHeigh);
+                    NSLog(@"The screen width and height is: %fx%f", screenWidth, screenHeigh);
+                    minimumScale = 1;
+                    currentImgView.frame = CGRectMake((screenWidth - img.size.width / 2)/2, 0, img.size.width/2, img.size.height/2);
+
+                    currentScroolView.minimumZoomScale = minimumScale;
+                    currentScroolView.zoomScale = minimumScale;
+                    NSLog(@"Size of img viewer is: %fx%f", currentImgView.frame.size.width, currentImgView.frame.size.height);
+                }
+                    break;
+                case UIInterfaceOrientationPortrait:
+                case UIInterfaceOrientationPortraitUpsideDown:
+                {
+                    float h = minimumScale * [currentImgView frame].size.height;
+                    NSLog(@"Size after scale is: %fx%f", [currentScroolView frame].size.width, h);
+                    if ( h < screenHeigh) {
+                        currentScroolView.frame = CGRectMake(screenWidth, (screenHeigh - h)/2, screenWidth, h);
+                    } else {
+                        currentScroolView.frame = CGRectMake(screenWidth, 0, screenWidth, screenHeigh);
+                    }
+                    currentScroolView.minimumZoomScale = minimumScale;
+                    currentScroolView.zoomScale = minimumScale;
+                    break;
+                }
             }
-            currentScroolView.minimumZoomScale = minimumScale;
-            currentScroolView.zoomScale = minimumScale;
+
             currentScroolView.maximumZoomScale = 6.0;
         }
     } @catch (NSException * e) {
@@ -492,7 +510,6 @@ Caculate which image we should load and show on screen
 
 
 #pragma mark UIScroolViewDelegate method
-
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
     
     CGRect zoomRect;
@@ -516,6 +533,29 @@ Caculate which image we should load and show on screen
     return currentImgView;
 }
 
+#pragma mark UIScroolViewDelegate method
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
+    NSLog(@"- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale %@, %@, %f", scrollView, view, scale);
+    
+    UIInterfaceOrientation direction = [[UIApplication sharedApplication] statusBarOrientation];
+    switch (direction)
+    {
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+        {
+            CGSize scaleSize = CGSizeMake(currentImageSize.width * scale, currentImageSize.height * scale);
+            view.frame = CGRectMake((screenWidth - scaleSize.width/2)/2, 0, scaleSize.width / 2, scaleSize.height/2);
+            break;
+        }
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown:
+        {
+
+        }
+    };
+    
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *) sender
 {
     if (downloading)
@@ -529,13 +569,13 @@ Caculate which image we should load and show on screen
         {
             //Fill in the new image
             [self loadImage:1];
-            NSLog(@"%d", currentMemeIndex);
+            NSLog(@"Current Meme is: %d", currentMemeIndex);
         }
     
         if (imgContainer.contentOffset.x < imgContainer.frame.size.width)
         {
             [self loadImage:-1];
-            NSLog(@"%d", currentMemeIndex);
+            NSLog(@"Current Meme is: %d", currentMemeIndex);
         } 
         
     }
