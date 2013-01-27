@@ -52,6 +52,8 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     [[self navigationController] setNavigationBarHidden:TRUE];
     [[self toolbar] setHidden:TRUE];
     
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
+    
     NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     docRoot = [path objectAtIndex:0];
     
@@ -178,7 +180,9 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     imgContainer.contentSize = CGSizeMake(screenWidth * 3, screenHeigh);
     currentScroolView.contentSize = [currentImgView frame].size;
     [imgContainer scrollRectToVisible:CGRectMake(screenWidth * 1, 0, screenWidth * 1, screenHeigh) animated:NO];
-    
+   
+    [self centerImgView:currentImgView atScale:1];
+    downloadProgress.frame = CGRectMake((screenWidth - downloadProgress.frame.size.width) / 2, 100, downloadProgress.frame.size.width, downloadProgress.frame.size.height);
 }
 
 /**
@@ -537,6 +541,14 @@ Caculate which image we should load and show on screen
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
     NSLog(@"- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale %@, %@, %f", scrollView, view, scale);
     
+    [self centerImgView:view atScale:scale];
+}
+
+/**
+ Re position image view to center of screen when rotating the device
+ */
+- (void) centerImgView:(UIView *)view atScale:(float)scale
+{
     UIInterfaceOrientation direction = [[UIApplication sharedApplication] statusBarOrientation];
     switch (direction)
     {
@@ -550,10 +562,9 @@ Caculate which image we should load and show on screen
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown:
         {
-
+            
         }
     };
-    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *) sender
