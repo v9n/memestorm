@@ -28,7 +28,7 @@
     CGFloat marginRight = 7.0f;
     CGFloat marginLeft = button.frame.size.width - textSize.width - marginRight;
     [button setTitleEdgeInsets:UIEdgeInsetsMake(margin, marginLeft, margin, marginRight)];
-    [button setTitleColor:[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:95.0f/255.0f green:96.0f/255.0f blue:101.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
     
     return [[UIBarButtonItem alloc] initWithCustomView:button];
 }

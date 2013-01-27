@@ -33,8 +33,11 @@
 - (void) drawUi
 {
     if ([[UINavigationBar class]respondsToSelector:@selector(appearance)]) {
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"toolbar-bg"] forBarMetrics:UIBarMetricsDefault];
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav-bar"] forBarMetrics:UIBarMetricsDefault];
     }
+    UILabel *lbl = (UILabel *)self.navigationItem.titleView;
+    lbl.textColor = [UIColor colorWithRed:52.0f green:64.0f blue:61.0f alpha:1.0f];
+    
 }
 
 - (void)didReceiveMemoryWarning

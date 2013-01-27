@@ -144,6 +144,10 @@
 					<string key="NSFrameSize">{0, 0}</string>
 					<string key="NSReuseIdentifierKey">_NS:15</string>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					<object class="NSColor" key="IBUITintColor">
+						<int key="NSColorSpace">1</int>
+						<bytes key="NSRGB">MSAwLjEwODU3NDkwODggMC43NDcyMTE2ODA5AA</bytes>
+					</object>
 				</object>
 				<array class="NSMutableArray" key="IBUIViewControllers">
 					<object class="IBUIViewController" id="966472592">
