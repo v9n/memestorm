@@ -52,6 +52,9 @@
 		174739ED1669E58100C25A72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C51669E58100C25A72 /* Foundation.framework */; };
 		174739F51669E58100C25A72 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 174739F31669E58100C25A72 /* InfoPlist.strings */; };
 		174739F81669E58100C25A72 /* Meme_StormTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 174739F71669E58100C25A72 /* Meme_StormTests.m */; };
+		175E731616B0FCF900F9D754 /* nav-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 175E731416B0FCF900F9D754 /* nav-bar.png */; };
+		175E731716B0FCF900F9D754 /* nav-bar@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 175E731516B0FCF900F9D754 /* nav-bar@2X.png */; };
+		175E73C216B535B000F9D754 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175E73C116B535B000F9D754 /* ImageIO.framework */; };
 		176982E9166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */; };
 		176982EA166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */; };
 		176982EB166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */; };
@@ -62,6 +65,7 @@
 		176982F7166AC0950091B88D /* AxcotoMemeSourceFunnymama.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */; };
 		17706E5C169664530013C6CB /* avatar in Resources */ = {isa = PBXBuildFile; fileRef = 17706E5B169664530013C6CB /* avatar */; };
 		179FDD4816A16F8600F84859 /* button_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 179FDD4716A16F8600F84859 /* button_back.png */; };
+		17D5D56116AA99370057BB8A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 17D5D56016AA99370057BB8A /* Settings.bundle */; };
 		17DCB172167B3BB800A06BD6 /* Prefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DCB171167B3BB800A06BD6 /* Prefs.m */; };
 		17DCB173167B3BB800A06BD6 /* Prefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DCB171167B3BB800A06BD6 /* Prefs.m */; };
 		17F9B208169048B300A02C52 /* AXConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F9B206169048B300A02C52 /* AXConfig.m */; };
@@ -71,8 +75,6 @@
 		FBB5200E16954B3300891FBA /* comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB5200A16954B3300891FBA /* comment@2x.png */; };
 		FBB5200F16954B3300891FBA /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB5200B16954B3300891FBA /* like.png */; };
 		FBB5201016954B3300891FBA /* like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB5200C16954B3300891FBA /* like@2x.png */; };
-		FBB5201416955D0E00891FBA /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB5201216955D0E00891FBA /* share@2x.png */; };
-		FBB5201516955D0E00891FBA /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = FBB5201316955D0E00891FBA /* share.png */; };
 		FBD2EAE2168FF2E800D8B0BA /* AXMemeMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD2EAE1168FF2E800D8B0BA /* AXMemeMeta.m */; };
 /* End PBXBuildFile section */
 
@@ -394,6 +396,9 @@
 		174739F41669E58100C25A72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		174739F61669E58100C25A72 /* Meme_StormTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Meme_StormTests.h; sourceTree = "<group>"; };
 		174739F71669E58100C25A72 /* Meme_StormTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Meme_StormTests.m; sourceTree = "<group>"; };
+		175E731416B0FCF900F9D754 /* nav-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav-bar.png"; path = "design/nav-bar.png"; sourceTree = SOURCE_ROOT; };
+		175E731516B0FCF900F9D754 /* nav-bar@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav-bar@2X.png"; path = "design/nav-bar@2X.png"; sourceTree = SOURCE_ROOT; };
+		175E73C116B535B000F9D754 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		176982E6166ABA670091B88D /* AxcotoMemeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxcotoMemeDetailViewController.h; sourceTree = "<group>"; };
 		176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeDetailViewController.m; sourceTree = "<group>"; };
 		176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AxcotoMemeDetailViewController.xib; sourceTree = "<group>"; };
@@ -403,6 +408,7 @@
 		176982F5166AC0950091B88D /* AxcotoMemeSourceFunnymama.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeSourceFunnymama.m; sourceTree = "<group>"; };
 		17706E5B169664530013C6CB /* avatar */ = {isa = PBXFileReference; lastKnownFileType = folder; name = avatar; path = Resources/avatar; sourceTree = "<group>"; };
 		179FDD4716A16F8600F84859 /* button_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_back.png; path = design/button_back.png; sourceTree = SOURCE_ROOT; };
+		17D5D56016AA99370057BB8A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Resources/Settings.bundle; sourceTree = "<group>"; };
 		17DCB170167B3BB800A06BD6 /* Prefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefs.h; sourceTree = "<group>"; };
 		17DCB171167B3BB800A06BD6 /* Prefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Prefs.m; sourceTree = "<group>"; };
 		17F9B206169048B300A02C52 /* AXConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXConfig.m; sourceTree = "<group>"; };
@@ -414,8 +420,6 @@
 		FBB5200A16954B3300891FBA /* comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment@2x.png"; sourceTree = "<group>"; };
 		FBB5200B16954B3300891FBA /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		FBB5200C16954B3300891FBA /* like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@2x.png"; sourceTree = "<group>"; };
-		FBB5201216955D0E00891FBA /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
-		FBB5201316955D0E00891FBA /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		FBD2EAE0168FF2E800D8B0BA /* AXMemeMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXMemeMeta.h; sourceTree = "<group>"; };
 		FBD2EAE1168FF2E800D8B0BA /* AXMemeMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXMemeMeta.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -425,6 +429,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				175E73C216B535B000F9D754 /* ImageIO.framework in Frameworks */,
 				17163532169A469800AE7482 /* libShareKit.a in Frameworks */,
 				17060900169A2A23006F1B1C /* AdSupport.framework in Frameworks */,
 				170608FE169A29F7006F1B1C /* CoreFoundation.framework in Frameworks */,
@@ -520,6 +525,7 @@
 		174739B41669E58100C25A72 = {
 			isa = PBXGroup;
 			children = (
+				175E73C116B535B000F9D754 /* ImageIO.framework */,
 				171634B9169A462300AE7482 /* ShareKit.xcodeproj */,
 				174072431699816B009B1D6E /* ipad-144.png */,
 				174072411699815F009B1D6E /* ipad-72.png */,
@@ -576,6 +582,7 @@
 				176982ED166ABA9F0091B88D /* MemeDetail */,
 				176982E5166A93D80091B88D /* MemeList */,
 				174739CA1669E58100C25A72 /* Supporting Files */,
+				17D5D56016AA99370057BB8A /* Settings.bundle */,
 			);
 			path = "Meme Storm";
 			sourceTree = "<group>";
@@ -671,6 +678,8 @@
 		176982F8166AC2090091B88D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				175E731416B0FCF900F9D754 /* nav-bar.png */,
+				175E731516B0FCF900F9D754 /* nav-bar@2X.png */,
 				179FDD4716A16F8600F84859 /* button_back.png */,
 				17163534169A563F00AE7482 /* toolbar-bg@2x.png */,
 				17163535169A563F00AE7482 /* toolbar-bg.png */,
@@ -684,8 +693,6 @@
 		FBB5200816954B3300891FBA /* icon */ = {
 			isa = PBXGroup;
 			children = (
-				FBB5201216955D0E00891FBA /* share@2x.png */,
-				FBB5201316955D0E00891FBA /* share.png */,
 				FBB5200916954B3300891FBA /* comment.png */,
 				FBB5200A16954B3300891FBA /* comment@2x.png */,
 				FBB5200B16954B3300891FBA /* like.png */,
@@ -1029,8 +1036,6 @@
 				FBB5200E16954B3300891FBA /* comment@2x.png in Resources */,
 				FBB5200F16954B3300891FBA /* like.png in Resources */,
 				FBB5201016954B3300891FBA /* like@2x.png in Resources */,
-				FBB5201416955D0E00891FBA /* share@2x.png in Resources */,
-				FBB5201516955D0E00891FBA /* share.png in Resources */,
 				17706E5C169664530013C6CB /* avatar in Resources */,
 				174072371699806A009B1D6E /* icon-57.png in Resources */,
 				1740723A16998089009B1D6E /* icon-114.png in Resources */,
@@ -1043,6 +1048,9 @@
 				17163536169A563F00AE7482 /* toolbar-bg@2x.png in Resources */,
 				17163537169A563F00AE7482 /* toolbar-bg.png in Resources */,
 				179FDD4816A16F8600F84859 /* button_back.png in Resources */,
+				17D5D56116AA99370057BB8A /* Settings.bundle in Resources */,
+				175E731616B0FCF900F9D754 /* nav-bar.png in Resources */,
+				175E731716B0FCF900F9D754 /* nav-bar@2X.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1232,6 +1240,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				USER_HEADER_SEARCH_PATHS = "Submodules/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1249,6 +1258,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				USER_HEADER_SEARCH_PATHS = "Submodules/**";
 				WRAPPER_EXTENSION = app;
 			};
