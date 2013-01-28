@@ -8,6 +8,8 @@
 
 #import "AXMemeCommentViewController.h"
 
+#import "UIBarButtonItem+StyledButton.h"
+
 @interface AXMemeCommentViewController ()
 
 @end
@@ -31,8 +33,16 @@
     // Do any additional setup after loading the view from its nib.
     self.webView.delegate = self;
     
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(back)];
+    
+    
 	[self loadCommentsView];
 
+}
+
+- (void) back
+{
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

@@ -28,9 +28,6 @@ NSString * const AXMemeBackground;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIScrollView *imgContainer;
 
-
-@property (unsafe_unretained, nonatomic) IBOutlet UIToolbar *toolbar;
-
 @property (strong, nonatomic) UIImageView * prevImgView;
 @property (strong, nonatomic) UIImageView * currentImgView;
 @property (strong, nonatomic) UIImageView * nextImgView;
@@ -44,9 +41,6 @@ NSString * const AXMemeBackground;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIBarButtonItem *memeShareBar;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *memeTitleLbl;
-
-
-
 @property (unsafe_unretained, nonatomic) IBOutlet UIToolbar *metaMemeView;
 
 - (IBAction)showComment:(id)sender;
