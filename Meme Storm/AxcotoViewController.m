@@ -34,10 +34,23 @@
 {
     if ([[UINavigationBar class]respondsToSelector:@selector(appearance)]) {
         [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav-bar"] forBarMetrics:UIBarMetricsDefault];
+    }    
+}
+
+- (void)setTitle:(NSString *)title
+{
+    [super setTitle:title];
+    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
+    if (!titleView) {
+        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+        titleView.backgroundColor = [UIColor clearColor];
+        titleView.font = [UIFont boldSystemFontOfSize:20.0];
+        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+        titleView.textColor = [UIColor colorWithRed:52.0f green:64.0f blue:61.0f alpha:0.0f];
+        self.navigationItem.titleView = titleView;
     }
-    UILabel *lbl = (UILabel *)self.navigationItem.titleView;
-    lbl.textColor = [UIColor colorWithRed:52.0f green:64.0f blue:61.0f alpha:1.0f];
-    
+    titleView.text = title;
+    [titleView sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning
