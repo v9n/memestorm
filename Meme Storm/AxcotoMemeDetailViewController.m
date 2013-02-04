@@ -121,7 +121,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     NSLog(@"Screen height = %f", screenHeigh);
     
     if ([metaMemeView respondsToSelector:@selector(setBackgroundImage:forToolbarPosition:barMetrics:)]) {
-        //[metaMemeView setBackgroundImage:[UIImage imageNamed:@"toolbar-bg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+        [metaMemeView setBackgroundImage:[UIImage imageNamed:@"toolbar-bg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
     } else {
         [metaMemeView insertSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar-bg"]] atIndex:0];
     }
@@ -260,67 +260,68 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     NSString * memeFolder = [doc stringByAppendingFormat:@"/meme/%@",self.memeSource];
     
     [downloadProgress setHidden:FALSE];
-    [downloadProgress setProgress:0 animated:YES];
+    [downloadProgress startAnimating];
     downloading = YES;
     //We cannot run it on main queu to avoid block UI thread
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         
         [self fetchFromSource:pageToDownload];
-        NSFileManager * fileMan = [NSFileManager defaultManager];
-        
-        if (![fileMan fileExistsAtPath:memeFolder]) {
-            //try to create if not existed yet
-            NSError * e;
-            NSLog(@"Trying to validate memeFolder %@", memeFolder);
-            if ([[NSFileManager defaultManager] createDirectoryAtPath:memeFolder withIntermediateDirectories:YES attributes:nil error:&e]) {
-                NSLog(@"%@", @"Success to create memeFolder");
-            } else {
-                NSLog(@"[%@] ERROR: attempting to create meme directory", [self class]);
-                NSAssert( FALSE, @"Failed to create directory maybe out of disk space?");
-            }
-        }
-        
-        NSArray * urls = [memesList objectAtIndex:pageToDownload];
-        NSURL * fileUrl;
-        NSData * imageData;
-        NSString * memeFile;
-        float totalProgress;
-        for (int i=0; i< [urls count]; i++) {
-            fileUrl = [NSURL URLWithString:(NSString *) [[urls objectAtIndex:i] objectForKey:@"src"] ];
-            memeFile = [memeFolder stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@", [fileUrl lastPathComponent]]]; //pageToDownload, i]];
-            
-            if ([fileMan fileExistsAtPath:memeFile]) {
-                NSLog(@"INFO: File %@ is existed in cache folder. Ignore downloading", memeFile);
-                
-            } else {
-                NSLog(@"INFO: attempting to download file %@", memeFile);
-                imageData = [NSData dataWithContentsOfURL:fileUrl];
-                NSLog(@"INFO: attempting to create file %@", memeFile);
-                [imageData writeToFile:memeFile atomically:YES];
-                NSLog(@"Download completed: %f", totalProgress);
-                // We are updating UI so let do it on mean thread
-                
-            }
-            totalProgress = (float)(i+1) / (float)[urls count];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [downloadProgress setProgress:totalProgress];
-                [downloadProgress setNeedsDisplay];
-                downloading = NO;
-            });
-        }
+//        NSFileManager * fileMan = [NSFileManager defaultManager];
+//        
+//        if (![fileMan fileExistsAtPath:memeFolder]) {
+//            //try to create if not existed yet
+//            NSError * e;
+//            NSLog(@"Trying to validate memeFolder %@", memeFolder);
+//            if ([[NSFileManager defaultManager] createDirectoryAtPath:memeFolder withIntermediateDirectories:YES attributes:nil error:&e]) {
+//                NSLog(@"%@", @"Success to create memeFolder");
+//            } else {
+//                NSLog(@"[%@] ERROR: attempting to create meme directory", [self class]);
+//                NSAssert( FALSE, @"Failed to create directory maybe out of disk space?");
+//            }
+//        }
+//    
+////        Disable downloading for now. Switch to SDWebImage with cacheable data
+//        NSArray * urls = [memesList objectAtIndex:pageToDownload];
+//        NSURL * fileUrl;
+//        NSData * imageData;
+//        NSString * memeFile;
+//        float totalProgress;
+//        for (int i=0; i< [urls count]; i++) {
+//            fileUrl = [NSURL URLWithString:(NSString *) [[urls objectAtIndex:i] objectForKey:@"src"] ];
+//            memeFile = [memeFolder stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@", [fileUrl lastPathComponent]]]; //pageToDownload, i]];
+//
+//            if ([fileMan fileExistsAtPath:memeFile]) {
+//                NSLog(@"INFO: File %@ is existed in cache folder. Ignore downloading", memeFile);
+//                
+//            } else {
+//                NSLog(@"INFO: attempting to download file %@", memeFile);
+//                imageData = [NSData dataWithContentsOfURL:fileUrl];
+//                NSLog(@"INFO: attempting to create file %@", memeFile);
+//                [imageData writeToFile:memeFile atomically:YES];
+//                NSLog(@"Download completed: %f", totalProgress);
+//                // We are updating UI so let do it on mean thread
+//                
+//            }
+//            totalProgress = (float)(i+1) / (float)[urls count];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [downloadProgress setProgress:totalProgress];
+//                [downloadProgress setNeedsDisplay];
+//                downloading = NO;
+//            });
+//        }
         
         // We are updating UI so let do it on mean thread
         dispatch_async(dispatch_get_main_queue(), ^{
+            downloading = NO;
             [imgContainer setHidden:FALSE];
             if (show) {
                 [self loadImage:0];
             }
             [downloadProgress setHidden:TRUE];
-            [downloadProgress setProgress:0 animated:NO];
+            [downloadProgress stopAnimating];
         });
-        
-        
     });
+    
 }
 
 
@@ -475,7 +476,7 @@ Caculate which image we should load and show on screen
         NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/%@/%@", self.memeSource, [fileUrl lastPathComponent]];
         
         NSLog(@"About to load: %@", imgPath);
-        if ([[NSFileManager defaultManager] fileExistsAtPath:imgPath]) {
+        //if ([[NSFileManager defaultManager] fileExistsAtPath:imgPath]) {
             //So, we need to remove old image view
             for (UIView * v in currentScroolView.subviews) {
                 if ([v isKindOfClass:[UIImageView class]]) {
@@ -483,58 +484,80 @@ Caculate which image we should load and show on screen
                 }
             }
             
-            UIImage * img = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]];
-            NSLog(@"Original size of this image is: %fx%f", img.size.width, img.size.height);
-            currentImgView = nil; //Release it? not sure, need to be do an instrucment
-            currentImgView =[[UIImageView alloc] initWithImage:img];
-            currentImgView.frame = CGRectMake(0, 0, img.size.width, img.size.height);
-            currentImageSize = CGSizeMake(img.size.width, img.size.height);
+            //Use SDWeb to load imag async
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            [manager downloadWithURL:fileUrl
+                            delegate:self
+                             options:0
+                             success:^(UIImage *image, BOOL cached)
+                             {
+                               //do something with image
+                               NSLog(@"Finish downloading image");
+                               [self drawImgToScrool:image];
+                              }
+                             failure:nil];
+            //End SDWeb
             
-            [currentScroolView addSubview:currentImgView];
-            
-            currentScroolView.contentSize = [currentImgView frame].size;
-            // calculate minimum scale to perfectly fit image width, and begin at that scale
-            float minimumScale = [currentScroolView frame].size.width  / [currentImgView frame].size.width;
-            
-            //Recenter the zoom images
-            
-            UIInterfaceOrientation direction = [[UIApplication sharedApplication] statusBarOrientation];
-            switch (direction)
-            {
-                case UIInterfaceOrientationLandscapeLeft:
-                case UIInterfaceOrientationLandscapeRight:
-                {
-                    currentScroolView.frame = CGRectMake(screenWidth, 0, screenWidth, screenHeigh);
-                    NSLog(@"The screen width and height is: %fx%f", screenWidth, screenHeigh);
-                    minimumScale = 1;
-                    currentImgView.frame = CGRectMake((screenWidth - img.size.width / 2)/2, 0, img.size.width/2, img.size.height/2);
-
-                    currentScroolView.minimumZoomScale = minimumScale;
-                    currentScroolView.zoomScale = minimumScale;
-                    NSLog(@"Size of img viewer is: %fx%f", currentImgView.frame.size.width, currentImgView.frame.size.height);
-                }
-                    break;
-                case UIInterfaceOrientationPortrait:
-                case UIInterfaceOrientationPortraitUpsideDown:
-                {
-                    float h = minimumScale * [currentImgView frame].size.height;
-                    NSLog(@"Size after scale is: %fx%f", [currentScroolView frame].size.width, h);
-                    if ( h < screenHeigh) {
-                        currentScroolView.frame = CGRectMake(screenWidth, (screenHeigh - h)/2, screenWidth, h);
-                    } else {
-                        currentScroolView.frame = CGRectMake(screenWidth, 0, screenWidth, screenHeigh);
-                    }
-                    currentScroolView.minimumZoomScale = minimumScale;
-                    currentScroolView.zoomScale = minimumScale;
-                    break;
-                }
-            }
-
-            currentScroolView.maximumZoomScale = 6.0;
-        }
+            //Show place holder image
+            UIImage * img = [UIImage imageNamed:@"bg"];
+//            UIImage * img = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]];
+            [self drawImgToScrool:img];
+        
+        //}
     } @catch (NSException * e) {
         NSLog(@"%@", e);
     }
+}
+
+- (void) drawImgToScrool:(UIImage *)img
+{
+    //Show place holder image
+    NSLog(@"Original size of this image is: %fx%f", img.size.width, img.size.height);
+    currentImgView = nil; //Release it? not sure, need to be do an instrucment
+    currentImgView =[[UIImageView alloc] initWithImage:img];
+    currentImgView.frame = CGRectMake(0, 0, img.size.width, img.size.height);
+    currentImageSize = CGSizeMake(img.size.width, img.size.height);
+    
+    [currentScroolView addSubview:currentImgView];
+    
+    currentScroolView.contentSize = [currentImgView frame].size;
+    // calculate minimum scale to perfectly fit image width, and begin at that scale
+    float minimumScale = [currentScroolView frame].size.width  / [currentImgView frame].size.width;
+    
+    //Recenter the zoom images    
+    UIInterfaceOrientation direction = [[UIApplication sharedApplication] statusBarOrientation];
+    switch (direction)
+    {
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+        {
+            currentScroolView.frame = CGRectMake(screenWidth, 0, screenWidth, screenHeigh);
+            NSLog(@"The screen width and height is: %fx%f", screenWidth, screenHeigh);
+            minimumScale = 1;
+            currentImgView.frame = CGRectMake((screenWidth - img.size.width / 2)/2, 0, img.size.width/2, img.size.height/2);
+            
+            currentScroolView.minimumZoomScale = minimumScale;
+            currentScroolView.zoomScale = minimumScale;
+            NSLog(@"Size of img viewer is: %fx%f", currentImgView.frame.size.width, currentImgView.frame.size.height);
+        }
+            break;
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown:
+        {
+            float h = minimumScale * [currentImgView frame].size.height;
+            NSLog(@"Size after scale is: %fx%f", [currentScroolView frame].size.width, h);
+            if ( h < screenHeigh) {
+                currentScroolView.frame = CGRectMake(screenWidth, (screenHeigh - h)/2, screenWidth, h);
+            } else {
+                currentScroolView.frame = CGRectMake(screenWidth, 0, screenWidth, screenHeigh);
+            }
+            currentScroolView.minimumZoomScale = minimumScale;
+            currentScroolView.zoomScale = minimumScale;
+            break;
+        }
+    }
+    
+    currentScroolView.maximumZoomScale = 6.0;
 }
 
 

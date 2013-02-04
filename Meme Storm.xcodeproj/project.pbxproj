@@ -55,6 +55,7 @@
 		175E731616B0FCF900F9D754 /* nav-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 175E731416B0FCF900F9D754 /* nav-bar.png */; };
 		175E731716B0FCF900F9D754 /* nav-bar@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 175E731516B0FCF900F9D754 /* nav-bar@2X.png */; };
 		175E73C216B535B000F9D754 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175E73C116B535B000F9D754 /* ImageIO.framework */; };
+		175E73C416BA73B200F9D754 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175E73C316BA73AF00F9D754 /* SDWebImage.framework */; };
 		176982E9166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */; };
 		176982EA166ABA680091B88D /* AxcotoMemeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */; };
 		176982EB166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */; };
@@ -399,6 +400,7 @@
 		175E731416B0FCF900F9D754 /* nav-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav-bar.png"; path = "design/nav-bar.png"; sourceTree = SOURCE_ROOT; };
 		175E731516B0FCF900F9D754 /* nav-bar@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav-bar@2X.png"; path = "design/nav-bar@2X.png"; sourceTree = SOURCE_ROOT; };
 		175E73C116B535B000F9D754 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		175E73C316BA73AF00F9D754 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 		176982E6166ABA670091B88D /* AxcotoMemeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxcotoMemeDetailViewController.h; sourceTree = "<group>"; };
 		176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxcotoMemeDetailViewController.m; sourceTree = "<group>"; };
 		176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AxcotoMemeDetailViewController.xib; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				174739C41669E58100C25A72 /* UIKit.framework in Frameworks */,
 				174739C61669E58100C25A72 /* Foundation.framework in Frameworks */,
 				174739C81669E58100C25A72 /* CoreGraphics.framework in Frameworks */,
+				175E73C416BA73B200F9D754 /* SDWebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +528,7 @@
 		174739B41669E58100C25A72 = {
 			isa = PBXGroup;
 			children = (
+				175E73C316BA73AF00F9D754 /* SDWebImage.framework */,
 				175E73C116B535B000F9D754 /* ImageIO.framework */,
 				171634B9169A462300AE7482 /* ShareKit.xcodeproj */,
 				174072431699816B009B1D6E /* ipad-144.png */,
@@ -1233,6 +1237,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Vinh Nguyen (63C8TVC926)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Meme Storm/Meme Storm-Prefix.pch";
 				INFOPLIST_FILE = "Meme Storm/Meme Storm-Info.plist";
@@ -1253,6 +1261,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Vinh Nguyen (63C8TVC926)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Meme Storm/Meme Storm-Prefix.pch";
 				INFOPLIST_FILE = "Meme Storm/Meme Storm-Info.plist";
