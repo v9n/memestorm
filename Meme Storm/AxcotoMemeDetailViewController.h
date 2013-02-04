@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JSONKit.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 NSString * const AXMemeBackground;
 @interface AxcotoMemeDetailViewController : UIViewController <UIScrollViewDelegate> {
@@ -24,7 +25,7 @@ NSString * const AXMemeBackground;
 
 @property (strong, nonatomic) NSString *memeSource ;
 
-@property (unsafe_unretained, nonatomic) IBOutlet UIProgressView *downloadProgress;
+@property (unsafe_unretained, nonatomic) IBOutlet UIActivityIndicatorView *downloadProgress;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIScrollView *imgContainer;
 
