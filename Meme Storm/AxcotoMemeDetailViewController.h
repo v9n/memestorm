@@ -11,7 +11,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 NSString * const AXMemeBackground;
-@interface AxcotoMemeDetailViewController : UIViewController <UIScrollViewDelegate> {
+@interface AxcotoMemeDetailViewController : UIViewController <UIScrollViewDelegate, SDWebImageManagerDelegate> {
     int currentMemeIndex;
     int currentMemePage;
     NSMutableArray * memesList;
@@ -52,5 +52,7 @@ NSString * const AXMemeBackground;
 
 - (void)caculateViewerDim;
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
+
+- (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image;
 
 @end

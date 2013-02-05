@@ -475,7 +475,7 @@ Caculate which image we should load and show on screen
         
         NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/%@/%@", self.memeSource, [fileUrl lastPathComponent]];
         
-        NSLog(@"About to load: %@", imgPath);
+        NSLog(@"About to load: %@", fileUrl);
         //if ([[NSFileManager defaultManager] fileExistsAtPath:imgPath]) {
             //So, we need to remove old image view
             for (UIView * v in currentScroolView.subviews) {
@@ -485,6 +485,7 @@ Caculate which image we should load and show on screen
             }
             
             //Use SDWeb to load imag async
+            [downloadProgress startAnimating];
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
             [manager downloadWithURL:fileUrl
                             delegate:self
@@ -492,16 +493,22 @@ Caculate which image we should load and show on screen
                              success:^(UIImage *image, BOOL cached)
                              {
                                //do something with image
-                               NSLog(@"Finish downloading image");
-                               [self drawImgToScrool:image];
-                              }
-                             failure:nil];
+                                 NSLog(@"Success to download the image from: %@", cached? @"cache":@"network");
+                                 if (cached) {
+                                     //try to write it down
+//                                     NSData * imgData = UIImageJPEGRepresentation(image, 100);
+//                                     [imgData writeToFile:imgPath atomically:YES];
+                                 }
+                             }
+                             failure:^(NSError * error) {
+                                 NSLog(@"Cannot download the image: %@", error);
+                             }];
             //End SDWeb
             
             //Show place holder image
-            UIImage * img = [UIImage imageNamed:@"bg"];
+//            UIImage * img = [UIImage imageNamed:@"bg"];
 //            UIImage * img = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]];
-            [self drawImgToScrool:img];
+//            [self drawImgToScrool:img];
         
         //}
     } @catch (NSException * e) {
@@ -512,6 +519,7 @@ Caculate which image we should load and show on screen
 - (void) drawImgToScrool:(UIImage *)img
 {
     //Show place holder image
+    NSLog(@"Image to draw: %@", img);
     NSLog(@"Original size of this image is: %fx%f", img.size.width, img.size.height);
     currentImgView = nil; //Release it? not sure, need to be do an instrucment
     currentImgView =[[UIImageView alloc] initWithImage:img];
@@ -560,6 +568,14 @@ Caculate which image we should load and show on screen
     currentScroolView.maximumZoomScale = 6.0;
 }
 
+#pragma mark SDWebImageDownloaderDelegate
+- (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image
+{
+    NSLog(@"Finish downloading image. Start to redraw it");
+    [self drawImgToScrool:image];
+    NSLog(@"Finish redrawing");
+    [downloadProgress stopAnimating];
+}
 
 #pragma mark UIScroolViewDelegate method
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
