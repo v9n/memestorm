@@ -48,10 +48,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setTitle:self.memeSource];
-    
-    [[self navigationController] setNavigationBarHidden:TRUE];
-    [[self metaMemeView] setHidden:TRUE];
-    
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
     
     NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -82,6 +78,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     NSLog(@"Screen height is %f", screenHeigh);
     [self setUpImageViewer];
     [self bindSwipeEvent];
+    [self handleSingleTap];    
 }
 
 - (void)setTitle:(NSString *)title
@@ -146,8 +143,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     nextScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(screenWidth * 2,0,screenWidth, screenHeigh)];
 
     //currentScroolView.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
-    
-    
+        
     [imgContainer addSubview: prevScroolView];    
     [imgContainer addSubview: currentScroolView];
     [imgContainer addSubview: nextScroolView];
@@ -156,6 +152,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     [currentScroolView setDelegate:self]; //zooming, we always use the currentScroolView to display image.
     currentScroolView.minimumZoomScale=0.5;
     currentScroolView.maximumZoomScale=6.0;
+    currentScroolView.zoomScale = 2;
     
     currentImgView =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
     [currentScroolView addSubview:currentImgView];
@@ -385,7 +382,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
  */
 - (void)handleSingleTap
 {
-    static Boolean clicked = FALSE;
+    static Boolean clicked = NO;
     [[self navigationController] setNavigationBarHidden:clicked];
     [[self metaMemeView] setHidden:clicked];
     [[self memeTitleLbl] setHidden:clicked];

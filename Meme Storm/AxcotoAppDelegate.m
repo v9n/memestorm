@@ -26,11 +26,12 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     UIViewController *rootView;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         rootView = [[AxcotoViewController alloc] initWithNibName:@"AxcotoViewController_iPhone" bundle:nil];
-    } else {
-        rootView = [[AxcotoViewController alloc] initWithNibName:@"AxcotoViewController_iPad" bundle:nil];
-    }
+//    } else {
+//        
+//        rootView = [[AxcotoViewController alloc] initWithNibName:@"AxcotoViewController_iPad" bundle:nil];
+//    }
     
     self.navController = [[UINavigationController alloc] initWithRootViewController:rootView];
     
