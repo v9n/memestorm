@@ -509,7 +509,7 @@ Caculate which image we should load and show on screen
         
         //}
     } @catch (NSException * e) {
-        NSLog(@"%@", e);
+    //    NSLog(@"Eror%@", e.reason);
     }
 }
 
