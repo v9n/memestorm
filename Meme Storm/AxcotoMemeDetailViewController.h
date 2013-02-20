@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JSONKit.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import "SDWebImage/UIImageView+WebCache.h"
 
 NSString * const AXMemeBackground;
 @interface AxcotoMemeDetailViewController : UIViewController <UIScrollViewDelegate, SDWebImageManagerDelegate> {
