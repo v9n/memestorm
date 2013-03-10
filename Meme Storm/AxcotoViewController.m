@@ -32,26 +32,30 @@
 
 - (void) drawUi
 {
-    if ([[UINavigationBar class]respondsToSelector:@selector(appearance)]) {
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav-bar"] forBarMetrics:UIBarMetricsDefault];
-    }    
+//    if ([[UINavigationBar class]respondsToSelector:@selector(appearance)]) {
+//        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav-bar"] forBarMetrics:UIBarMetricsDefault];
+//    }
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+//    self.navigationController.navigationBar.translucent = YES;
+//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(reorderSite) withTitle:@"Edit"];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(reorderSite)];
 }
 
-- (void)setTitle:(NSString *)title
-{
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-        titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont boldSystemFontOfSize:20.0];
-        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        titleView.textColor = [UIColor colorWithRed:52.0f green:64.0f blue:61.0f alpha:0.0f];
-        self.navigationItem.titleView = titleView;
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
+//- (void)setTitle:(NSString *)title
+//{
+//    [super setTitle:title];
+//    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
+//    if (!titleView) {
+//        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+//        titleView.backgroundColor = [UIColor clearColor];
+//        titleView.font = [UIFont boldSystemFontOfSize:20.0];
+//        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+//        titleView.textColor = [UIColor colorWithRed:52.0f green:64.0f blue:61.0f alpha:0.0f];
+//        self.navigationItem.titleView = titleView;
+//    }
+//    titleView.text = title;
+//    [titleView sizeToFit];
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -189,6 +193,14 @@
         });
         
     });
+}
+
+- (void) reorderSite
+{
+    static Boolean edit=NO;
+    edit = !edit;
+    [self.navigationItem.leftBarButtonItem setTitle:edit?@"Done":@"Edit"];
+    [self.memeSourceTable setEditing:edit];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

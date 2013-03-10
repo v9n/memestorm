@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "UIBarButtonItem+StyledButton.h"
+
 @interface AxcotoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (unsafe_unretained, nonatomic) IBOutlet UITableView *memeSourceTable;
@@ -17,4 +19,5 @@
 @property NSString * avatarFolder;
 - (void) loadMemeSource;
 - (void) cleanMemeCache;
+- (void) reorderSite;
 @end
