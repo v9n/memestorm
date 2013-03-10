@@ -13,11 +13,33 @@
 
 + (UIBarButtonItem *)styledBackBarButtonItemWithTarget:(id)target selector:(SEL)selector;
 {
+    return [self styledBackBarButtonItemWithTarget:target selector:selector withTitle:@"Back"];
+//    UIImage *image = [UIImage imageNamed:@"button_back"];
+////    image = [image stretchableImageWithLeftCapWidth:20.0f topCapHeight:0.0f];
+//    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 31.0, 9)];
+//    
+//    NSString *title = NSLocalizedString(@"Back", nil);
+//    UIFont *font = [UIFont boldSystemFontOfSize:12.0f];
+//    
+//    UIButton *button = [UIButton styledButtonWithBackgroundImage:image font:font title:title target:target selector:selector];
+//    button.titleLabel.textColor = [UIColor blackColor];
+//    
+//    CGSize textSize = [title sizeWithFont:font];
+//    CGFloat margin = (button.frame.size.height - textSize.height) / 2;
+//    CGFloat marginRight = 7.0f;
+//    CGFloat marginLeft = button.frame.size.width - textSize.width - marginRight;
+//    [button setTitleEdgeInsets:UIEdgeInsetsMake(margin, marginLeft, margin, marginRight)];
+//    [button setTitleColor:[UIColor colorWithRed:95.0f/255.0f green:96.0f/255.0f blue:101.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+//    
+//    return [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
++ (UIBarButtonItem *)styledBackBarButtonItemWithTarget:(id)target selector:(SEL)selector withTitle:(NSString *) title
+{
     UIImage *image = [UIImage imageNamed:@"button_back"];
-//    image = [image stretchableImageWithLeftCapWidth:20.0f topCapHeight:0.0f];
+    //    image = [image stretchableImageWithLeftCapWidth:20.0f topCapHeight:0.0f];
     image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 31.0, 9)];
     
-    NSString *title = NSLocalizedString(@"Back", nil);
     UIFont *font = [UIFont boldSystemFontOfSize:12.0f];
     
     UIButton *button = [UIButton styledButtonWithBackgroundImage:image font:font title:title target:target selector:selector];

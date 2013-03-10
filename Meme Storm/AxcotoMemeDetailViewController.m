@@ -81,28 +81,31 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     [self handleSingleTap];    
 }
 
-- (void)setTitle:(NSString *)title
-{
-    [super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    if (!titleView) {
-        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-        titleView.backgroundColor = [UIColor clearColor];
-        titleView.font = [UIFont boldSystemFontOfSize:20.0];
-        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        titleView.textColor = [UIColor colorWithRed:52.0f green:64.0f blue:61.0f alpha:0.0f];
-        self.navigationItem.titleView = titleView;
-    }
-    titleView.text = title;
-    [titleView sizeToFit];
-}
+//- (void)setTitle:(NSString *)title
+//{
+//    [super setTitle:title];
+//    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
+//    if (!titleView) {
+//        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+//        titleView.backgroundColor = [UIColor clearColor];
+//        titleView.font = [UIFont boldSystemFontOfSize:20.0];
+//        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+//        titleView.textColor = [UIColor colorWithRed:52.0f green:64.0f blue:61.0f alpha:0.0f];
+//        self.navigationItem.titleView = titleView;
+//    }
+//    titleView.text = title;
+//    [titleView sizeToFit];
+//}
 
 /**
  Prepare controller and object. Set their location, initalizr their value or so
  */
 - (void) setUpImageViewer {
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(showMemeListView)];
-
+//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(showMemeListView)];
+    [[self navigationController] setNavigationBarHidden:NO];
+    [self.navigationItem.leftBarButtonItem setTitle:@"Back"];
+//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(showMemeListView)];
+//    
     self.view.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
     imgContainer.delegate = self;
     imgContainer.pagingEnabled = YES;
@@ -117,11 +120,11 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 
     NSLog(@"Screen height = %f", screenHeigh);
     
-    if ([metaMemeView respondsToSelector:@selector(setBackgroundImage:forToolbarPosition:barMetrics:)]) {
-        [metaMemeView setBackgroundImage:[UIImage imageNamed:@"toolbar-bg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
-    } else {
-        [metaMemeView insertSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar-bg"]] atIndex:0];
-    }
+//    if ([metaMemeView respondsToSelector:@selector(setBackgroundImage:forToolbarPosition:barMetrics:)]) {
+//        [metaMemeView setBackgroundImage:[UIImage imageNamed:@"toolbar-bg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+//    } else {
+//        [metaMemeView insertSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar-bg"]] atIndex:0];
+//    }
     
     imgContainer.bouncesZoom = YES;
     imgContainer.clipsToBounds = YES;
