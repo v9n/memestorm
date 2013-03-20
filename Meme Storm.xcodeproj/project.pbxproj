@@ -43,16 +43,12 @@
 		1740724016998130009B1D6E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1740723F16998130009B1D6E /* Default-568h@2x.png */; };
 		174072421699815F009B1D6E /* ipad-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 174072411699815F009B1D6E /* ipad-72.png */; };
 		174072441699816B009B1D6E /* ipad-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 174072431699816B009B1D6E /* ipad-144.png */; };
-		17407248169982FE009B1D6E /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 17407247169982FE009B1D6E /* bg.png */; };
 		174739C41669E58100C25A72 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C31669E58100C25A72 /* UIKit.framework */; };
 		174739C61669E58100C25A72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C51669E58100C25A72 /* Foundation.framework */; };
 		174739C81669E58100C25A72 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174739C71669E58100C25A72 /* CoreGraphics.framework */; };
 		174739CE1669E58100C25A72 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 174739CC1669E58100C25A72 /* InfoPlist.strings */; };
 		174739D01669E58100C25A72 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 174739CF1669E58100C25A72 /* main.m */; };
 		174739D41669E58100C25A72 /* AxcotoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 174739D31669E58100C25A72 /* AxcotoAppDelegate.m */; };
-		174739D61669E58100C25A72 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 174739D51669E58100C25A72 /* Default.png */; };
-		174739D81669E58100C25A72 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174739D71669E58100C25A72 /* Default@2x.png */; };
-		174739DA1669E58100C25A72 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174739D91669E58100C25A72 /* Default-568h@2x.png */; };
 		174739DD1669E58100C25A72 /* AxcotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 174739DC1669E58100C25A72 /* AxcotoViewController.m */; };
 		174739E01669E58100C25A72 /* AxcotoViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 174739DE1669E58100C25A72 /* AxcotoViewController_iPhone.xib */; };
 		174739E31669E58100C25A72 /* AxcotoViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 174739E11669E58100C25A72 /* AxcotoViewController_iPad.xib */; };
@@ -402,7 +398,6 @@
 		1740723F16998130009B1D6E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		174072411699815F009B1D6E /* ipad-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-72.png"; sourceTree = "<group>"; };
 		174072431699816B009B1D6E /* ipad-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-144.png"; sourceTree = "<group>"; };
-		17407247169982FE009B1D6E /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		174739BF1669E58100C25A72 /* Meme Storm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Meme Storm.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		174739C31669E58100C25A72 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		174739C51669E58100C25A72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -413,9 +408,6 @@
 		174739D11669E58100C25A72 /* Meme Storm-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Meme Storm-Prefix.pch"; sourceTree = "<group>"; };
 		174739D21669E58100C25A72 /* AxcotoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AxcotoAppDelegate.h; sourceTree = "<group>"; };
 		174739D31669E58100C25A72 /* AxcotoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AxcotoAppDelegate.m; sourceTree = "<group>"; };
-		174739D51669E58100C25A72 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		174739D71669E58100C25A72 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		174739D91669E58100C25A72 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		174739DB1669E58100C25A72 /* AxcotoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AxcotoViewController.h; sourceTree = "<group>"; };
 		174739DC1669E58100C25A72 /* AxcotoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AxcotoViewController.m; sourceTree = "<group>"; };
 		174739DF1669E58100C25A72 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AxcotoViewController_iPhone.xib; sourceTree = "<group>"; };
@@ -655,9 +647,6 @@
 				174739CC1669E58100C25A72 /* InfoPlist.strings */,
 				174739CF1669E58100C25A72 /* main.m */,
 				174739D11669E58100C25A72 /* Meme Storm-Prefix.pch */,
-				174739D51669E58100C25A72 /* Default.png */,
-				174739D71669E58100C25A72 /* Default@2x.png */,
-				174739D91669E58100C25A72 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -744,7 +733,6 @@
 				179FDD4716A16F8600F84859 /* button_back.png */,
 				17163534169A563F00AE7482 /* toolbar-bg@2x.png */,
 				17163535169A563F00AE7482 /* toolbar-bg.png */,
-				17407247169982FE009B1D6E /* bg.png */,
 				17706E5B169664530013C6CB /* avatar */,
 				FBB5200816954B3300891FBA /* icon */,
 			);
@@ -1085,9 +1073,6 @@
 			files = (
 				17163533169A46A700AE7482 /* ShareKit.bundle in Resources */,
 				174739CE1669E58100C25A72 /* InfoPlist.strings in Resources */,
-				174739D61669E58100C25A72 /* Default.png in Resources */,
-				174739D81669E58100C25A72 /* Default@2x.png in Resources */,
-				174739DA1669E58100C25A72 /* Default-568h@2x.png in Resources */,
 				174739E01669E58100C25A72 /* AxcotoViewController_iPhone.xib in Resources */,
 				174739E31669E58100C25A72 /* AxcotoViewController_iPad.xib in Resources */,
 				176982EB166ABA680091B88D /* AxcotoMemeDetailViewController.xib in Resources */,
@@ -1105,7 +1090,6 @@
 				1740724016998130009B1D6E /* Default-568h@2x.png in Resources */,
 				174072421699815F009B1D6E /* ipad-72.png in Resources */,
 				174072441699816B009B1D6E /* ipad-144.png in Resources */,
-				17407248169982FE009B1D6E /* bg.png in Resources */,
 				17163536169A563F00AE7482 /* toolbar-bg@2x.png in Resources */,
 				17163537169A563F00AE7482 /* toolbar-bg.png in Resources */,
 				179FDD4816A16F8600F84859 /* button_back.png in Resources */,
