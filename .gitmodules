@@ -1,9 +1,6 @@
 [submodule "vendor/ShareKit"]
 	path = Submodules/ShareKit
 	url = git://github.com/ShareKit/ShareKit.git
-[submodule "Submodules/ShareKit"]
-	path = Submodules/ShareKit
-	url = git://github.com/ShareKit/ShareKit.git
 [submodule "Submodules/SDWebImage"]
 	path = Submodules/SDWebImage
 	url = https://github.com/rs/SDWebImage.git

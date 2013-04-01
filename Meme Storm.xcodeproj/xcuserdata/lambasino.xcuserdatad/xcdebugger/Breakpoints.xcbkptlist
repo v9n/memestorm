@@ -13,7 +13,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "183"
          endingLineNumber = "183"
-         landmarkName = "-download:andShow:"
+         landmarkName = "-caculateViewerDim:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -26,7 +26,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "185"
          endingLineNumber = "185"
-         landmarkName = "-download:andShow:"
+         landmarkName = "-caculateViewerDim:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -39,7 +39,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "184"
          endingLineNumber = "184"
-         landmarkName = "-download:andShow:"
+         landmarkName = "-caculateViewerDim:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
