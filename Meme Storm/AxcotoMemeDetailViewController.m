@@ -46,6 +46,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
     [self setTitle:self.memeSource];
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
@@ -76,6 +77,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     }
     
     NSLog(@"Screen height is %f", screenHeigh);
+    
     [self setUpImageViewer];
     [self bindSwipeEvent];
     [self handleSingleTap];    
@@ -111,8 +113,10 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     imgContainer.pagingEnabled = YES;
     imgContainer.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
     NSLog(@"The height of imgContainer is %f", imgContainer.frame.size.height);
+    //screenHeigh - metaMemeView.frame.size.height
+    metaMemeView.frame = CGRectMake(0, 500, metaMemeView.frame.size.width, metaMemeView.frame.size.height);
+    [metaMemeView setHidden:FALSE];
     
-    metaMemeView.frame = CGRectMake(0, screenHeigh - metaMemeView.frame.size.height, metaMemeView.frame.size.width, metaMemeView.frame.size.height);
     NSLog(@"DIM %f", metaMemeView.frame.origin.y);
     NSLog(@"DIM %f", metaMemeView.frame.origin.x);
     NSLog(@"DIM %f", metaMemeView.frame.size.width);
