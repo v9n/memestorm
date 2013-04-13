@@ -40,9 +40,10 @@ NSString * const AXMemeBackground;
 @property (unsafe_unretained, nonatomic) IBOutlet UIButton *memeCommentButton;
 @property (unsafe_unretained, nonatomic) IBOutlet UIButton *memeLikeButton;
 
-@property (unsafe_unretained, nonatomic) IBOutlet UIBarButtonItem *memeShareBar;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *memeShareBar;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *memeTitleLbl;
-@property (unsafe_unretained, nonatomic) IBOutlet UIToolbar *metaMemeView;
+@property (unsafe_unretained, nonatomic) IBOutlet UIView *metaMemeView;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel * socialMetric;
 
 - (IBAction)showComment:(id)sender;
 

@@ -31,7 +31,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 @synthesize prevScroolView, currentScroolView, nextScroolView;
 @synthesize prevImgView, currentImgView, nextImgView;
 
-@synthesize memeShareBar, memeCommentButton, memeLikeButton;
+@synthesize memeShareBar, memeCommentButton, memeLikeButton, socialMetric;
 @synthesize memeTitleLbl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -361,6 +361,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 }
 
 - (void)viewDidUnload {
+    [self setSocialMetric:nil];
     [self setImgContainer:nil];
     [self setDownloadProgress:nil];
     [self setMetaMemeView:nil];
@@ -470,6 +471,14 @@ Caculate which image we should load and show on screen
         
         [memeCommentButton setTitle:commentCount forState:UIControlStateNormal];
         [memeLikeButton setTitle:likeCount forState:UIControlStateNormal];
+        if ([likeCount isEqualToString:@""]) {
+            [socialMetric setText:[NSString stringWithFormat:@"%@ Comment", commentCount]];
+            
+        } else {
+            
+            [socialMetric setText:[NSString stringWithFormat:@"%@ Comment, %@ Likes", commentCount, likeCount]];
+            
+        }
         
         [memeTitleLbl setText:[memeToLoad objectForKey:@"title"]];
         
@@ -692,7 +701,8 @@ Caculate which image we should load and show on screen
     [SHK setRootViewController:self];
     
     // Display the action sheet
-    [actionSheet showFromToolbar:self.metaMemeView];
+    [actionSheet showInView:self.metaMemeView];
+    //[actionSheet showFromToolbar:self.metaMemeView];
 }
 
 - (void) showMemeListView
