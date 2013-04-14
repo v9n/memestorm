@@ -39,8 +39,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "380"
          endingLineNumber = "380"
-         landmarkName = "-handleDoubleTap:"
-         landmarkType = "5">
+         landmarkName = "@implementation AxcotoMemeDetailViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -91,8 +91,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "245"
          endingLineNumber = "245"
-         landmarkName = "@implementation AxcotoMemeDetailViewController"
-         landmarkType = "3">
+         landmarkName = "-didReceiveMemoryWarning"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -104,8 +104,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "424"
          endingLineNumber = "424"
-         landmarkName = "@implementation AxcotoMemeDetailViewController"
-         landmarkType = "3">
+         landmarkName = "-handleLeftSwipe:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -117,8 +117,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "256"
          endingLineNumber = "256"
-         landmarkName = "-download:andShow:"
-         landmarkType = "5">
+         landmarkName = "@implementation AxcotoMemeDetailViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -130,8 +130,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "418"
          endingLineNumber = "418"
-         landmarkName = "-handleLeftSwipe:"
-         landmarkType = "5">
+         landmarkName = "@implementation AxcotoMemeDetailViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -143,8 +143,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "420"
          endingLineNumber = "420"
-         landmarkName = "-handleLeftSwipe:"
-         landmarkType = "5">
+         landmarkName = "@implementation AxcotoMemeDetailViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -182,8 +182,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "414"
          endingLineNumber = "414"
-         landmarkName = "@implementation AxcotoMemeDetailViewController"
-         landmarkType = "3">
+         landmarkName = "-handleRightSwipe:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -195,7 +195,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "398"
          endingLineNumber = "398"
-         landmarkName = "-handleTwoFingerTap:"
+         landmarkName = "-handleSingleTap"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -312,8 +312,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "464"
          endingLineNumber = "464"
-         landmarkName = "-loadImageAtPage:withIndex:"
-         landmarkType = "5">
+         landmarkName = "@implementation AxcotoMemeDetailViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -650,7 +650,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "588"
          endingLineNumber = "588"
-         landmarkName = "-zoomRectForScale:withCenter:"
+         landmarkName = "-webImageManager:didFinishWithImage:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -663,8 +663,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "197"
          endingLineNumber = "197"
-         landmarkName = "-didRotateFromInterfaceOrientation:"
-         landmarkType = "5">
+         landmarkName = "@implementation AxcotoMemeDetailViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -832,8 +832,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "428"
          endingLineNumber = "428"
-         landmarkName = "@implementation AxcotoMemeDetailViewController"
-         landmarkType = "3">
+         landmarkName = "-handleLeftSwipe:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -923,7 +923,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "574"
          endingLineNumber = "574"
-         landmarkName = "-webImageManager:didFinishWithImage:"
+         landmarkName = "-drawImgToScrool:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1001,7 +1001,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "522"
          endingLineNumber = "522"
-         landmarkName = "-drawImgToScrool:"
+         landmarkName = "-loadImageAtPage:withIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1014,7 +1014,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "525"
          endingLineNumber = "525"
-         landmarkName = "-drawImgToScrool:"
+         landmarkName = "-loadImageAtPage:withIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1027,7 +1027,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "529"
          endingLineNumber = "529"
-         landmarkName = "-drawImgToScrool:"
+         landmarkName = "-loadImageAtPage:withIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1040,7 +1040,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "572"
          endingLineNumber = "572"
-         landmarkName = "-webImageManager:didFinishWithImage:"
+         landmarkName = "-drawImgToScrool:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1053,7 +1053,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "523"
          endingLineNumber = "523"
-         landmarkName = "-drawImgToScrool:"
+         landmarkName = "-loadImageAtPage:withIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
