@@ -113,10 +113,11 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     imgContainer.pagingEnabled = YES;
     imgContainer.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
     NSLog(@"The height of imgContainer is %f", imgContainer.frame.size.height);
-    metaMemeView.frame = CGRectMake(0, screenHeigh - metaMemeView.frame.size.height - 44, metaMemeView.frame.size.width, metaMemeView.frame.size.height);
+    int memeMetaHeight = 85;
+    metaMemeView.frame = CGRectMake(0, screenHeigh - memeMetaHeight, metaMemeView.frame.size.width, 35);
     [metaMemeView setHidden:FALSE];
-    
-    NSLog(@"DIM Y POS  %f", screenHeigh - metaMemeView.frame.size.height);
+    [metaMemeView setBackgroundColor:[UIColor whiteColor]];
+    [metaMemeView setAlpha:0.7];     NSLog(@"DIM Y POS  %f", screenHeigh - metaMemeView.frame.size.height);
     NSLog(@"DIM %f", metaMemeView.frame.origin.y);
     NSLog(@"DIM %f", metaMemeView.frame.origin.x);
     NSLog(@"DIM %f", metaMemeView.frame.size.width);
