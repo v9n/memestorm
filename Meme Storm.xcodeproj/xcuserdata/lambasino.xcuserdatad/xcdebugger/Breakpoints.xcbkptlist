@@ -8,20 +8,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Meme Storm/AxcotoMemeDetailViewController.m"
-         timestampString = "387667514.700324"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "187"
-         endingLineNumber = "187"
-         landmarkName = "-caculateViewerDim:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Meme Storm/AxcotoMemeDetailViewController.m"
-         timestampString = "387667514.700324"
+         timestampString = "387677168.105967"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "189"
@@ -34,11 +21,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Meme Storm/AxcotoMemeDetailViewController.m"
-         timestampString = "387667514.700324"
+         timestampString = "387677168.105967"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "188"
-         endingLineNumber = "188"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
+         landmarkName = "-caculateViewerDim:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Meme Storm/AxcotoMemeDetailViewController.m"
+         timestampString = "387677168.105967"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "190"
+         endingLineNumber = "190"
          landmarkName = "-caculateViewerDim:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Meme Storm/AxcotoMemeDetailViewController.m"
-         timestampString = "387667514.700324"
+         timestampString = "387677168.105967"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "168"
-         endingLineNumber = "168"
+         startingLineNumber = "170"
+         endingLineNumber = "170"
          landmarkName = "-setUpImageViewer"
          landmarkType = "5">
       </FileBreakpoint>
