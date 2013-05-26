@@ -9,6 +9,9 @@
 #import "AxcotoViewController.h"
 #import "AxcotoMemeDetailViewController.h"
 #import "SourceCell.h"
+#import "AXConfig.h"
+#import "UINavigationBar+CustomBackground.h"
+
 
 @interface AxcotoViewController ()
 
@@ -30,32 +33,44 @@
     [self loadMemeSource];
 }
 
+/**
+ Redraw to custom UI
+ */
 - (void) drawUi
 {
-//    if ([[UINavigationBar class]respondsToSelector:@selector(appearance)]) {
-//        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav-bar"] forBarMetrics:UIBarMetricsDefault];
-//    }
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-//    self.navigationController.navigationBar.translucent = YES;
+    UINavigationBar * bar =  self.navigationController.navigationBar;    
+    if ([[UINavigationBar class]respondsToSelector:@selector(appearance)]) {
+        UIImage * bg = [bar createImageWithColor:[UIColor colorWithRed:35/255.0f green:35/255.0f blue:35/255.0f alpha:1.0f]];
+        [[UINavigationBar appearance] setBackgroundImage:bg forBarMetrics:UIBarMetricsDefault];
+    } else {
+        
+    }
+    UIColor * color = [UIColor colorWithRed:35/255.0f green:35/255.0f blue:35/255.0f alpha:1.0f];
+    self.navigationController.navigationBar.tintColor = color;
+
+    color = [UIColor redColor];
+    self.navigationController.navigationBar.tintColor = color;
+//    self.navigationController.navigationBar.translucent = NO;
 //    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(reorderSite) withTitle:@"Edit"];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(reorderSite)];
 }
 
-//- (void)setTitle:(NSString *)title
-//{
-//    [super setTitle:title];
-//    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-//    if (!titleView) {
-//        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-//        titleView.backgroundColor = [UIColor clearColor];
-//        titleView.font = [UIFont boldSystemFontOfSize:20.0];
-//        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-//        titleView.textColor = [UIColor colorWithRed:52.0f green:64.0f blue:61.0f alpha:0.0f];
-//        self.navigationItem.titleView = titleView;
-//    }
-//    titleView.text = title;
-//    [titleView sizeToFit];
-//}
+
+- (void)setTitle:(NSString *)title
+{
+    [super setTitle:title];
+    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
+    if (!titleView) {
+        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
+        titleView.backgroundColor = [UIColor clearColor];
+        titleView.font = [UIFont fontWithName:@"Montserrat-Bold" size:18.00];
+        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+        titleView.textColor = [UIColor colorWithRed:255.0f green:255.0f blue:255.0f alpha:1.0f];
+        self.navigationItem.titleView = titleView;
+    }
+    titleView.text = title;
+    [titleView sizeToFit];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -84,7 +99,7 @@
         NSString * f = [path objectAtIndex:0];
         f = [f stringByAppendingString:@"/source.json"];
                 
-        NSString * url = @"http://meme.axcoto.com/m/list";
+        NSString * url = [NSString stringWithFormat:@"%@/m/list", AX_SPIDER_URL];
         //NSString * url = @"http://127.0.0.1:9393/m/list";
         NSLog(@"Start to load meme source at: %@", url);
         
