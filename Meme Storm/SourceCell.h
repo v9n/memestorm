@@ -15,6 +15,14 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *langImageView;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *nameLbl;
+@property (unsafe_unretained, nonatomic) int order;;
 
+
+
+- (void) setMemeTitle:(NSString *) title;
+- (void) setAvatar:(UIImage *) img ;
+
+- (void)drawRect:(CGRect)rect;
+- (void)paint:(NSIndexPath *) indexPath;
 
 @end
