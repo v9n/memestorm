@@ -53,6 +53,9 @@
 //    self.navigationController.navigationBar.translucent = NO;
 //    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(reorderSite) withTitle:@"Edit"];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(reorderSite)];
+    
+    [self.memeSourceTable setBackgroundColor:[UIColor clearColor]];
+    [self.memeSourceTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 
@@ -233,6 +236,13 @@
     return [memeSourceData count];
 }
 
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SourceCell * c = (SourceCell *) cell;
+    [c paint:indexPath];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
@@ -253,11 +263,11 @@
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.nameLbl.text = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"t"];
+    [cell setMemeTitle:[[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"t"]];
     NSString * avatarFile = [avatarFolder stringByAppendingPathComponent:[[[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"name"] stringByAppendingString:@".png"]];
     NSLog(@"Load thumbnail image %@", avatarFile);
-    //cell.thumbImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:avatarFile]];
-    cell.thumbImageView.image = [UIImage imageWithContentsOfFile:avatarFile];
+    [cell setAvatar:[UIImage imageWithContentsOfFile:avatarFile]];
+    
     return cell;
 }
 
