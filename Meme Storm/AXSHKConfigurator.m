@@ -7,6 +7,7 @@
 //
 
 #import "AXSHKConfigurator.h"
+#import "AXConfig.h"
 
 @implementation AXSHKConfigurator
 
@@ -20,7 +21,7 @@
 }
 
 - (NSString*)appURL {
-	return @"http://meme.axcoto.com";
+	return [NSString stringWithFormat:@"%@", AX_SPIDER_URL];
 }
 
 /*
