@@ -19,6 +19,7 @@
     if (self) {
         // Initialization code
     }
+
     return self;
 }
 
@@ -31,11 +32,13 @@
 
 - (void)drawRect:(CGRect)rect {
     UIColor *color = [UIColor colorWithRed:31/255.0f green:127/255.0f blue:92/255.0f alpha:1.0f];
+    
     UIColor *lineColor = [UIColor colorWithRed:37/255.0f green:110/255.0f blue:83/255.0f alpha:1.0f];
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColor(context, CGColorGetComponents( [color CGColor]));
-    CGContextFillRect(context, rect);
+    CGContextFillRect(context, rect)
+    ;
     int xStart = 0, yStart = self.bounds.size.height;
 
     
@@ -53,9 +56,9 @@
     [lineColor setStroke];
     [topPath stroke];
     
-    [topPath moveToPoint:CGPointMake(53, 0)];
-    [topPath addLineToPoint:CGPointMake(53, 56)];
-    
+//    [topPath moveToPoint:CGPointMake(53, 0)];
+//    [topPath addLineToPoint:CGPointMake(53, 56)];
+   
     [topPath stroke];
 }
 

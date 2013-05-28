@@ -42,17 +42,17 @@
     if ([[UINavigationBar class]respondsToSelector:@selector(appearance)]) {
         UIImage * bg = [bar createImageWithColor:[UIColor colorWithRed:35/255.0f green:35/255.0f blue:35/255.0f alpha:1.0f]];
         [[UINavigationBar appearance] setBackgroundImage:bg forBarMetrics:UIBarMetricsDefault];
-    } else {
         
+    } else {
+        UIColor * color = [UIColor colorWithRed:35/255.0f green:35/255.0f blue:35/255.0f alpha:1.0f];
+        self.navigationController.navigationBar.tintColor = color;
     }
-    UIColor * color = [UIColor colorWithRed:35/255.0f green:35/255.0f blue:35/255.0f alpha:1.0f];
-    self.navigationController.navigationBar.tintColor = color;
 
-    color = [UIColor redColor];
-    self.navigationController.navigationBar.tintColor = color;
+//    color = [UIColor redColor];
+//    self.navigationController.navigationBar.tintColor = color;
 //    self.navigationController.navigationBar.translucent = NO;
 //    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(reorderSite) withTitle:@"Edit"];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(reorderSite)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(reorderSite)];
     
     [self.memeSourceTable setBackgroundColor:[UIColor clearColor]];
     [self.memeSourceTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -267,7 +267,11 @@
     NSString * avatarFile = [avatarFolder stringByAppendingPathComponent:[[[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"name"] stringByAppendingString:@".png"]];
     NSLog(@"Load thumbnail image %@", avatarFile);
     [cell setAvatar:[UIImage imageWithContentsOfFile:avatarFile]];
-    
+
+    UIView *bgSelectedView = [[UIView alloc] init];
+    [bgSelectedView setBackgroundColor:[UIColor colorWithRed:31/255.0f green:127/255.0f blue:92/255.0f alpha:1.0f]];
+    [cell setSelectedBackgroundView:bgSelectedView];
+
     return cell;
 }
 
