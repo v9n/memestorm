@@ -13,8 +13,10 @@
 #import "UIBarButtonItem+StyledButton.h"
 
 //#import "ImageZoomingViewController.h"
-//#import "TapDetectingImageView.h"
+//#import "TapDetemtingImageView.h"
+#import "AXConfig.h"
 
+#define MEME_META_VIEW_HEIGHT 66
 #define ZOOM_STEP 1.5
 NSString * const AXMemeBackground = @"bg.png";
 NSString * const AXBarBkgImg = @"toolbar-bg";
@@ -103,21 +105,24 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
  Prepare controller and object. Set their location, initalizr their value or so
  */
 - (void) setUpImageViewer {
-//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(showMemeListView)];
     [[self navigationController] setNavigationBarHidden:NO];
-    [self.navigationItem.leftBarButtonItem setTitle:@"Back"];
+//    [self.navigationItem.leftBarButtonItem setTitle:@"Back"];
 //    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(showMemeListView)];
-//    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow-left"] landscapeImagePhone:[UIImage imageNamed:@"arrow-left"] style:UIBarButtonItemStylePlain target:self action:@selector(showMemeListView)];
+    self.navigationItem.leftBarButtonItem
+    
     self.view.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
     imgContainer.delegate = self;
     imgContainer.pagingEnabled = YES;
     imgContainer.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
     NSLog(@"The height of imgContainer is %f", imgContainer.frame.size.height);
-    int memeMetaHeight = 85;
-    metaMemeView.frame = CGRectMake(0, screenHeigh - memeMetaHeight, metaMemeView.frame.size.width, 35);
+    
+    metaMemeView.frame = CGRectMake(0, screenHeigh - self.navigationController.navigationBar.bounds.size.height -  MEME_META_VIEW_HEIGHT, screenWidth, MEME_META_VIEW_HEIGHT);
+    
     [metaMemeView setHidden:FALSE];
-    [metaMemeView setBackgroundColor:[UIColor whiteColor]];
-    [metaMemeView setAlpha:0.7];     NSLog(@"DIM Y POS  %f", screenHeigh - metaMemeView.frame.size.height);
+//    [metaMemeView setBackgroundColor:[UIColor whiteColor]];
+//    [metaMemeView setAlpha:0.7];
+    NSLog(@"DIM Y POS  %f", screenHeigh - metaMemeView.frame.size.height);
     NSLog(@"DIM %f", metaMemeView.frame.origin.y);
     NSLog(@"DIM %f", metaMemeView.frame.origin.x);
     NSLog(@"DIM %f", metaMemeView.frame.size.width);
@@ -125,16 +130,10 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 
     NSLog(@"Screen height = %f", screenHeigh);
     
-//    if ([metaMemeView respondsToSelector:@selector(setBackgroundImage:forToolbarPosition:barMetrics:)]) {
-//        [metaMemeView setBackgroundImage:[UIImage imageNamed:@"toolbar-bg"] forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
-//    } else {
-//        [metaMemeView insertSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"toolbar-bg"]] atIndex:0];
-//    }
-    
     imgContainer.bouncesZoom = YES;
     imgContainer.clipsToBounds = YES;
-    memeTitleLbl.frame = CGRectMake(0, metaMemeView.frame.origin.y - metaMemeView.frame.size.height - memeTitleLbl.frame.size.height, screenWidth, memeTitleLbl.frame.size.height);
-    [memeTitleLbl setBackgroundColor:[[UIColor alloc] initWithRed:0.0 green:0.0 blue:0.0 alpha:0.7]];
+//    memeTitleLbl.frame = CGRectMake(0, metaMemeView.frame.origin.y - metaMemeView.frame.size.height - memeTitleLbl.frame.size.height, screenWidth, memeTitleLbl.frame.size.height);
+    [memeTitleLbl setBackgroundColor:[UIColor clearColor]];
     
     NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/d.jpg"];
     NSString * resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/%@", AXMemeBackground];
@@ -168,6 +167,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         
     [imgContainer scrollRectToVisible:CGRectMake(screenWidth, 0, screenWidth, screenHeigh) animated:NO];
     
+    downloadProgress.frame = CGRectMake((screenWidth - downloadProgress.frame.size.width) / 2, 100, downloadProgress.frame.size.width, downloadProgress.frame.size.height);
 }
 
 /**
@@ -201,9 +201,8 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     [self caculateViewerDim:fromInterfaceOrientation];
     imgContainer.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
     
-//    metaMemeView.frame = CGRectMake(0, screenHeigh - metaMemeView.frame.size.height, metaMemeView.frame.size.width, metaMemeView.frame.size.height);
+    metaMemeView.frame = CGRectMake(0, screenHeigh - self.navigationController.navigationBar.bounds.size.height -  MEME_META_VIEW_HEIGHT, screenWidth, screenWidth);
     
-    memeTitleLbl.frame = CGRectMake(0, metaMemeView.frame.origin.y - memeTitleLbl.frame.size.height, screenWidth, memeTitleLbl.frame.size.height);
     prevScroolView.frame = CGRectMake(0,0,screenWidth, screenHeigh);
     currentScroolView.frame = CGRectMake(screenWidth * 1,0,screenWidth, screenHeigh);
     nextScroolView.frame = CGRectMake(screenWidth * 2,0, screenWidth, screenHeigh);
@@ -355,7 +354,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         quantity = [[memesList objectAtIndex:(pageToDownload -1)] count];
     }
     
-    NSString * url = [NSString stringWithFormat:@"http://meme.axcoto.com/m/%@/%d,%@,%@,%d", memeSource,pageToDownload, start_id, end_id, quantity];
+    NSString * url = [NSString stringWithFormat:@"%@/m/%@/%d,%@,%@,%d", AX_SPIDER_URL, memeSource,pageToDownload, start_id, end_id, quantity];
     //NSString * url = [NSString stringWithFormat:@"http://127.0.0.1:9393/m/%@/%d,%@,%@,%d", memeSource,pageToDownload, start_id, end_id, quantity];
     
     NSLog(@"Start to fetch from this URL%@", url);    
@@ -640,7 +639,9 @@ Caculate which image we should load and show on screen
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown:
         {
-            
+            CGSize scaleSize = CGSizeMake(currentImageSize.width * scale, currentImageSize.height * scale);
+            view.frame = CGRectMake((screenWidth - scaleSize.width/2)/2, 0, scaleSize.width / 2, scaleSize.height/2);
+            break;
         }
     };
 }
