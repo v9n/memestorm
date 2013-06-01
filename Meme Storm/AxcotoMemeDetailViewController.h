@@ -44,11 +44,10 @@ NSString * const AXMemeBackground;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *memeTitleLbl;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *metaMemeView;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel * socialMetric;
 
 - (IBAction)showComment:(id)sender;
-
-- (IBAction)share:(id)sender;
+- (IBAction)shareMeme:(id)sender;
+- (void) downloadMeme:(id)sender;
 
 - (void) showMemeListView;
 
