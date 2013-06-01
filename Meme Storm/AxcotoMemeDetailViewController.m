@@ -33,14 +33,27 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 @synthesize prevScroolView, currentScroolView, nextScroolView;
 @synthesize prevImgView, currentImgView, nextImgView;
 
-@synthesize memeShareBar, memeCommentButton, memeLikeButton, socialMetric;
+@synthesize memeShareButton, memeCommentButton, memeLikeButton, memeDownloadButton, socialMetric;
 @synthesize memeTitleLbl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [[self navigationController] setNavigationBarHidden:NO];
+        //    [self.navigationItem.leftBarButtonItem setTitle:@"Back"];
+        //    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(showMemeListView)];
+        //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow-left"] landscapeImagePhone:[UIImage imageNamed:@"arrow-left"] style:UIBarButtonItemStylePlain target:self action:@selector(showMemeListView)];
+        [self.navigationController.navigationBar setFrame:CGRectMake(0,0, 320, 44)];
+        self.navigationItem.leftBarButtonItem = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"arrow-left"] target:self selector:@selector(showMemeListView)];
+        
+        memeShareButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-share"] target:self selector:@selector(share:)];
+        
+        memeDownloadButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-download"] target:self selector:@selector(share:)];
+        
+        memeCommentButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-com"] target:self selector:@selector(showComment::)];
+        
+        self.navigationItem.rightBarButtonItems = @[memeShareButton, memeDownloadButton, memeCommentButton];
     }
     return self;
 }
@@ -105,12 +118,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
  Prepare controller and object. Set their location, initalizr their value or so
  */
 - (void) setUpImageViewer {
-    [[self navigationController] setNavigationBarHidden:NO];
-//    [self.navigationItem.leftBarButtonItem setTitle:@"Back"];
-//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(showMemeListView)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow-left"] landscapeImagePhone:[UIImage imageNamed:@"arrow-left"] style:UIBarButtonItemStylePlain target:self action:@selector(showMemeListView)];
-    self.navigationItem.leftBarButtonItem
-    
     self.view.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
     imgContainer.delegate = self;
     imgContainer.pagingEnabled = YES;
@@ -370,7 +377,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     [self setDownloadProgress:nil];
     [self setMetaMemeView:nil];
     [self setMetaMemeView:nil];
-    [self setMemeShareBar:nil];
     [self setMemeTitleLbl:nil];
     [self setMemeCommentButton:nil];
     [self setMemeLikeButton:nil];
@@ -473,8 +479,6 @@ Caculate which image we should load and show on screen
         NSString * likeCount = [[memeToLoad objectForKey:@"info"] objectForKey:@"like"];
         NSString * commentCount = [[memeToLoad objectForKey:@"info"] objectForKey:@"comment"];
         
-        [memeCommentButton setTitle:commentCount forState:UIControlStateNormal];
-        [memeLikeButton setTitle:likeCount forState:UIControlStateNormal];
         if ([likeCount isEqualToString:@""]) {
             [socialMetric setText:[NSString stringWithFormat:@"%@ Comment", commentCount]];
             
