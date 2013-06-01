@@ -31,7 +31,8 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-    UIColor *color = [UIColor colorWithRed:31/255.0f green:127/255.0f blue:92/255.0f alpha:1.0f];
+//    UIColor *color = [UIColor colorWithRed:31/255.0f green:127/255.0f blue:92/255.0f alpha:1.0f];
+    UIColor *color = [UIColor colorWithRed:25/255.0f green:102/255.0f blue:74/255.0f alpha:1.0f];
     
     UIColor *lineColor = [UIColor colorWithRed:37/255.0f green:110/255.0f blue:83/255.0f alpha:1.0f];
     

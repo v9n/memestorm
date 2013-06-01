@@ -8,51 +8,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Meme Storm/AxcotoMemeDetailViewController.m"
-         timestampString = "387677168.105967"
+         timestampString = "391809454.274835"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "189"
-         endingLineNumber = "189"
-         landmarkName = "-caculateViewerDim:"
-         landmarkType = "5">
+         startingLineNumber = "202"
+         endingLineNumber = "202"
+         landmarkName = "@implementation AxcotoMemeDetailViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Meme Storm/AxcotoMemeDetailViewController.m"
-         timestampString = "387677168.105967"
+         timestampString = "391809454.274835"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "191"
-         endingLineNumber = "191"
-         landmarkName = "-caculateViewerDim:"
-         landmarkType = "5">
+         startingLineNumber = "204"
+         endingLineNumber = "204"
+         landmarkName = "@implementation AxcotoMemeDetailViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Meme Storm/AxcotoMemeDetailViewController.m"
-         timestampString = "387677168.105967"
+         timestampString = "391809454.274835"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "190"
-         endingLineNumber = "190"
-         landmarkName = "-caculateViewerDim:"
-         landmarkType = "5">
+         startingLineNumber = "203"
+         endingLineNumber = "203"
+         landmarkName = "@implementation AxcotoMemeDetailViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Meme Storm/AxcotoViewController.m"
-         timestampString = "378530664.47038"
+         timestampString = "391600988.290921"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
-         landmarkName = "-loadMemeSource"
+         startingLineNumber = "89"
+         endingLineNumber = "89"
+         landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -60,13 +60,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Meme Storm/AxcotoMemeDetailViewController.m"
-         timestampString = "387677168.105967"
+         timestampString = "391809454.274835"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "170"
-         endingLineNumber = "170"
-         landmarkName = "-setUpImageViewer"
-         landmarkType = "5">
+         startingLineNumber = "182"
+         endingLineNumber = "182"
+         landmarkName = "@implementation AxcotoMemeDetailViewController"
+         landmarkType = "3">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
