@@ -84,4 +84,16 @@
     return [[UIBarButtonItem alloc] initWithCustomView:button] ;
 }
 
++ (UIBarButtonItem *)transparentButtonWithImage:(UIImage *)image target:(id)target selector:(SEL)selector
+{
+    UIFont *font = [UIFont boldSystemFontOfSize:12.0f];
+    
+    UIButton *button = [UIButton styledButtonWithBackgroundImage:image font:font title:@"" target:target selector:selector];
+    button.titleLabel.textColor = [UIColor whiteColor];
+    [button setBounds:CGRectMake(0, 0, 30,30)];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    return [[UIBarButtonItem alloc] initWithCustomView:button] ;
+}
+
 @end
