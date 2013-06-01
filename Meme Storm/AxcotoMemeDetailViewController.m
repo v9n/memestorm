@@ -43,11 +43,12 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         [[self navigationController] setNavigationBarHidden:NO];
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"arrow-left"] target:self selector:@selector(showMemeListView)];
         
-        memeShareButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-share"] target:self selector:@selector(shareMeme:)];
+        memeLikeButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-like"] target:self selector:@selector(showComment:)];
+        memeShareButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-share-b"] target:self selector:@selector(shareMeme:)];
         memeDownloadButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-download"] target:self selector:@selector(downloadMeme:)];
         memeCommentButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-com"] target:self selector:@selector(showComment::)];
         
-        self.navigationItem.rightBarButtonItems = @[memeShareButton, memeDownloadButton, memeCommentButton];
+        self.navigationItem.rightBarButtonItems = @[memeShareButton, memeDownloadButton, memeCommentButton, memeLikeButton];
     }
     return self;
 }
@@ -97,7 +98,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
  */
 - (void) setUpImageViewer {
     self.view.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
-    [self.navigationController.navigationBar setFrame:CGRectMake(0,0, 320, 44)];
+    //[self.navigationController.navigationBar setFrame:CGRectMake(0,0, 320, 44)];
 
     imgContainer.delegate = self;
     imgContainer.pagingEnabled = YES;
