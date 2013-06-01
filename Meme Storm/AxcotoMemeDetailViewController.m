@@ -16,7 +16,7 @@
 //#import "TapDetemtingImageView.h"
 #import "AXConfig.h"
 
-#define MEME_META_VIEW_HEIGHT 66
+#define MEME_META_VIEW_HEIGHT 27
 #define ZOOM_STEP 1.5
 NSString * const AXMemeBackground = @"bg.png";
 NSString * const AXBarBkgImg = @"toolbar-bg";
@@ -33,7 +33,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 @synthesize prevScroolView, currentScroolView, nextScroolView;
 @synthesize prevImgView, currentImgView, nextImgView;
 
-@synthesize memeShareButton, memeCommentButton, memeLikeButton, memeDownloadButton, socialMetric;
+@synthesize memeShareButton, memeCommentButton, memeLikeButton, memeDownloadButton;
 @synthesize memeTitleLbl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,16 +41,10 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[self navigationController] setNavigationBarHidden:NO];
-        //    [self.navigationItem.leftBarButtonItem setTitle:@"Back"];
-        //    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(showMemeListView)];
-        //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow-left"] landscapeImagePhone:[UIImage imageNamed:@"arrow-left"] style:UIBarButtonItemStylePlain target:self action:@selector(showMemeListView)];
-        [self.navigationController.navigationBar setFrame:CGRectMake(0,0, 320, 44)];
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"arrow-left"] target:self selector:@selector(showMemeListView)];
         
-        memeShareButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-share"] target:self selector:@selector(share:)];
-        
-        memeDownloadButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-download"] target:self selector:@selector(share:)];
-        
+        memeShareButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-share"] target:self selector:@selector(shareMeme:)];
+        memeDownloadButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-download"] target:self selector:@selector(downloadMeme:)];
         memeCommentButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-com"] target:self selector:@selector(showComment::)];
         
         self.navigationItem.rightBarButtonItems = @[memeShareButton, memeDownloadButton, memeCommentButton];
@@ -98,27 +92,13 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     [self handleSingleTap];    
 }
 
-//- (void)setTitle:(NSString *)title
-//{
-//    [super setTitle:title];
-//    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-//    if (!titleView) {
-//        titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-//        titleView.backgroundColor = [UIColor clearColor];
-//        titleView.font = [UIFont boldSystemFontOfSize:20.0];
-//        titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-//        titleView.textColor = [UIColor colorWithRed:52.0f green:64.0f blue:61.0f alpha:0.0f];
-//        self.navigationItem.titleView = titleView;
-//    }
-//    titleView.text = title;
-//    [titleView sizeToFit];
-//}
-
 /**
  Prepare controller and object. Set their location, initalizr their value or so
  */
 - (void) setUpImageViewer {
     self.view.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
+    [self.navigationController.navigationBar setFrame:CGRectMake(0,0, 320, 44)];
+
     imgContainer.delegate = self;
     imgContainer.pagingEnabled = YES;
     imgContainer.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
@@ -277,49 +257,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         
         [self fetchFromSource:pageToDownload];
-//        NSFileManager * fileMan = [NSFileManager defaultManager];
-//        
-//        if (![fileMan fileExistsAtPath:memeFolder]) {
-//            //try to create if not existed yet
-//            NSError * e;
-//            NSLog(@"Trying to validate memeFolder %@", memeFolder);
-//            if ([[NSFileManager defaultManager] createDirectoryAtPath:memeFolder withIntermediateDirectories:YES attributes:nil error:&e]) {
-//                NSLog(@"%@", @"Success to create memeFolder");
-//            } else {
-//                NSLog(@"[%@] ERROR: attempting to create meme directory", [self class]);
-//                NSAssert( FALSE, @"Failed to create directory maybe out of disk space?");
-//            }
-//        }
-//    
-////        Disable downloading for now. Switch to SDWebImage with cacheable data
-//        NSArray * urls = [memesList objectAtIndex:pageToDownload];
-//        NSURL * fileUrl;
-//        NSData * imageData;
-//        NSString * memeFile;
-//        float totalProgress;
-//        for (int i=0; i< [urls count]; i++) {
-//            fileUrl = [NSURL URLWithString:(NSString *) [[urls objectAtIndex:i] objectForKey:@"src"] ];
-//            memeFile = [memeFolder stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@", [fileUrl lastPathComponent]]]; //pageToDownload, i]];
-//
-//            if ([fileMan fileExistsAtPath:memeFile]) {
-//                NSLog(@"INFO: File %@ is existed in cache folder. Ignore downloading", memeFile);
-//                
-//            } else {
-//                NSLog(@"INFO: attempting to download file %@", memeFile);
-//                imageData = [NSData dataWithContentsOfURL:fileUrl];
-//                NSLog(@"INFO: attempting to create file %@", memeFile);
-//                [imageData writeToFile:memeFile atomically:YES];
-//                NSLog(@"Download completed: %f", totalProgress);
-//                // We are updating UI so let do it on mean thread
-//                
-//            }
-//            totalProgress = (float)(i+1) / (float)[urls count];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [downloadProgress setProgress:totalProgress];
-//                [downloadProgress setNeedsDisplay];
-//                downloading = NO;
-//            });
-//        }
         
         // We are updating UI so let do it on mean thread
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -372,14 +309,16 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 }
 
 - (void)viewDidUnload {
-    [self setSocialMetric:nil];
+    [self setMemeCommentButton:nil];
+    [self setMemeDownloadButton:nil];
+    [self setMemeLikeButton:nil];
+    [self setMemeShareButton:nil];
+    
     [self setImgContainer:nil];
     [self setDownloadProgress:nil];
     [self setMetaMemeView:nil];
     [self setMetaMemeView:nil];
     [self setMemeTitleLbl:nil];
-    [self setMemeCommentButton:nil];
-    [self setMemeLikeButton:nil];
     [super viewDidUnload];
 }
 
@@ -480,11 +419,11 @@ Caculate which image we should load and show on screen
         NSString * commentCount = [[memeToLoad objectForKey:@"info"] objectForKey:@"comment"];
         
         if ([likeCount isEqualToString:@""]) {
-            [socialMetric setText:[NSString stringWithFormat:@"%@ Comment", commentCount]];
-            
+//            [socialMetric setText:[NSString stringWithFormat:@"%@ Comment", commentCount]];
+//            
         } else {
             
-            [socialMetric setText:[NSString stringWithFormat:@"%@ Comment, %@ Likes", commentCount, likeCount]];
+//            [socialMetric setText:[NSString stringWithFormat:@"%@ Comment, %@ Likes", commentCount, likeCount]];
             
         }
         
@@ -696,7 +635,7 @@ Caculate which image we should load and show on screen
  ShareKit comes to play at this moment. 
  It handles sharing featue via twitter and facebook
  */
-- (IBAction)share:(id)sender {
+- (IBAction)shareMeme:(id)sender {
     // Create the item to share (in this example, a url)
     NSDictionary * ameme = [[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex];
     NSURL *url = [NSURL URLWithString:[ameme objectForKey:@"url"]];
@@ -715,6 +654,17 @@ Caculate which image we should load and show on screen
     //[actionSheet showFromToolbar:self.metaMemeView];
 }
 
+/**
+ Save meme to local phone. Require write access to Photo Camera rool to write picture to
+*/
+-(void)downloadMeme:(id) sender
+{
+    
+}
+
+/**
+ Navigate to meme source list. Then user can choose to read another meme site.
+ */
 - (void) showMemeListView
 {    
     [[self navigationController] popViewControllerAnimated:YES];
