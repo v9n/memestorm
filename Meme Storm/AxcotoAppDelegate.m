@@ -39,7 +39,6 @@
     [[self window] setRootViewController:navController];
     [self.window makeKeyAndVisible];
     
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];    
     return YES;
 }
 

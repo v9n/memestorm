@@ -38,7 +38,7 @@
  */
 - (void) drawUi
 {
-    UINavigationBar * bar =  self.navigationController.navigationBar;    
+    UINavigationBar * bar =  self.navigationController.navigationBar;
     if ([[UINavigationBar class]respondsToSelector:@selector(appearance)]) {
         UIImage * bg = [bar createImageWithColor:[UIColor colorWithRed:35/255.0f green:35/255.0f blue:35/255.0f alpha:1.0f]];
         [[UINavigationBar appearance] setBackgroundImage:bg forBarMetrics:UIBarMetricsDefault];
