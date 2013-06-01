@@ -627,9 +627,7 @@
 		174739B41669E58100C25A72 = {
 			isa = PBXGroup;
 			children = (
-				172B7F2F16D1776B00729E27 /* MapKit.framework */,
 				172B7F1216D16D1900729E27 /* SDWebImage */,
-				175E73C116B535B000F9D754 /* ImageIO.framework */,
 				171634B9169A462300AE7482 /* ShareKit.xcodeproj */,
 				174072431699816B009B1D6E /* ipad-144.png */,
 				174072411699815F009B1D6E /* ipad-72.png */,
@@ -657,6 +655,8 @@
 		174739C21669E58100C25A72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				172B7F2F16D1776B00729E27 /* MapKit.framework */,
+				175E73C116B535B000F9D754 /* ImageIO.framework */,
 				170608FF169A2A23006F1B1C /* AdSupport.framework */,
 				170608FD169A29F7006F1B1C /* CoreFoundation.framework */,
 				170608FB169A29DC006F1B1C /* libsqlite3.dylib */,
@@ -683,8 +683,6 @@
 				176982F8166AC2090091B88D /* Resources */,
 				174739D21669E58100C25A72 /* AxcotoAppDelegate.h */,
 				174739D31669E58100C25A72 /* AxcotoAppDelegate.m */,
-				176982ED166ABA9F0091B88D /* MemeDetail */,
-				176982E5166A93D80091B88D /* MemeList */,
 				174739CA1669E58100C25A72 /* Supporting Files */,
 				17D5D56016AA99370057BB8A /* Settings.bundle */,
 			);
@@ -726,11 +724,8 @@
 			children = (
 				174739DB1669E58100C25A72 /* AxcotoViewController.h */,
 				174739DC1669E58100C25A72 /* AxcotoViewController.m */,
-				174739DE1669E58100C25A72 /* AxcotoViewController_iPhone.xib */,
-				174739E11669E58100C25A72 /* AxcotoViewController_iPad.xib */,
 				170EB24B1673E55A0045F6CA /* SourceCell.h */,
 				170EB24C1673E55A0045F6CA /* SourceCell.m */,
-				170EB24F1673E5800045F6CA /* SourceCell.xib */,
 			);
 			name = MemeList;
 			sourceTree = "<group>";
@@ -740,10 +735,8 @@
 			children = (
 				176982E6166ABA670091B88D /* AxcotoMemeDetailViewController.h */,
 				176982E7166ABA670091B88D /* AxcotoMemeDetailViewController.m */,
-				176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */,
 				17F9B20F1692907A00A02C52 /* AXMemeCommentViewController.h */,
 				17F9B2101692907A00A02C52 /* AXMemeCommentViewController.m */,
-				17F9B2111692907A00A02C52 /* AXMemeCommentViewController.xib */,
 			);
 			name = MemeDetail;
 			sourceTree = "<group>";
@@ -751,6 +744,8 @@
 		176982F2166ABFB50091B88D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				176982ED166ABA9F0091B88D /* MemeDetail */,
+				176982E5166A93D80091B88D /* MemeList */,
 				172088D4169A4155007BACF3 /* JSONKit.h */,
 				17F9B206169048B300A02C52 /* AXConfig.m */,
 				17F9B207169048B300A02C52 /* AXConfig.h */,
@@ -780,6 +775,7 @@
 		176982F8166AC2090091B88D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FB6B69F4175AB49300C17F6B /* UI */,
 				FB3A9F3B17518943008D475D /* Montserrat-Bold.ttf */,
 				FB3A9F3C17518943008D475D /* Montserrat-Regular.ttf */,
 				175E731416B0FCF900F9D754 /* nav-bar.png */,
@@ -800,6 +796,18 @@
 				FB3A9F631751ADD9008D475D /* UINavigationBar+CustomBackground.m */,
 			);
 			name = UINaviationBar;
+			sourceTree = "<group>";
+		};
+		FB6B69F4175AB49300C17F6B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				174739DE1669E58100C25A72 /* AxcotoViewController_iPhone.xib */,
+				170EB24F1673E5800045F6CA /* SourceCell.xib */,
+				174739E11669E58100C25A72 /* AxcotoViewController_iPad.xib */,
+				176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */,
+				17F9B2111692907A00A02C52 /* AXMemeCommentViewController.xib */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		FBB5200816954B3300891FBA /* icon */ = {
