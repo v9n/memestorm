@@ -14,6 +14,8 @@
 #import "SHKConfiguration.h"
 #import "AXSHKConfigurator.h"
 
+#import "JASidePanelController.h"
+
 @implementation AxcotoAppDelegate
 
 @synthesize navController;
@@ -24,6 +26,7 @@
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
     UIViewController *rootView;
 //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
