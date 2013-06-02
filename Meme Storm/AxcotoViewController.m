@@ -40,7 +40,9 @@
 {
     UINavigationBar * bar =  self.navigationController.navigationBar;
     if ([[UINavigationBar class]respondsToSelector:@selector(appearance)]) {
-        UIImage * bg = [bar createImageWithColor:[UIColor colorWithRed:35/255.0f green:35/255.0f blue:35/255.0f alpha:1.0f]];
+//        UIImage * bg = [bar createImageWithColor:[UIColor colorWithRed:35/255.0f green:35/255.0f blue:35/255.0f alpha:1.0f]];
+        UIImage * bg = [bar createImageWithColor:[UIColor colorWithRed:36/255.0f green:137/255.0f blue:197/255.0f alpha:1.0f]];
+
         [[UINavigationBar appearance] setBackgroundImage:bg forBarMetrics:UIBarMetricsDefault];
         
     } else {
@@ -269,7 +271,8 @@
     [cell setAvatar:[UIImage imageWithContentsOfFile:avatarFile]];
 
     UIView *bgSelectedView = [[UIView alloc] init];
-    [bgSelectedView setBackgroundColor:[UIColor colorWithRed:31/255.0f green:127/255.0f blue:92/255.0f alpha:1.0f]];
+//    [bgSelectedView setBackgroundColor:[UIColor colorWithRed:31/255.0f green:127/255.0f blue:92/255.0f alpha:1.0f]];
+    [bgSelectedView setBackgroundColor:[UIColor colorWithRed:35/255.0f green:35/255.0f blue:35/255.0f alpha:1.0f]];
     [cell setSelectedBackgroundView:bgSelectedView];
 
     return cell;
