@@ -53,8 +53,8 @@
     [lineColor setStroke];
     [topPath stroke];
     
-    [topPath moveToPoint:CGPointMake(53, 0)];
-    [topPath addLineToPoint:CGPointMake(53, 56)];
+//    [topPath moveToPoint:CGPointMake(53, 0)];
+//    [topPath addLineToPoint:CGPointMake(53, 56)];
    
     [topPath stroke];
 }
