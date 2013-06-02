@@ -58,7 +58,8 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
-    [self setTitle:self.memeSource];
+    [self setTitle:@""]; //clear title out. 
+    
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
     
     NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -105,7 +106,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     imgContainer.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
     NSLog(@"The height of imgContainer is %f", imgContainer.frame.size.height);
     
-    metaMemeView.frame = CGRectMake(0, screenHeigh - self.navigationController.navigationBar.bounds.size.height -  MEME_META_VIEW_HEIGHT, screenWidth, MEME_META_VIEW_HEIGHT);
+    metaMemeView.frame = CGRectMake(0, screenHeigh - self.navigationController.navigationBar.bounds.size.height -  MEME_META_VIEW_HEIGHT - 20 , screenWidth, MEME_META_VIEW_HEIGHT); //20 is heigh of status bar
     
     [metaMemeView setHidden:FALSE];
 //    [metaMemeView setBackgroundColor:[UIColor whiteColor]];
