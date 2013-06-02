@@ -32,8 +32,7 @@
 
 - (void)drawRect:(CGRect)rect {
 //    UIColor *color = [UIColor colorWithRed:31/255.0f green:127/255.0f blue:92/255.0f alpha:1.0f];
-    //UIColor *color = [UIColor colorWithRed:25/255.0f green:102/255.0f blue:74/255.0f alpha:1.0f];
-    UIColor *color = [UIColor whiteColor];
+    UIColor *color = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
     
     //UIColor *lineColor = [UIColor colorWithRed:37/255.0f green:110/255.0f blue:83/255.0f alpha:1.0f];
     UIColor *lineColor = [UIColor colorWithRed:244/255.0f green:244/255.0f blue:244/255.0f alpha:1.0f];
@@ -47,12 +46,6 @@
 
     
     UIBezierPath *topPath = [UIBezierPath bezierPath];
-//    // draw vertical lines
-//    for(int xId=1; xId<=2; xId++) {
-//        int x = xStart + xId * gridSize / 3;
-//        [topPath moveToPoint:CGPointMake(x, yStart)];
-//        [topPath addLineToPoint:CGPointMake(x, yStart+gridSize)];
-//    }
 
     [topPath moveToPoint:CGPointMake(xStart, yStart)];
     [topPath addLineToPoint:CGPointMake(xStart+self.bounds.size.width, yStart)];
@@ -60,8 +53,8 @@
     [lineColor setStroke];
     [topPath stroke];
     
-//    [topPath moveToPoint:CGPointMake(53, 0)];
-//    [topPath addLineToPoint:CGPointMake(53, 56)];
+    [topPath moveToPoint:CGPointMake(53, 0)];
+    [topPath addLineToPoint:CGPointMake(53, 56)];
    
     [topPath stroke];
 }
@@ -91,8 +84,8 @@
     [lineColor setStroke];
     [topPath stroke];
     
-    [topPath moveToPoint:CGPointMake(56, 0)];
-    [topPath addLineToPoint:CGPointMake(56, 56)];
+//    [topPath moveToPoint:CGPointMake(56, 0)];
+//    [topPath addLineToPoint:CGPointMake(56, 56)];
     
     [topPath stroke];
 
@@ -101,8 +94,8 @@
 
 
 - (void) setMemeTitle:(NSString *)title {
-    nameLbl.font = [UIFont fontWithName:@"Montserrat-Regular" size:15.00];
-    [nameLbl setTextColor:[UIColor whiteColor]];
+    nameLbl.font = [UIFont fontWithName:@"Montserrat-Regular" size:14.00];
+    [nameLbl setTextColor:[UIColor blackColor]];
     [nameLbl setText:title];
 
 }

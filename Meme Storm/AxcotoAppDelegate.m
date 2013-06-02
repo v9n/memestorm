@@ -36,6 +36,8 @@
     self.navController = [[UINavigationController alloc] initWithRootViewController:rootView];
     
     //template code
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque
+                                                animated:NO];
     [[self window] setRootViewController:navController];
     [self.window makeKeyAndVisible];
     
