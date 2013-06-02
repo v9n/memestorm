@@ -208,8 +208,11 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
  */
 - (void) bindSwipeEvent {
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap)];
+    singleTap.numberOfTapsRequired = 1;
+    singleTap.enabled = YES;
+    
     [imgContainer addGestureRecognizer:singleTap];
-
+    
 //    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
 //    UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
     
