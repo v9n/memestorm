@@ -14,7 +14,7 @@
 #import "SHKConfiguration.h"
 #import "AXSHKConfigurator.h"
 
-#import "JASidePanelController.h"
+#import "AXMemeShopViewController.h"
 
 @implementation AxcotoAppDelegate
 
@@ -26,6 +26,9 @@
     [SHKConfiguration sharedInstanceWithConfigurator:configurator];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque
+                                                animated:NO];
+    
     
     // Override point for customization after application launch.
     UIViewController *rootView;
@@ -39,12 +42,21 @@
     self.navController = [[UINavigationController alloc] initWithRootViewController:rootView];
     
     //template code
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque
-                                                animated:NO];
-    [[self window] setRootViewController:navController];
-    [self.window makeKeyAndVisible];
+//    [[self window] setRootViewController:navController];
     
+    
+    self.viewController = [[AXSidePanelController alloc] init];
+    self.viewController.leftPanel = [[AXMemeShopViewController alloc] init];
+    self.viewController.centerPanel = self.navController;
+//    self.viewController.rightPanel = [[JARightViewController alloc] init];
+    
+    [self.window setRootViewController:self.viewController];
+    
+    
+    
+    [self.window makeKeyAndVisible];
     return YES;
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

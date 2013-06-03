@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JASidePanelController.h"
+#import "AXSidePanelControllerViewController.h"
 
 @class AxcotoViewController;
 
@@ -15,7 +17,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) AxcotoViewController *viewController;
+@property (strong, nonatomic) JASidePanelController *viewController;
 
 @property (nonatomic, retain) UINavigationController *navController;
 
