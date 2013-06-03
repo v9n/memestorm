@@ -91,6 +91,20 @@
 		FB5C536F171B5D59002129B1 /* ishare.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5C536B171B5D59002129B1 /* ishare.png */; };
 		FB5C5372171B61AF002129B1 /* idownload.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5C5370171B61AF002129B1 /* idownload.png */; };
 		FB5C5373171B61AF002129B1 /* idownload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB5C5371171B61AF002129B1 /* idownload@2x.png */; };
+		FB64B05E175C8E3B00CACA08 /* AXSidePanelControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB64B05D175C8E3B00CACA08 /* AXSidePanelControllerViewController.m */; };
+		FB64B066175C945600CACA08 /* site-toggle.png in Resources */ = {isa = PBXBuildFile; fileRef = FB64B064175C945600CACA08 /* site-toggle.png */; };
+		FB64B06A175C96E600CACA08 /* wall4@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = FB64B068175C96E600CACA08 /* wall4@2X.png */; };
+		FB64B06B175C96E600CACA08 /* wall4.png in Resources */ = {isa = PBXBuildFile; fileRef = FB64B069175C96E600CACA08 /* wall4.png */; };
+		FB64B06E175C96F300CACA08 /* light_noise_diagonal@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = FB64B06C175C96F300CACA08 /* light_noise_diagonal@2X.png */; };
+		FB64B06F175C96F300CACA08 /* light_noise_diagonal.png in Resources */ = {isa = PBXBuildFile; fileRef = FB64B06D175C96F300CACA08 /* light_noise_diagonal.png */; };
+		FB90C62F175B4531007C8943 /* AXMemeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB90C62D175B4531007C8943 /* AXMemeShopViewController.m */; };
+		FB90C630175B4531007C8943 /* AXMemeShopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB90C62E175B4531007C8943 /* AXMemeShopViewController.xib */; };
+		FB90C632175B4A2D007C8943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB90C631175B4A2D007C8943 /* QuartzCore.framework */; };
+		FB90C650175B4DA4007C8943 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FB90C634175B4DA4007C8943 /* .gitignore */; };
+		FB90C651175B4DA4007C8943 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB90C635175B4DA4007C8943 /* Default-568h@2x.png */; };
+		FB90C65A175B4DA4007C8943 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB90C649175B4DA4007C8943 /* JASidePanelController.m */; };
+		FB90C65B175B4DA4007C8943 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB90C64B175B4DA4007C8943 /* UIViewController+JASidePanel.m */; };
+		FB90C65C175B4DA4007C8943 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = FB90C64F175B4DA4007C8943 /* README.markdown */; };
 		FB938A971757554100461857 /* arrow-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB938A951757554100461857 /* arrow-left@2x.png */; };
 		FB938A981757554100461857 /* arrow-left.png in Resources */ = {isa = PBXBuildFile; fileRef = FB938A961757554100461857 /* arrow-left.png */; };
 		FB938AA117575A4F00461857 /* mini-download@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB938A9917575A4E00461857 /* mini-download@2x.png */; };
@@ -479,6 +493,24 @@
 		FB5C536B171B5D59002129B1 /* ishare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ishare.png; sourceTree = "<group>"; };
 		FB5C5370171B61AF002129B1 /* idownload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = idownload.png; sourceTree = "<group>"; };
 		FB5C5371171B61AF002129B1 /* idownload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "idownload@2x.png"; sourceTree = "<group>"; };
+		FB64B05C175C8E3B00CACA08 /* AXSidePanelControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXSidePanelControllerViewController.h; sourceTree = "<group>"; };
+		FB64B05D175C8E3B00CACA08 /* AXSidePanelControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXSidePanelControllerViewController.m; sourceTree = "<group>"; };
+		FB64B064175C945600CACA08 /* site-toggle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "site-toggle.png"; sourceTree = "<group>"; };
+		FB64B068175C96E600CACA08 /* wall4@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wall4@2X.png"; path = "../../../../Downloads/wall4/wall4@2X.png"; sourceTree = "<group>"; };
+		FB64B069175C96E600CACA08 /* wall4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wall4.png; path = ../../../../Downloads/wall4/wall4.png; sourceTree = "<group>"; };
+		FB64B06C175C96F300CACA08 /* light_noise_diagonal@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "light_noise_diagonal@2X.png"; path = "../../../../Downloads/light_noise_diagonal/light_noise_diagonal@2X.png"; sourceTree = "<group>"; };
+		FB64B06D175C96F300CACA08 /* light_noise_diagonal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = light_noise_diagonal.png; path = ../../../../Downloads/light_noise_diagonal/light_noise_diagonal.png; sourceTree = "<group>"; };
+		FB90C62C175B4531007C8943 /* AXMemeShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXMemeShopViewController.h; sourceTree = "<group>"; };
+		FB90C62D175B4531007C8943 /* AXMemeShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXMemeShopViewController.m; sourceTree = "<group>"; };
+		FB90C62E175B4531007C8943 /* AXMemeShopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AXMemeShopViewController.xib; sourceTree = "<group>"; };
+		FB90C631175B4A2D007C8943 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FB90C634175B4DA4007C8943 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		FB90C635175B4DA4007C8943 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		FB90C648175B4DA4007C8943 /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASidePanelController.h; sourceTree = "<group>"; };
+		FB90C649175B4DA4007C8943 /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASidePanelController.m; sourceTree = "<group>"; };
+		FB90C64A175B4DA4007C8943 /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
+		FB90C64B175B4DA4007C8943 /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
+		FB90C64F175B4DA4007C8943 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		FB938A951757554100461857 /* arrow-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-left@2x.png"; sourceTree = "<group>"; };
 		FB938A961757554100461857 /* arrow-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-left.png"; sourceTree = "<group>"; };
 		FB938A9917575A4E00461857 /* mini-download@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mini-download@2x.png"; sourceTree = "<group>"; };
@@ -502,6 +534,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB90C632175B4A2D007C8943 /* QuartzCore.framework in Frameworks */,
 				172B7F3016D1776B00729E27 /* MapKit.framework in Frameworks */,
 				175E73C216B535B000F9D754 /* ImageIO.framework in Frameworks */,
 				17163532169A469800AE7482 /* libShareKit.a in Frameworks */,
@@ -627,6 +660,7 @@
 		174739B41669E58100C25A72 = {
 			isa = PBXGroup;
 			children = (
+				FB90C633175B4DA4007C8943 /* JASidePanel */,
 				172B7F1216D16D1900729E27 /* SDWebImage */,
 				171634B9169A462300AE7482 /* ShareKit.xcodeproj */,
 				174072431699816B009B1D6E /* ipad-144.png */,
@@ -655,6 +689,7 @@
 		174739C21669E58100C25A72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FB90C631175B4A2D007C8943 /* QuartzCore.framework */,
 				172B7F2F16D1776B00729E27 /* MapKit.framework */,
 				175E73C116B535B000F9D754 /* ImageIO.framework */,
 				170608FF169A2A23006F1B1C /* AdSupport.framework */,
@@ -722,8 +757,11 @@
 		176982E5166A93D80091B88D /* MemeList */ = {
 			isa = PBXGroup;
 			children = (
-				174739DB1669E58100C25A72 /* AxcotoViewController.h */,
+				FB90C62C175B4531007C8943 /* AXMemeShopViewController.h */,
+				FB90C62D175B4531007C8943 /* AXMemeShopViewController.m */,
+				FB90C62E175B4531007C8943 /* AXMemeShopViewController.xib */,
 				174739DC1669E58100C25A72 /* AxcotoViewController.m */,
+				174739DB1669E58100C25A72 /* AxcotoViewController.h */,
 				170EB24B1673E55A0045F6CA /* SourceCell.h */,
 				170EB24C1673E55A0045F6CA /* SourceCell.m */,
 			);
@@ -759,6 +797,8 @@
 				17060904169A30BC006F1B1C /* ShareKit */,
 				1716353F169AC7A100AE7482 /* UIButtonStyled */,
 				FB3A9F861751ADDF008D475D /* UINaviationBar */,
+				FB64B05C175C8E3B00CACA08 /* AXSidePanelControllerViewController.h */,
+				FB64B05D175C8E3B00CACA08 /* AXSidePanelControllerViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -775,6 +815,7 @@
 		176982F8166AC2090091B88D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FB64B067175C96D500CACA08 /* Bg */,
 				FB6B69F4175AB49300C17F6B /* UI */,
 				FB3A9F3B17518943008D475D /* Montserrat-Bold.ttf */,
 				FB3A9F3C17518943008D475D /* Montserrat-Regular.ttf */,
@@ -798,6 +839,17 @@
 			name = UINaviationBar;
 			sourceTree = "<group>";
 		};
+		FB64B067175C96D500CACA08 /* Bg */ = {
+			isa = PBXGroup;
+			children = (
+				FB64B06C175C96F300CACA08 /* light_noise_diagonal@2X.png */,
+				FB64B06D175C96F300CACA08 /* light_noise_diagonal.png */,
+				FB64B068175C96E600CACA08 /* wall4@2X.png */,
+				FB64B069175C96E600CACA08 /* wall4.png */,
+			);
+			name = Bg;
+			sourceTree = "<group>";
+		};
 		FB6B69F4175AB49300C17F6B /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -810,9 +862,41 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		FB90C633175B4DA4007C8943 /* JASidePanel */ = {
+			isa = PBXGroup;
+			children = (
+				FB90C634175B4DA4007C8943 /* .gitignore */,
+				FB90C635175B4DA4007C8943 /* Default-568h@2x.png */,
+				FB90C636175B4DA4007C8943 /* JASidePanels */,
+				FB90C64F175B4DA4007C8943 /* README.markdown */,
+			);
+			name = JASidePanel;
+			path = Submodules/JASidePanel;
+			sourceTree = "<group>";
+		};
+		FB90C636175B4DA4007C8943 /* JASidePanels */ = {
+			isa = PBXGroup;
+			children = (
+				FB90C647175B4DA4007C8943 /* Source */,
+			);
+			path = JASidePanels;
+			sourceTree = "<group>";
+		};
+		FB90C647175B4DA4007C8943 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				FB90C648175B4DA4007C8943 /* JASidePanelController.h */,
+				FB90C649175B4DA4007C8943 /* JASidePanelController.m */,
+				FB90C64A175B4DA4007C8943 /* UIViewController+JASidePanel.h */,
+				FB90C64B175B4DA4007C8943 /* UIViewController+JASidePanel.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		FBB5200816954B3300891FBA /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				FB64B064175C945600CACA08 /* site-toggle.png */,
 				FB938A9917575A4E00461857 /* mini-download@2x.png */,
 				FB938A9A17575A4E00461857 /* mini-download.png */,
 				FB938A9B17575A4E00461857 /* mini-share-b@2x.png */,
@@ -1213,6 +1297,15 @@
 				FB938AA617575A4F00461857 /* mini-like.png in Resources */,
 				FB938AA717575A4F00461857 /* mini-com@2x.png in Resources */,
 				FB938AA817575A4F00461857 /* mini-com.png in Resources */,
+				FB90C630175B4531007C8943 /* AXMemeShopViewController.xib in Resources */,
+				FB90C650175B4DA4007C8943 /* .gitignore in Resources */,
+				FB90C651175B4DA4007C8943 /* Default-568h@2x.png in Resources */,
+				FB90C65C175B4DA4007C8943 /* README.markdown in Resources */,
+				FB64B066175C945600CACA08 /* site-toggle.png in Resources */,
+				FB64B06A175C96E600CACA08 /* wall4@2X.png in Resources */,
+				FB64B06B175C96E600CACA08 /* wall4.png in Resources */,
+				FB64B06E175C96F300CACA08 /* light_noise_diagonal@2X.png in Resources */,
+				FB64B06F175C96F300CACA08 /* light_noise_diagonal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1271,6 +1364,10 @@
 				172B7F2D16D16D1900729E27 /* UIButton+WebCache.m in Sources */,
 				172B7F2E16D16D1900729E27 /* UIImageView+WebCache.m in Sources */,
 				FB3A9F641751ADD9008D475D /* UINavigationBar+CustomBackground.m in Sources */,
+				FB90C62F175B4531007C8943 /* AXMemeShopViewController.m in Sources */,
+				FB90C65A175B4DA4007C8943 /* JASidePanelController.m in Sources */,
+				FB90C65B175B4DA4007C8943 /* UIViewController+JASidePanel.m in Sources */,
+				FB64B05E175C8E3B00CACA08 /* AXSidePanelControllerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1412,7 +1509,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Meme Storm/Meme Storm-Prefix.pch";
 				INFOPLIST_FILE = "Meme Storm/Meme Storm-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -1421,7 +1518,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=*]" = "7F5B2E01-66DE-4F66-A22F-07781F856626";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				USER_HEADER_SEARCH_PATHS = "Submodules/**";
+				USER_HEADER_SEARCH_PATHS = "Submodules/JASidePanel/** Submodules/** Submodules/SDWebImage/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1438,7 +1535,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Meme Storm/Meme Storm-Prefix.pch";
 				INFOPLIST_FILE = "Meme Storm/Meme Storm-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -1447,7 +1544,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				USER_HEADER_SEARCH_PATHS = "Submodules/**";
+				USER_HEADER_SEARCH_PATHS = "Submodules/JASidePanel/** Submodules/** Submodules/SDWebImage/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
