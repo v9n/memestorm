@@ -57,7 +57,7 @@
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(reorderSite)];
     
     [self.memeSourceTable setBackgroundColor:[UIColor clearColor]];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"light_noise_diagonal"]]];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"wall4"]]];
     [self.memeSourceTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
