@@ -7,3 +7,6 @@
 [submodule "Submodules/JASidePanel"]
 	path = Submodules/JASidePanel
 	url = https://github.com/gotosleep/JASidePanels.git
+[submodule "Submodules/CMMR"]
+	path = Submodules/CMMR
+	url = git://github.com/chroman/CRMultiRowSelect.git
