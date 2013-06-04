@@ -1,11 +1,13 @@
-
+0.3.0 (2012-12-28 -> ?)
+Road map
+	
 0.2.0 (2012-12-28 -> ?)
 
-* Change to Flat UI
+* Use to Flat UI
 * Fix UI bugs:
 	* UINavigationBar suddenly fall down some pixels
 	* metaMemeView doesn't stay at bottom
-
+	* Picture doesn't get reposition to center correctly when changing orientation
 * Fix XKCD issue: suddenlt it just works without any fixing.
 * Implement SideBar
 
