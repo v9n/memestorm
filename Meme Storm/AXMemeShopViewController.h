@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSONKit.h"
+#import "CRTableViewCell.h"
 
-@interface AXMemeShopViewController : UIViewController
+#define kMarkColor kYellowColor;
+
+@interface AXMemeShopViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) IBOutlet UITableView *memeSourceTable;
+@property (strong, nonatomic) NSArray *memeSourceData;
+@property (strong, nonatomic) NSMutableArray *selectedMarks; // You need probably to save the selected cells for use in the future.
+
+- (void) loadMemeSource;
 
 @end
