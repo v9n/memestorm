@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSMutableDictionary * driver;
 @property (strong, nonatomic) NSString * db;
 
++ (AXCache *) instance;
 - (id) getByKey:(NSString *) key;
 - (BOOL) saveForKey:(NSString *) key withValue:(id) value;
 @end

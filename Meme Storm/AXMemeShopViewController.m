@@ -41,33 +41,37 @@
 
 
 - (void) loadMemeSource {
-    dispatch_async(dispatch_get_global_queue(0,0), ^ {
-        NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString * f = [path objectAtIndex:0];
-        f = [f stringByAppendingString:@"/source.json"];
-        
-        NSFileManager * fileMan = [NSFileManager defaultManager];
-        NSData *s = Nil;
-        
-        if ([fileMan fileExistsAtPath:f]) {
-            NSLog(@"Read memeSource form cache: %@", f);
-            NSError * e;
-            NSDictionary * attr = [fileMan attributesOfItemAtPath:f error:&e];
-            if (attr !=nil) {
-                NSDate * d = [attr objectForKey:NSFileCreationDate];
-                NSLog(@"The cache is created at %@\n. This is was %f seconds ago", d, [d timeIntervalSinceNow]);
-                if ([d timeIntervalSinceNow] + 24 * 3600 > 0) {
-                    NSLog(@"There is no need to fetch the data");
-                    s = [[NSData alloc] initWithContentsOfFile:f];
-                    memeSourceData = (NSArray *)[s objectFromJSONData];
-                    
-                } else {
-                    NSLog(@"There is need to fetch the data");
-                }
-            }
-            
-        }
-    });
+    AXCache * cache = [AXCache instance];
+    memeSourceData= (NSArray *) [cache getByKey:@"sources"];
+//    
+//    dispatch_async(dispatch_get_global_queue(0,0), ^ {
+//        NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString * f = [path objectAtIndex:0];
+//        f = [f stringByAppendingString:@"/source.json"];
+//        
+//        NSFileManager * fileMan = [NSFileManager defaultManager];
+//        NSData *s = Nil;
+//        
+//        if ([fileMan fileExistsAtPath:f]) {
+//            NSLog(@"Read memeSource form cache: %@", f);
+//            NSError * e;
+//            NSDictionary * attr = [fileMan attributesOfItemAtPath:f error:&e];
+//            if (attr !=nil) {
+//                NSDate * d = [attr objectForKey:NSFileCreationDate];
+//                NSLog(@"The cache is created at %@\n. This is was %f seconds ago", d, [d timeIntervalSinceNow]);
+//                if ([d timeIntervalSinceNow] + 24 * 3600 > 0) {
+//                    NSLog(@"There is no need to fetch the data");
+//                    s = [[NSData alloc] initWithContentsOfFile:f];
+//                    memeSourceData = (NSArray *)[s objectFromJSONData];
+//                    
+//                } else {
+//                    NSLog(@"There is need to fetch the data");
+//                }
+//            }
+//            
+//        }
+//    });
+
 }
 
 

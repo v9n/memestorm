@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "JSONKit.h"
 #import "CRTableViewCell.h"
+#import "AXCache.h"
 
 #define kMarkColor kYellowColor;
 
