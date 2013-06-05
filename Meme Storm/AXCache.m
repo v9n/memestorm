@@ -14,6 +14,18 @@
 @implementation AXCache
 
 @synthesize  driver, db;
+
+static AXCache *instance = NULL;
+
++ (AXCache *) instance {
+    @synchronized(self)
+    {
+        if (instance == NULL)
+            instance = [[self alloc] init];
+    }
+    return(instance);
+}
+
 - (id) init
 {
     if (self = [super init]) {
