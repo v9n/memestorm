@@ -423,14 +423,14 @@ Caculate which image we should load and show on screen
         NSString * likeCount = [[memeToLoad objectForKey:@"info"] objectForKey:@"like"];
         NSString * commentCount = [[memeToLoad objectForKey:@"info"] objectForKey:@"comment"];
         
-        if ([likeCount isEqualToString:@""]) {
-//            [socialMetric setText:[NSString stringWithFormat:@"%@ Comment", commentCount]];
+//        if ([likeCount isEqualToString:@""]) {
+////            [socialMetric setText:[NSString stringWithFormat:@"%@ Comment", commentCount]];
+////            
+//        } else {
 //            
-        } else {
-            
-//            [socialMetric setText:[NSString stringWithFormat:@"%@ Comment, %@ Likes", commentCount, likeCount]];
-            
-        }
+////            [socialMetric setText:[NSString stringWithFormat:@"%@ Comment, %@ Likes", commentCount, likeCount]];
+//            
+//        }
         
         [memeTitleLbl setText:[memeToLoad objectForKey:@"title"]];
         
