@@ -680,7 +680,9 @@ Caculate which image we should load and show on screen
 }
 
 # pragma mark
-
+/**
+ Delegation when fisniging writing picture to photos album
+ */
 - (void)image:(UIImage *)img didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error != nil) {

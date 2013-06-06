@@ -56,4 +56,6 @@ NSString * const AXMemeBackground;
 
 - (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image;
 
+# pragma mark
+- (void)image:(UIImage *)img didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo;
 @end

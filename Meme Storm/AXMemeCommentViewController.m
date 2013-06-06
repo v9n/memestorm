@@ -16,7 +16,7 @@
 
 @implementation AXMemeCommentViewController
 
-@synthesize commentUrl;
+@synthesize commentUrl, progressBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,6 +53,7 @@
 
 - (void)viewDidUnload {
     [self setWebView:nil];
+    [self setProgressBar:nil];
     [super viewDidUnload];
 }
 
@@ -62,6 +63,17 @@
     
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
 	[self.webView loadRequest:request];
+}
+
+# pragma mark - Public Method
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self.progressBar stopAnimating];
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [self.progressBar startAnimating];
 }
 
 @end
