@@ -11,9 +11,13 @@
 @interface AXMemeCommentViewController : UIViewController <UIWebViewDelegate>
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *progressBar;
 
 @property NSString * commentUrl;
 
 - (void) loadCommentsView;
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView;
+- (void)webViewDidStartLoad:(UIWebView *)webView;
 
 @end
