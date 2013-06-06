@@ -39,7 +39,7 @@
     
     //UIColor *lineColor = [UIColor colorWithRed:37/255.0f green:110/255.0f blue:83/255.0f alpha:1.0f];
 //    UIColor *lineColor = [UIColor colorWithRed:244/255.0f green:244/255.0f blue:244/255.0f alpha:1.0f];
-    UIColor *lineColor = [UIColor colorWithRed:79/255.0f green:79/255.0f blue:79/255.0f alpha:1.0f];
+    UIColor *lineColor = [UIColor colorWithRed:228/255.0f green:224/255.0f blue:204/255.0f alpha:1.0f];
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColor(context, CGColorGetComponents( [color CGColor]));
