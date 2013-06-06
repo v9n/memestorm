@@ -46,7 +46,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         memeLikeButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-like"] target:self selector:@selector(showComment:)];
         memeShareButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-share-b"] target:self selector:@selector(shareMeme:)];
         memeDownloadButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-download"] target:self selector:@selector(downloadMeme:)];
-        memeCommentButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-com"] target:self selector:@selector(showComment::)];
+        memeCommentButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-com"] target:self selector:@selector(showComment:)];
         
         self.navigationItem.rightBarButtonItems = @[memeShareButton, memeDownloadButton, memeCommentButton, memeLikeButton];
     }
@@ -664,7 +664,42 @@ Caculate which image we should load and show on screen
 */
 -(void)downloadMeme:(id) sender
 {
-    
+    if ([downloadProgress isAnimating]) {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Cannot save!"
+                                                          message:@"Meme is downloading. Try again later."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
+
+    } else {
+        UIImageWriteToSavedPhotosAlbum(currentImgView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        
+    }
+
+}
+
+# pragma mark
+
+- (void)image:(UIImage *)img didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (error != nil) {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Cannot save!"
+                                                          message:@"Meme cannot saved to your iOS album. Check your space usage."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
+
+    } else {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Photo saved!"
+                                                          message:@"Meme is saved to your iOS album"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
+        
+    }
 }
 
 /**
