@@ -30,6 +30,10 @@
     [super viewDidLoad];
     [self drawUi];
     [self setTitle:@"Meme Storm"];
+    
+    AXCache * cache = [AXCache instance];
+    memeSourceData = (NSArray *) [cache getByKey:@"selected_sources"];
+    
     [self loadMemeSource];
 }
 
@@ -61,7 +65,9 @@
     [self.memeSourceTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
-
+/**
+ * Customize setTitle method for navigation bar
+ */
 - (void)setTitle:(NSString *)title
 {
     [super setTitle:title];
@@ -289,6 +295,11 @@
     [cell setSelectedBackgroundView:bgSelectedView];
 
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 56.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
