@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JASidePanelController.h"
-#import "AXSidePanelControllerViewController.h"
+#import "AXSidePanelController.h"
 
 @class AxcotoViewController;
 
