@@ -15,6 +15,7 @@
 #import "AXSHKConfigurator.h"
 
 #import "AXMemeShopViewController.h"
+#import "AXInfoViewController.h"
 
 @implementation AxcotoAppDelegate
 
@@ -48,7 +49,7 @@
     self.viewController = [[AXSidePanelController alloc] init];
     self.viewController.leftPanel = [[AXMemeShopViewController alloc] init];
     self.viewController.centerPanel = self.navController;
-//    self.viewController.rightPanel = [[JARightViewController alloc] init];
+    self.viewController.rightPanel = [[AXInfoViewController alloc] init];
     
     [self.window setRootViewController:self.viewController];
     

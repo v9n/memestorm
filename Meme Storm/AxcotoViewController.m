@@ -30,10 +30,6 @@
     [super viewDidLoad];
     [self drawUi];
     [self setTitle:@"Meme Storm"];
-    
-    AXCache * cache = [AXCache instance];
-    memeSourceData = (NSArray *) [cache getByKey:@"selected_sources"];
-    
     [self loadMemeSource];
 }
 
@@ -120,11 +116,11 @@
     }
 }
 
-- (void) downloadAvatarForSiteAt:(NSUInteger) count {
+- (void) downloadAvatarForSite:(NSDictionary *) site {
     int attempt = 0;
     NSData * s=nil;
-    NSString * url = [[memeSourceData objectAtIndex:count] objectForKey:@"i"];
-    NSString * avatarFileName = [[[memeSourceData objectAtIndex:count] objectForKey:@"name"] stringByAppendingString:@".png"];
+    NSString * url = [site objectForKey:@"i"];
+    NSString * avatarFileName = [[site objectForKey:@"name"] stringByAppendingString:@".png"];
     avatarFileName = [avatarFolder stringByAppendingPathComponent:avatarFileName];
     static NSFileManager *fileMan = nil;
     if (fileMan==nil) {
@@ -171,7 +167,7 @@
     
     //We don't have data yet. Need to download fist
     //we just show progress icon when we have nothing in seleted source. later on, we don't need to do this.
-    if (memeSourceData == nil) {
+    if (memeSourceData == nil || [memeSourceData count] == 0) {
         [downloadProgress startAnimating];
     }
     
@@ -213,7 +209,7 @@
         [cache saveForKey:@"sources" withValue:[s objectFromJSONData]];
 
         for (int count=0; count<[supportedMemeSite count]; count++) {
-            [self downloadAvatarForSiteAt:count];
+            [self downloadAvatarForSite:(NSDictionary *)[supportedMemeSite objectAtIndex:count]];
         }
         if (memeSourceData == nil) {
             memeSourceData = supportedMemeSite; //On the first time, we show all meme site we supported, or we can define

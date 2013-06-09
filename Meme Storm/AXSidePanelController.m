@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Vinh Nguyen. All rights reserved.
 //
 
-#import "AXSidePanelControllerViewController.h"
+#import "AXSidePanelController.h"
 
 @interface AXSidePanelController ()
 
@@ -72,6 +72,23 @@
     [item setStyle:UIBarButtonItemStylePlain];
     return item;
 
+}
+
+
+- (void)toggleLeftPanel:(__unused id)sender {
+    [super toggleLeftPanel:sender];
+}
+
+# pragma mark - Override
+- (void)showCenterPanelAnimated:(BOOL)animated {
+    if (self.state == JASidePanelLeftVisible) {
+        if ([self.leftPanel conformsToProtocol:@protocol(AXSidePanelDelegate)] && [self.leftPanel respondsToSelector:@selector(didHideLeftPanel)]) {
+            [self.leftPanel didHideLeftPanel];
+        }
+    } else if (self.state == JASidePanelCenterVisible) {
+        
+    }
+    [super showCenterPanelAnimated:animated];
 }
 
 @end

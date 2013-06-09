@@ -14,7 +14,7 @@
 
 @implementation AXMemeShopViewController
 
-@synthesize memeSourceTable, memeSourceData, selectedMarks;
+@synthesize memeSourceTable, memeSourceData, selectedMarks, cache;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -22,6 +22,7 @@
     if (self) {
         // Custom initialization
         selectedMarks = [[NSMutableArray alloc] init];
+        cache = [AXCache instance];
         [self loadMemeSource];
     }
     return self;
@@ -39,6 +40,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+
+- (void) didHideLeftPanel {
+    [self saveSetting];
+}
+/**
+ Store selected site and other configuration if has some.
+ */
+- (void) saveSetting
+{
+    [cache saveForKey:@"selected_sources" withValue:selectedMarks];
+}
 
 - (void) loadMemeSource {
     AXCache * cache = [AXCache instance];
@@ -122,7 +137,6 @@
         [selectedMarks removeObject:text];
     else
         [selectedMarks addObject:text];
-    
     [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
