@@ -10,3 +10,6 @@
 [submodule "Submodules/CMMR"]
 	path = Submodules/CMMR
 	url = git://github.com/chroman/CRMultiRowSelect.git
+[submodule "Submodules/MMP"]
+	path = Submodules/MMP
+	url = git://github.com/jdg/MBProgressHUD.git

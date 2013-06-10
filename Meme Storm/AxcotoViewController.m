@@ -24,12 +24,15 @@
 
 @synthesize downloadProgress;
 @synthesize avatarFolder;
+@synthesize cache;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self drawUi];
     [self setTitle:@"Meme Storm"];
+    cache = [AXCache instance];
+    [self prepare];    
     [self loadMemeSource];
 }
 
@@ -99,49 +102,10 @@
 - (void) prepare
 {
     NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSFileManager * fileMan = [NSFileManager defaultManager];
     avatarFolder = [[path objectAtIndex:0] stringByAppendingPathComponent:@"avatar"];
-    if (![fileMan fileExistsAtPath:avatarFolder]) {
-        NSError * e;
-        NSLog(@"Trying to create avatar folder");
-        if ([fileMan createDirectoryAtPath:avatarFolder withIntermediateDirectories:YES attributes:nil error:&e])
-        {
-            NSLog(@"%@", @"Success to create memeFolder");
-        }
-        else
-        {
-            NSLog(@"[%@] ERROR: attempting to create avatar directory", [self class]);
-            NSAssert( FALSE, @"Failed to create directory maybe out of disk space?");
-        }
-    }
 }
 
-- (void) downloadAvatarForSite:(NSDictionary *) site {
-    int attempt = 0;
-    NSData * s=nil;
-    NSString * url = [site objectForKey:@"i"];
-    NSString * avatarFileName = [[site objectForKey:@"name"] stringByAppendingString:@".png"];
-    avatarFileName = [avatarFolder stringByAppendingPathComponent:avatarFileName];
-    static NSFileManager *fileMan = nil;
-    if (fileMan==nil) {
-        fileMan= [NSFileManager defaultManager];
-    }
-    
-    if (![fileMan fileExistsAtPath:avatarFileName]) {
-        while (attempt<=2 && s==Nil)
-        {
-            attempt++;
-            NSLog(@"Attempt #%d to get avatar", attempt);
-            @try {
-                s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
-                [s writeToFile:avatarFileName atomically:TRUE];
-            }
-            @catch (NSException * e){
-                NSLog(@"Fail at attempt #%d. Error:%@", attempt, e);
-            }
-        }
-    }
-}
+
 
 /**
  Do 2 things:
@@ -153,81 +117,9 @@
  */
  
 - (void) loadMemeSource {
-    [self prepare];
-    
-    AXCache * cache = [AXCache instance];
-    NSString * s1= [[[NSProcessInfo processInfo] environment] objectForKey:@"ENVIRONMENT"];
-    NSLog(@"Environment %@", s1);
-    
-    NSString * url = [NSString stringWithFormat:@"%@/m/list", AX_SPIDER_URL];
-    //NSString * url = @"http://127.0.0.1:9393/m/list";
-    NSLog(@"Will load meme source at: %@", url);
-    
-    memeSourceData = [cache getByKey:@"selected_sources"];
-    
-    //We don't have data yet. Need to download fist
-    //we just show progress icon when we have nothing in seleted source. later on, we don't need to do this.
-    if (memeSourceData == nil || [memeSourceData count] == 0) {
-        [downloadProgress startAnimating];
+    NSArray * _memeSourceData = [cache getByKey:@"selected_sources"];
+    if (_memeSourceData == nil || [_memeSourceData count] == 0) {
     }
-    
-    dispatch_async(dispatch_get_global_queue(0,0), ^ {
-        NSData *s = Nil;
-        NSArray * supportedMemeSite;
-        
-        int attempt =0;
-
-            while (attempt<=5 && s==Nil)
-            {
-                attempt++;
-                NSLog(@"Attempt #%d to get memesource list", attempt);
-                @try {
-                    s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
-                }
-                @catch (NSException * e){
-                    NSLog(@"Fail at attempt #%d. Error:%@", attempt, e);
-                }
-            }
-            
-            if (s==nil) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                        [downloadProgress stopAnimating];
-                        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Cannot fetch meme data!"
-                                                                          message:@"Check your data connection then open the app again."
-                                                                         delegate:nil
-                                                                cancelButtonTitle:@"OK"
-                                                                otherButtonTitles:nil];
-                        [message show];
-                        return;
-                   
-                    
-                });
-                return;
-            }
-        
-        supportedMemeSite = [s objectFromJSONData];
-        [cache saveForKey:@"sources" withValue:[s objectFromJSONData]];
-
-        for (int count=0; count<[supportedMemeSite count]; count++) {
-            [self downloadAvatarForSite:(NSDictionary *)[supportedMemeSite objectAtIndex:count]];
-        }
-        if (memeSourceData == nil) {
-            memeSourceData = supportedMemeSite; //On the first time, we show all meme site we supported, or we can define
-        }
-        [cache saveForKey:@"selected_sources" withValue:memeSourceData];
-
-
-        NSLog(@"Meme Source Data: %@", memeSourceData);
-        if ([downloadProgress isAnimating])
-        {
-            //Update UI on mean thread
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.memeSourceTable reloadData];
-                [downloadProgress stopAnimating];
-            });
-        }
-        
-    });
 }
 
 - (void) reorderSite
@@ -236,6 +128,16 @@
     edit = !edit;
     [self.navigationItem.leftBarButtonItem setTitle:edit?@"Done":@"Edit"];
     [self.memeSourceTable setEditing:edit];
+}
+
+/**
+ Come from side panel. 
+ Need to refresh the meme list
+ */
+# pragma mark - AXSidePanelDelegate
+- (void)didShowCenterPanel
+{
+    memeSourceData = (NSArray *)[cache getByKey:@"selected_sources"] ;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

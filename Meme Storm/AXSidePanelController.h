@@ -15,6 +15,8 @@
 @optional
 
 - (void) didHideLeftPanel;
+- (void) didShowLeftPanel;
+- (void) didShowCenterPanel;
 
 @end
 
