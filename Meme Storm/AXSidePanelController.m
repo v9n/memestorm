@@ -76,12 +76,21 @@
 
 
 - (void)toggleLeftPanel:(__unused id)sender {
+
+    if (self.state == JASidePanelLeftVisible) {
+    } else if (self.state == JASidePanelCenterVisible) {
+        if ([self.leftPanel conformsToProtocol:@protocol(AXSidePanelDelegate)] && [self.leftPanel respondsToSelector:@selector(didShowLeftPanel)]) {
+            [self.leftPanel didShowLeftPanel];
+        }
+    }
     [super toggleLeftPanel:sender];
 }
 
 # pragma mark - Override
 - (void)showCenterPanelAnimated:(BOOL)animated {
+    BOOL fromLeft = NO;
     if (self.state == JASidePanelLeftVisible) {
+        fromLeft = YES;
         if ([self.leftPanel conformsToProtocol:@protocol(AXSidePanelDelegate)] && [self.leftPanel respondsToSelector:@selector(didHideLeftPanel)]) {
             [self.leftPanel didHideLeftPanel];
         }
@@ -89,6 +98,11 @@
         
     }
     [super showCenterPanelAnimated:animated];
+    
+    if (fromLeft==YES && [self.centerPanel conformsToProtocol:@protocol(AXSidePanelDelegate)] && [self.centerPanel respondsToSelector:@selector(didShowCenterPanel)]) {
+        [self.centerPanel didShowCenterPanel];
+    }
+    
 }
 
 @end

@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "JSONKit.h"
 #import "CRTableViewCell.h"
+#import "AXConfig.h"
 #import "AXCache.h"
 #import "AXSidePanelController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #define kMarkColor kYellowColor;
 
@@ -20,8 +22,12 @@
 @property (strong, nonatomic) NSArray *memeSourceData;
 @property (strong, nonatomic) NSMutableArray *selectedMarks; // You need probably to save the selected cells for use in the future.
 @property (strong, nonatomic) AXCache *cache;
+@property NSString * avatarFolder;
+
 - (void) loadMemeSource;
 - (void) saveSetting;
+- (void) updateSourceList;
+- (void) downloadAvatarForSite:(NSDictionary *) site;
 
 - (void) didHideLeftPanel;
 

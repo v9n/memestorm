@@ -10,12 +10,15 @@
 
 #import "UIBarButtonItem+StyledButton.h"
 #import "AXCache.h"
+#import "AXSidePanelController.h"
 
-@interface AxcotoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AxcotoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, AXSidePanelDelegate>
 
 @property (unsafe_unretained, nonatomic) IBOutlet UITableView *memeSourceTable;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIActivityIndicatorView *downloadProgress;
+@property (strong, nonatomic)    AXCache * cache ;
+
 
 @property NSString * avatarFolder;
 - (void) loadMemeSource;
