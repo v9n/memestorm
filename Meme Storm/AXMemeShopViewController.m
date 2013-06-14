@@ -45,25 +45,49 @@
 }
 
 - (void) didHideLeftPanel {
-    [self saveSetting];
+    [self saveSelectedSource];
 }
 
 - (void) didShowLeftPanel {
+    NSString *t = [cache getByKey:@"last_sync"];
+    if (t == nil) { //never sync before
+        [self updateSourceList];
+    } else {
+        //synced. check the time diff to see if we need to resync
+//        NSDate *d =
+    }
+    
     [self updateSourceList];
 }
 
 /**
  Store selected site and other configuration if has some.
  */
-- (void) saveSetting
+- (void) saveSelectedSource
 {
-    [cache saveForKey:@"selected_sources" withValue:selectedMarks];
+    NSMutableArray * selectedSource = [[NSMutableArray alloc] initWithCapacity:[selectedMarks count]];
+    NSArray * sources = [cache getByKey:@"sources"];
+    
+    for (NSDictionary * d in sources)
+    {
+        if ([selectedMarks containsObject:[d objectForKey:@"u"]])
+        {
+            [selectedSource addObject:d];
+        }
+    }
+    
+    [cache saveForKey:@"selected_sources" withValue:selectedSource];
 }
 
 - (void) loadMemeSource {
-    AXCache * cache = [AXCache instance];
     memeSourceData= (NSArray *) [cache getByKey:@"sources"];
-
+    
+    NSArray * selectedSource = (NSArray *) [cache getByKey:@"selected_sources"];
+    if ( selectedSource!=nil && ([selectedSource count] > 0) ) {
+        for (NSDictionary * d in selectedSource) {
+            [selectedMarks addObject:[d objectForKey:@"u"]];
+        }
+    }
 }
 
 /**
@@ -81,7 +105,6 @@
     NSLog(@"Will load meme source at: %@", url);
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    hud.mode = MBProgressHUDModeAnnularDeterminate;
     hud.mode = MBProgressHUDAnimationFade;
     hud.labelText = @"Loading Source";
     
@@ -99,6 +122,7 @@
                 s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
             }
             @catch (NSException * e){
+                s= nil;
                 NSLog(@"Fail at attempt #%d. Error:%@", attempt, e);
             }
         }
@@ -118,6 +142,10 @@
             return;
         }
         
+        NSDateFormatter * date = [[NSDateFormatter alloc] init];
+        [date setDateFormat:@"dd-mm-yyyy HH:mm"];
+        [cache saveForKey:@"last_sync" withValue:[date stringFromDate:[NSDate date]]];
+        
         supportedMemeSite = [s objectFromJSONData];
         [cache saveForKey:@"sources" withValue:[s objectFromJSONData]];
         
@@ -127,7 +155,7 @@
         if (memeSourceData == nil) {
             memeSourceData = supportedMemeSite; //On the first time, we show all meme site we supported, or we can define
         }
-        [cache saveForKey:@"selected_sources" withValue:memeSourceData];
+        [cache saveForKey:@"sources" withValue:memeSourceData];
         
         
         NSLog(@"Meme Source Data: %@", memeSourceData);
@@ -226,7 +254,7 @@
     }
     
     // Check if the cell is currently selected (marked)
-    NSString *text = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"t"];
+    NSString *text = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"u"];
     cell.isSelected = [selectedMarks containsObject:text] ? YES : NO;
     
     cell.textLabel.text = text;
@@ -235,7 +263,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *text = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"t"];
+    NSString *text = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"u"];
     
     if ([selectedMarks containsObject:text])// Is selected?
         [selectedMarks removeObject:text];

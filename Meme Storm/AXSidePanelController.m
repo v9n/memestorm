@@ -7,6 +7,7 @@
 //
 
 #import "AXSidePanelController.h"
+#import "AxcotoViewController.h"
 
 @interface AXSidePanelController ()
 
@@ -98,9 +99,9 @@
         
     }
     [super showCenterPanelAnimated:animated];
-    
-    if (fromLeft==YES && [self.centerPanel conformsToProtocol:@protocol(AXSidePanelDelegate)] && [self.centerPanel respondsToSelector:@selector(didShowCenterPanel)]) {
-        [self.centerPanel didShowCenterPanel];
+    AxcotoViewController * centerView = (AxcotoViewController *)self.centerPanel.visibleViewController;
+    if (fromLeft==YES && [centerView conformsToProtocol:@protocol(AXSidePanelDelegate)] && [centerView respondsToSelector:@selector(didShowCenterPanel)]) {
+        [centerView didShowCenterPanel];
     }
     
 }

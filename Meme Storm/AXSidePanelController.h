@@ -24,7 +24,7 @@
 
 // set the panels
 @property (nonatomic, strong) UIViewController<AXSidePanelDelegate>  *leftPanel;   // optional
-@property (nonatomic, strong) UIViewController<AXSidePanelDelegate> *centerPanel; // required
+@property (nonatomic, strong) UINavigationController<AXSidePanelDelegate> *centerPanel; // required
 @property (nonatomic, strong) UIViewController<AXSidePanelDelegate> *rightPanel;  // optional
 
 
