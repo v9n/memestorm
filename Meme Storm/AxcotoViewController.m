@@ -25,6 +25,7 @@
 @synthesize downloadProgress;
 @synthesize avatarFolder;
 @synthesize cache;
+@synthesize chooseMemeButton;
 
 - (void)viewDidLoad
 {
@@ -34,6 +35,9 @@
     cache = [AXCache instance];
     [self prepare];    
     [self loadMemeSource];
+    if (memeSourceData!=nil && [memeSourceData count]>0) {
+        [chooseMemeButton setHidden:YES];
+    }
 }
 
 /**
@@ -93,6 +97,7 @@
     [self setMemeSourceTable:nil];
     [self setDownloadProgress:nil];
     [self setDownloadProgress:nil];
+    [self setChooseMemeButton:nil];
     [super viewDidUnload];
 }
 
@@ -117,9 +122,8 @@
  */
  
 - (void) loadMemeSource {
-    NSArray * _memeSourceData = [cache getByKey:@"selected_sources"];
-    if (_memeSourceData == nil || [_memeSourceData count] == 0) {
-    }
+    memeSourceData = [cache getByKey:@"selected_sources"];
+
 }
 
 - (void) reorderSite
@@ -137,7 +141,8 @@
 # pragma mark - AXSidePanelDelegate
 - (void)didShowCenterPanel
 {
-    memeSourceData = (NSArray *)[cache getByKey:@"selected_sources"] ;
+    [self loadMemeSource];
+    [self.memeSourceTable reloadData];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -236,6 +241,14 @@
             }
         }
     }
+}
+
+/**
+ Left panel is hide. We shold update the list
+ */
+- (void) didHideLeftPanel {
+    [self loadMemeSource];
+    [self.memeSourceTable reloadData];
 }
 
 @end

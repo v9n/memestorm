@@ -19,6 +19,10 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIActivityIndicatorView *downloadProgress;
 @property (strong, nonatomic)    AXCache * cache ;
 
+@property (weak, nonatomic) IBOutlet UIButton *chooseMemeButton;
+
+- (void) didHideLeftPanel;
+- (void) didShowCenterPanel;
 
 @property NSString * avatarFolder;
 - (void) loadMemeSource;

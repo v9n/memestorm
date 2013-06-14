@@ -25,7 +25,7 @@
 @property NSString * avatarFolder;
 
 - (void) loadMemeSource;
-- (void) saveSetting;
+- (void) saveSelectedSource;
 - (void) updateSourceList;
 - (void) downloadAvatarForSite:(NSDictionary *) site;
 
