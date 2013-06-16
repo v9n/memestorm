@@ -45,6 +45,8 @@ NSString * const AXMemeBackground;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *memeTitleLbl;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *metaMemeView;
 
+@property NSUInteger tag;
+
 - (IBAction)showComment:(id)sender;
 - (IBAction)shareMeme:(id)sender;
 - (void) downloadMeme:(id)sender;
@@ -58,4 +60,5 @@ NSString * const AXMemeBackground;
 
 # pragma mark
 - (void)image:(UIImage *)img didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo;
+
 @end

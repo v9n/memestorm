@@ -90,7 +90,7 @@
     
     UIButton *button = [UIButton styledButtonWithBackgroundImage:image font:font title:@"" target:target selector:selector];
     button.titleLabel.textColor = [UIColor whiteColor];
-    [button setBounds:CGRectMake(0, 0, 30,30)];
+    [button setBounds:CGRectMake(10, 5, 20,20)];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     return [[UIBarButtonItem alloc] initWithCustomView:button] ;
