@@ -754,9 +754,6 @@
 				176982F8166AC2090091B88D /* Resources */,
 				174739CA1669E58100C25A72 /* Supporting Files */,
 				17D5D56016AA99370057BB8A /* Settings.bundle */,
-				FBAC5F361763F405009EE12A /* AXInfoViewController.h */,
-				FBAC5F371763F405009EE12A /* AXInfoViewController.m */,
-				FBAC5F381763F405009EE12A /* AXInfoViewController.xib */,
 			);
 			path = "Meme Storm";
 			sourceTree = "<group>";
@@ -794,6 +791,8 @@
 		176982E5166A93D80091B88D /* MemeList */ = {
 			isa = PBXGroup;
 			children = (
+				FBAC5F361763F405009EE12A /* AXInfoViewController.h */,
+				FBAC5F371763F405009EE12A /* AXInfoViewController.m */,
 				FB90C62C175B4531007C8943 /* AXMemeShopViewController.h */,
 				FB90C62D175B4531007C8943 /* AXMemeShopViewController.m */,
 				FB90C62E175B4531007C8943 /* AXMemeShopViewController.xib */,
@@ -923,6 +922,7 @@
 			children = (
 				174739DE1669E58100C25A72 /* AxcotoViewController_iPhone.xib */,
 				170EB24F1673E5800045F6CA /* SourceCell.xib */,
+				FBAC5F381763F405009EE12A /* AXInfoViewController.xib */,
 				174739E11669E58100C25A72 /* AxcotoViewController_iPad.xib */,
 				176982E8166ABA670091B88D /* AxcotoMemeDetailViewController.xib */,
 				17F9B2111692907A00A02C52 /* AXMemeCommentViewController.xib */,
