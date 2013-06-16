@@ -18,6 +18,8 @@
 
 #define MEME_META_VIEW_HEIGHT 27
 #define ZOOM_STEP 1.5
+#define AX_VIEW_MARGIN 10
+
 NSString * const AXMemeBackground = @"bg.png";
 NSString * const AXBarBkgImg = @"toolbar-bg";
 
@@ -35,6 +37,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 
 @synthesize memeShareButton, memeCommentButton, memeLikeButton, memeDownloadButton;
 @synthesize memeTitleLbl;
+@synthesize tag;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,7 +50,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         memeShareButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-share-b"] target:self selector:@selector(shareMeme:)];
         memeDownloadButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-download"] target:self selector:@selector(downloadMeme:)];
         memeCommentButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-com"] target:self selector:@selector(showComment:)];
-        
+        tag = 0;
         self.navigationItem.rightBarButtonItems = @[memeShareButton, memeDownloadButton, memeCommentButton, memeLikeButton];
     }
     return self;
@@ -88,6 +91,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     }
     
     NSLog(@"Screen height is %f", screenHeigh);
+    [[self navigationController] setNavigationBarHidden:NO];
     
     [self setUpImageViewer];
     [self bindSwipeEvent];
@@ -99,7 +103,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
  */
 - (void) setUpImageViewer {
     self.view.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
-    //[self.navigationController.navigationBar setFrame:CGRectMake(0,0, 320, 44)];
 
     imgContainer.delegate = self;
     imgContainer.pagingEnabled = YES;
@@ -111,13 +114,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     [metaMemeView setHidden:FALSE];
 //    [metaMemeView setBackgroundColor:[UIColor whiteColor]];
 //    [metaMemeView setAlpha:0.7];
-    NSLog(@"DIM Y POS  %f", screenHeigh - metaMemeView.frame.size.height);
-    NSLog(@"DIM %f", metaMemeView.frame.origin.y);
-    NSLog(@"DIM %f", metaMemeView.frame.origin.x);
-    NSLog(@"DIM %f", metaMemeView.frame.size.width);
-    NSLog(@"DIM %f", metaMemeView.frame.size.height);
-
-    NSLog(@"Screen height = %f", screenHeigh);
     
     imgContainer.bouncesZoom = YES;
     imgContainer.clipsToBounds = YES;
@@ -134,13 +130,11 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         NSLog(@"%@", error);
     }
   
-    prevScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,screenWidth, screenHeigh)];
-    currentScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(screenWidth * 1,0,screenWidth, screenHeigh)];
-    nextScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(screenWidth * 2,0,screenWidth, screenHeigh)];
+    prevScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeigh)];
+    currentScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(screenWidth * 1, 0, screenWidth + 2 * AX_VIEW_MARGIN, screenHeigh)];
+    nextScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(screenWidth * 2, 0, screenWidth, screenHeigh)];
 
-    //currentScroolView.autoresizingMask = ( UIViewAutoresizingFlexibleWidth );
-        
-    [imgContainer addSubview: prevScroolView];    
+    [imgContainer addSubview: prevScroolView];
     [imgContainer addSubview: currentScroolView];
     [imgContainer addSubview: nextScroolView];
     imgContainer.contentSize = CGSizeMake(screenWidth * 3, screenHeigh);
@@ -260,19 +254,21 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     downloading = YES;
     //We cannot run it on main queu to avoid block UI thread
     dispatch_async(dispatch_get_global_queue(0,0), ^{
+        tag++;
+        [self fetchFromSource:pageToDownload withTag:tag thenRun: ^{
+            // We are updating UI so let do it on mean thread
+            dispatch_async(dispatch_get_main_queue(), ^{
+                downloading = NO;
+                [imgContainer setHidden:FALSE];
+                if (show) {
+                    [self loadImage:0];
+                }
+                [downloadProgress setHidden:TRUE];
+                [downloadProgress stopAnimating];
+            });
+            
+        }];
         
-        [self fetchFromSource:pageToDownload];
-        
-        // We are updating UI so let do it on mean thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            downloading = NO;
-            [imgContainer setHidden:FALSE];
-            if (show) {
-                [self loadImage:0];
-            }
-            [downloadProgress setHidden:TRUE];
-            [downloadProgress stopAnimating];
-        });
     });
     
 }
@@ -281,7 +277,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 /**
 * fetchFromSource should be in Asyntask or run on anothe thread instad of meain thread ot avoid block ui
 **/
-- (void) fetchFromSource:(NSUInteger)pageToDownload {
+- (void) fetchFromSource:(NSUInteger)pageToDownload withTag:(NSUInteger) aTag thenRun:(void (^)(void))execBlock{
     //get '/m/:source/:section,:start_id,:end_id:,:quantity' do |source,section,start_id,end_id,quantity|
     NSString * start_id;
     NSString * end_id;
@@ -311,6 +307,13 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     NSArray * memes = (NSArray *)[dataSource objectFromJSONData];
     NSLog(@"%@", memes);
    [memesList insertObject:memes atIndex:currentMemePage];
+    
+    if (tag==aTag) {
+        NSLog(@"Looks good. Go ahead and load download image to view");        
+        execBlock();
+    } else {
+        NSLog(@"Download finish but ignire loading. It seems user move to another step already");
+    }
 }
 
 - (void)viewDidUnload {
@@ -448,6 +451,7 @@ Caculate which image we should load and show on screen
             //Use SDWeb to load imag async
             [downloadProgress startAnimating];
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            tag++;
             [manager downloadWithURL:fileUrl
                             delegate:self
                              options:0
@@ -558,15 +562,14 @@ Caculate which image we should load and show on screen
 
 #pragma mark UIScroolViewDelegate method
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)aScrollView {
-    //return imgViewUi;
     return currentImgView;
 }
 
 #pragma mark UIScroolViewDelegate method
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
     NSLog(@"- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale %@, %@, %f", scrollView, view, scale);
-    
-    [self centerImgView:view atScale:scale];
+    NSLog(@"Zoom ration: %f", scale);
+   // [self centerImgView:view atScale:scale];
 }
 
 /**
