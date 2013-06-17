@@ -32,7 +32,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 @synthesize memeSource;
 @synthesize imgContainer, downloadProgress, metaMemeView;
 
-@synthesize prevScroolView, currentScroolView, nextScroolView;
+@synthesize prevScroolView, currentScroolView, currentScroolViewContainer, nextScroolView;
 @synthesize prevImgView, currentImgView, nextImgView;
 
 @synthesize memeShareButton, memeCommentButton, memeLikeButton, memeDownloadButton;
@@ -130,14 +130,13 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         NSLog(@"%@", error);
     }
   
-    prevScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeigh)];
-    currentScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(screenWidth * 1, 0, screenWidth + 2 * AX_VIEW_MARGIN, screenHeigh)];
-    nextScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(screenWidth * 2, 0, screenWidth, screenHeigh)];
-
+    prevScroolView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeigh)];
+    nextScroolView = [[UIView alloc] initWithFrame:CGRectMake(screenWidth * 2, 0, screenWidth, screenHeigh)];
+    currentScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(screenWidth, 0, screenWidth , screenHeigh)];
     [imgContainer addSubview: prevScroolView];
     [imgContainer addSubview: currentScroolView];
     [imgContainer addSubview: nextScroolView];
-    imgContainer.contentSize = CGSizeMake(screenWidth * 3, screenHeigh);
+    imgContainer.contentSize = CGSizeMake(screenWidth * 3 + 2 * AX_VIEW_MARGIN  , screenHeigh);
     
     [currentScroolView setDelegate:self]; //zooming, we always use the currentScroolView to display image.
     currentScroolView.minimumZoomScale=0.5;
@@ -521,6 +520,7 @@ Caculate which image we should load and show on screen
             NSLog(@"Size after scale is: %fx%f", [currentScroolView frame].size.width, h);
             if ( h < screenHeigh) {
                 currentScroolView.frame = CGRectMake(screenWidth, (screenHeigh - h)/2, screenWidth, h);
+//                currentIView.frame = CGRectMake(screenWidth, (screenHeigh - h)/2, screenWidth, h);
             } else {
                 currentScroolView.frame = CGRectMake(screenWidth, 0, screenWidth, screenHeigh);
             }
@@ -533,7 +533,7 @@ Caculate which image we should load and show on screen
     currentScroolView.maximumZoomScale = 6.0;
 }
 
-#pragma mark SDWebImageDownloaderDelegate
+#pragma mark SDWebImageDownloaderDelegate method 
 - (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image
 {
     NSLog(@"Finish downloading image. Start to redraw it");
@@ -550,8 +550,8 @@ Caculate which image we should load and show on screen
     // the zoom rect is in the content view's coordinates.
     //    At a zoom scale of 1.0, it would be the size of the imageScrollView's bounds.
     //    As the zoom scale decreases, so more content is visible, the size of the rect grows.
-    zoomRect.size.height = [currentScroolView frame].size.height / scale;
-    zoomRect.size.width  = [currentScroolView frame].size.width  / scale;
+    zoomRect.size.height = [currentImgView frame].size.height / scale;
+    zoomRect.size.width  = [currentImgView frame].size.width  / scale;
     
     // choose an origin so as to get the right center.
     zoomRect.origin.x    = center.x - (zoomRect.size.width  / 2.0);
@@ -569,6 +569,10 @@ Caculate which image we should load and show on screen
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
     NSLog(@"- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale %@, %@, %f", scrollView, view, scale);
     NSLog(@"Zoom ration: %f", scale);
+    float h = view.frame.size.height * scale;
+    if (h<screenHeigh) {
+        scrollView.frame = CGRectMake(screenWidth, (screenHeigh - h)/2, scrollView.frame.size.width * scale, scrollView.frame.size.height * scale);
+    }
    // [self centerImgView:view atScale:scale];
 }
 
@@ -597,6 +601,11 @@ Caculate which image we should load and show on screen
     };
 }
 
+/**
+ If a downloading process is happenng. just abondone 
+ If everything seems fine, attempt to decide if we should move next or move forward
+ Otherwise, do abosultely nothing.
+ */
 - (void)scrollViewDidEndDecelerating:(UIScrollView *) sender
 {
     if (downloading)
@@ -606,22 +615,26 @@ Caculate which image we should load and show on screen
     else
     {
         //So we are moving forward
-        if (imgContainer.contentOffset.x>imgContainer.frame.size.width)
+        if (imgContainer.contentOffset.x - 2 * AX_VIEW_MARGIN>imgContainer.frame.size.width)
         {
             //Fill in the new image
             [self loadImage:1];
             NSLog(@"Current Meme is: %d", currentMemeIndex);
+            //we will always come back the center one to keep infinitg scrool effect
+            [imgContainer scrollRectToVisible:CGRectMake(screenWidth, 0, screenWidth, screenHeigh) animated:NO];
+            
         }
     
-        if (imgContainer.contentOffset.x < imgContainer.frame.size.width)
+        if (imgContainer.contentOffset.x + 2 * AX_VIEW_MARGIN< imgContainer.frame.size.width)
         {
             [self loadImage:-1];
             NSLog(@"Current Meme is: %d", currentMemeIndex);
+            //we will always come back the center one to keep infinitg scrool effect
+            [imgContainer scrollRectToVisible:CGRectMake(screenWidth, 0, screenWidth, screenHeigh) animated:NO];
+            
         } 
         
     }
-    //we will always come back the center one to keep infinitg scrool effect
-    [imgContainer scrollRectToVisible:CGRectMake(screenWidth, 0, screenWidth, screenHeigh) animated:NO];
 }
 
 /**
