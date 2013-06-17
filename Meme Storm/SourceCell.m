@@ -10,7 +10,7 @@
 
 @implementation SourceCell
 
-@synthesize  thumbImageView, langImageView, nameLbl;
+@synthesize  thumbImageView, langImageView, nameLbl, lblLastRead;
 @synthesize  order;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -105,5 +105,10 @@
 
 - (void) setAvatar:(UIImage *) img {
    thumbImageView.image = img;
+}
+- (void) setLastRead:(NSString *) lastRead {
+    if (lastRead != Nil) {
+        [lblLastRead setText:lastRead];
+    }
 }
 @end

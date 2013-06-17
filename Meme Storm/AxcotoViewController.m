@@ -19,7 +19,7 @@
 
 @implementation AxcotoViewController
 {
-    NSArray *memeSourceData;
+    NSMutableArray *memeSourceData;
 }
 
 @synthesize downloadProgress;
@@ -122,7 +122,7 @@
  */
  
 - (void) loadMemeSource {
-    memeSourceData = [cache getByKey:@"selected_sources"];
+    memeSourceData = (NSMutableArray *) [cache getByKey:@"selected_sources"];
 
 }
 
@@ -187,10 +187,12 @@
     }
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     [cell setMemeTitle:[[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"t"]];
     NSString * avatarFile = [avatarFolder stringByAppendingPathComponent:[[[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"name"] stringByAppendingString:@".png"]];
     NSLog(@"Load thumbnail image %@", avatarFile);
     [cell setAvatar:[UIImage imageWithContentsOfFile:avatarFile]];
+    [cell setLastRead:[[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"last_read"]];
 
     UIView *bgSelectedView = [[UIView alloc] init];
 //    [bgSelectedView setBackgroundColor:[UIColor colorWithRed:31/255.0f green:127/255.0f blue:92/255.0f alpha:1.0f]];
@@ -207,15 +209,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString * s = [[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"name"];
-    [self readMemeFor:s];
+    [self readMemeFor:s atRow:indexPath];
 }
 
--(IBAction)readMemeFor:(id)sender{
+-(IBAction)readMemeFor:(id)sender atRow:(NSIndexPath *) aPath{
     AxcotoMemeDetailViewController *secondView = [[AxcotoMemeDetailViewController alloc]
                                     initWithNibName:@"AxcotoMemeDetailViewController"
                                     bundle:nil];
     NSLog(@"Selected source: %@", (NSString *) sender);
     [secondView setMemeSource:(NSString *)sender];
+    
+    NSMutableDictionary * memeSource =  (NSMutableDictionary *)[memeSourceData objectAtIndex:aPath.row];
+    NSDateFormatter * date = [[NSDateFormatter alloc] init];
+    [date setDateFormat:@"dd-mm-yyyy HH:mm"];
+    [memeSource setObject:[date stringFromDate:[NSDate date]] forKey:@"last_read"];
+    [cache saveForKey:@"selected_sources" withValue:memeSourceData];
+    
     
     [[self navigationController] pushViewController:secondView animated:YES];
 

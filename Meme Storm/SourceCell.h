@@ -15,13 +15,15 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *langImageView;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *nameLbl;
+@property (weak, nonatomic) IBOutlet UILabel *lblLastRead;
+
 @property (unsafe_unretained, nonatomic) int order;;
 
 
 
 - (void) setMemeTitle:(NSString *) title;
 - (void) setAvatar:(UIImage *) img ;
-
+- (void) setLastRead:(NSString *) lastRead;
 - (void)drawRect:(CGRect)rect;
 - (void)paint:(NSIndexPath *) indexPath;
 

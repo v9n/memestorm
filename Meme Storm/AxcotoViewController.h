@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *chooseMemeButton;
 
+
 - (void) didHideLeftPanel;
 - (void) didShowCenterPanel;
 
