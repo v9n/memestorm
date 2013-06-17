@@ -101,10 +101,6 @@
 		FB90C62F175B4531007C8943 /* AXMemeShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB90C62D175B4531007C8943 /* AXMemeShopViewController.m */; };
 		FB90C630175B4531007C8943 /* AXMemeShopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB90C62E175B4531007C8943 /* AXMemeShopViewController.xib */; };
 		FB90C632175B4A2D007C8943 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB90C631175B4A2D007C8943 /* QuartzCore.framework */; };
-		FB90C650175B4DA4007C8943 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FB90C634175B4DA4007C8943 /* .gitignore */; };
-		FB90C65A175B4DA4007C8943 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB90C649175B4DA4007C8943 /* JASidePanelController.m */; };
-		FB90C65B175B4DA4007C8943 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = FB90C64B175B4DA4007C8943 /* UIViewController+JASidePanel.m */; };
-		FB90C65C175B4DA4007C8943 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = FB90C64F175B4DA4007C8943 /* README.markdown */; };
 		FB938A971757554100461857 /* arrow-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB938A951757554100461857 /* arrow-left@2x.png */; };
 		FB938A981757554100461857 /* arrow-left.png in Resources */ = {isa = PBXBuildFile; fileRef = FB938A961757554100461857 /* arrow-left.png */; };
 		FB938AA117575A4F00461857 /* mini-download@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB938A9917575A4E00461857 /* mini-download@2x.png */; };
@@ -115,6 +111,8 @@
 		FB938AA617575A4F00461857 /* mini-like.png in Resources */ = {isa = PBXBuildFile; fileRef = FB938A9E17575A4F00461857 /* mini-like.png */; };
 		FB938AA717575A4F00461857 /* mini-com@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB938A9F17575A4F00461857 /* mini-com@2x.png */; };
 		FB938AA817575A4F00461857 /* mini-com.png in Resources */ = {isa = PBXBuildFile; fileRef = FB938AA017575A4F00461857 /* mini-com.png */; };
+		FBA28E98176E9744006F565E /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA28E95176E9744006F565E /* JASidePanelController.m */; };
+		FBA28E99176E9744006F565E /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = FBA28E97176E9744006F565E /* UIViewController+JASidePanel.m */; };
 		FBA6C7C61768319B00FB7BD4 /* light_noise_diagonal.png in Resources */ = {isa = PBXBuildFile; fileRef = FBA6C7C41768319B00FB7BD4 /* light_noise_diagonal.png */; };
 		FBA6C7C71768319B00FB7BD4 /* light_noise_diagonal.png in Resources */ = {isa = PBXBuildFile; fileRef = FBA6C7C41768319B00FB7BD4 /* light_noise_diagonal.png */; };
 		FBA6C7C81768319B00FB7BD4 /* light_noise_diagonal@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = FBA6C7C51768319B00FB7BD4 /* light_noise_diagonal@2X.png */; };
@@ -529,12 +527,6 @@
 		FB90C62D175B4531007C8943 /* AXMemeShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXMemeShopViewController.m; sourceTree = "<group>"; };
 		FB90C62E175B4531007C8943 /* AXMemeShopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AXMemeShopViewController.xib; sourceTree = "<group>"; };
 		FB90C631175B4A2D007C8943 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		FB90C634175B4DA4007C8943 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		FB90C648175B4DA4007C8943 /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASidePanelController.h; sourceTree = "<group>"; };
-		FB90C649175B4DA4007C8943 /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASidePanelController.m; sourceTree = "<group>"; };
-		FB90C64A175B4DA4007C8943 /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
-		FB90C64B175B4DA4007C8943 /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
-		FB90C64F175B4DA4007C8943 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		FB938A951757554100461857 /* arrow-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-left@2x.png"; sourceTree = "<group>"; };
 		FB938A961757554100461857 /* arrow-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-left.png"; sourceTree = "<group>"; };
 		FB938A9917575A4E00461857 /* mini-download@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mini-download@2x.png"; sourceTree = "<group>"; };
@@ -545,6 +537,10 @@
 		FB938A9E17575A4F00461857 /* mini-like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mini-like.png"; sourceTree = "<group>"; };
 		FB938A9F17575A4F00461857 /* mini-com@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mini-com@2x.png"; sourceTree = "<group>"; };
 		FB938AA017575A4F00461857 /* mini-com.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mini-com.png"; sourceTree = "<group>"; };
+		FBA28E94176E9744006F565E /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASidePanelController.h; sourceTree = "<group>"; };
+		FBA28E95176E9744006F565E /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASidePanelController.m; sourceTree = "<group>"; };
+		FBA28E96176E9744006F565E /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
+		FBA28E97176E9744006F565E /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
 		FBA6C7C41768319B00FB7BD4 /* light_noise_diagonal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = light_noise_diagonal.png; sourceTree = "<group>"; };
 		FBA6C7C51768319B00FB7BD4 /* light_noise_diagonal@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light_noise_diagonal@2X.png"; sourceTree = "<group>"; };
 		FBAC5F361763F405009EE12A /* AXInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXInfoViewController.h; sourceTree = "<group>"; };
@@ -694,7 +690,6 @@
 			children = (
 				FB56D1BA176484ED001E3D5B /* MBProgressHUD.xcodeproj */,
 				FB2E585E175D95B000CD1B8D /* CMMR */,
-				FB90C633175B4DA4007C8943 /* JASidePanel */,
 				172B7F1216D16D1900729E27 /* SDWebImage */,
 				171634B9169A462300AE7482 /* ShareKit.xcodeproj */,
 				174072431699816B009B1D6E /* ipad-144.png */,
@@ -748,6 +743,7 @@
 		174739C91669E58100C25A72 /* Meme Storm */ = {
 			isa = PBXGroup;
 			children = (
+				FBA28E93176E9744006F565E /* Source */,
 				174739D21669E58100C25A72 /* AxcotoAppDelegate.h */,
 				174739D31669E58100C25A72 /* AxcotoAppDelegate.m */,
 				176982F2166ABFB50091B88D /* Classes */,
@@ -930,32 +926,13 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		FB90C633175B4DA4007C8943 /* JASidePanel */ = {
+		FBA28E93176E9744006F565E /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				FB90C634175B4DA4007C8943 /* .gitignore */,
-				FB90C636175B4DA4007C8943 /* JASidePanels */,
-				FB90C64F175B4DA4007C8943 /* README.markdown */,
-			);
-			name = JASidePanel;
-			path = Submodules/JASidePanel;
-			sourceTree = "<group>";
-		};
-		FB90C636175B4DA4007C8943 /* JASidePanels */ = {
-			isa = PBXGroup;
-			children = (
-				FB90C647175B4DA4007C8943 /* Source */,
-			);
-			path = JASidePanels;
-			sourceTree = "<group>";
-		};
-		FB90C647175B4DA4007C8943 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				FB90C648175B4DA4007C8943 /* JASidePanelController.h */,
-				FB90C649175B4DA4007C8943 /* JASidePanelController.m */,
-				FB90C64A175B4DA4007C8943 /* UIViewController+JASidePanel.h */,
-				FB90C64B175B4DA4007C8943 /* UIViewController+JASidePanel.m */,
+				FBA28E94176E9744006F565E /* JASidePanelController.h */,
+				FBA28E95176E9744006F565E /* JASidePanelController.m */,
+				FBA28E96176E9744006F565E /* UIViewController+JASidePanel.h */,
+				FBA28E97176E9744006F565E /* UIViewController+JASidePanel.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1379,8 +1356,6 @@
 				FB938AA717575A4F00461857 /* mini-com@2x.png in Resources */,
 				FB938AA817575A4F00461857 /* mini-com.png in Resources */,
 				FB90C630175B4531007C8943 /* AXMemeShopViewController.xib in Resources */,
-				FB90C650175B4DA4007C8943 /* .gitignore in Resources */,
-				FB90C65C175B4DA4007C8943 /* README.markdown in Resources */,
 				FB64B066175C945600CACA08 /* site-toggle.png in Resources */,
 				FB2E5872175D95B000CD1B8D /* .gitignore in Resources */,
 				FBAC5F3A1763F405009EE12A /* AXInfoViewController.xib in Resources */,
@@ -1445,14 +1420,14 @@
 				172B7F2E16D16D1900729E27 /* UIImageView+WebCache.m in Sources */,
 				FB3A9F641751ADD9008D475D /* UINavigationBar+CustomBackground.m in Sources */,
 				FB90C62F175B4531007C8943 /* AXMemeShopViewController.m in Sources */,
-				FB90C65A175B4DA4007C8943 /* JASidePanelController.m in Sources */,
-				FB90C65B175B4DA4007C8943 /* UIViewController+JASidePanel.m in Sources */,
 				FB64B05E175C8E3B00CACA08 /* AXSidePanelController.m in Sources */,
 				FB2E5873175D95B000CD1B8D /* CRAppDelegate.m in Sources */,
 				FB2E5875175D95B000CD1B8D /* CRTableViewCell.m in Sources */,
 				FB2E5876175D95B000CD1B8D /* CRTableViewController.m in Sources */,
 				FBB3CD7D175EDC4D00938202 /* AXCache.m in Sources */,
 				FBAC5F391763F405009EE12A /* AXInfoViewController.m in Sources */,
+				FBA28E98176E9744006F565E /* JASidePanelController.m in Sources */,
+				FBA28E99176E9744006F565E /* UIViewController+JASidePanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
