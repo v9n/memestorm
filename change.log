@@ -16,6 +16,8 @@ Road map
 	git submodule init
 * Fix sensitive navigaiton when zooming
 * Fix auto reset zoom ration	
+* Add last read info
+
 
 ==============
 Path:
