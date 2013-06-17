@@ -10,8 +10,14 @@ Road map
 	* Picture doesn't get reposition to center correctly when changing orientation
 * Fix XKCD issue: suddenlt it just works without any fixing.
 * Implement SideBar
-
+* Implement InfoPanel
+* Update instruction to clone project:
+	git clone
+	git submodule init
+* Fix sensitive navigaiton when zooming
+* Fix auto reset zoom ration	
 
 ==============
 Path:
 export $MEME=/Users/kureikain/Library/Application\ Support/iPhone\ Simulator/6.0/Applications/B187091B-B491-41BA-9EFF-B6ADF201E49C/
+
