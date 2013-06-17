@@ -33,9 +33,10 @@ NSString * const AXMemeBackground;
 @property (strong, nonatomic) UIImageView * currentImgView;
 @property (strong, nonatomic) UIImageView * nextImgView;
 
-@property (strong, nonatomic) UIScrollView * prevScroolView;
+@property (strong, nonatomic) UIView * prevScroolView;
 @property (strong, nonatomic) UIScrollView * currentScroolView;
-@property (strong, nonatomic) UIScrollView * nextScroolView;
+@property (strong, nonatomic) UIScrollView * currentScroolViewContainer;
+@property (strong, nonatomic) UIView * nextScroolView;
 
 @property (unsafe_unretained, nonatomic)  UIBarButtonItem *memeCommentButton;
 @property (unsafe_unretained, nonatomic)  UIBarButtonItem *memeLikeButton;
