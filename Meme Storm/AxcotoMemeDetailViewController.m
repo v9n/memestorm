@@ -44,12 +44,12 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[self navigationController] setNavigationBarHidden:NO];
-        self.navigationItem.leftBarButtonItem = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"arrow-left"] target:self selector:@selector(showMemeListView)];
+        self.navigationItem.leftBarButtonItem = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"arrow-left"] andBound:CGRectMake(10, 5, 30, 30) target:self selector:@selector(showMemeListView)];
         
-        memeLikeButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-like"] target:self selector:@selector(showComment:)];
-        memeShareButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-share-b"] target:self selector:@selector(shareMeme:)];
-        memeDownloadButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-download"] target:self selector:@selector(downloadMeme:)];
-        memeCommentButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-com"] target:self selector:@selector(showComment:)];
+        memeLikeButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-like"] andBound:CGRectMake(0, 5, 25, 25) target:self selector:@selector(showComment:)];
+        memeShareButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-share-b"] andBound:CGRectMake(20, 5, 25, 25) target:self selector:@selector(shareMeme:)];
+        memeDownloadButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-download"] andBound:CGRectMake(20, 5, 25, 25) target:self selector:@selector(downloadMeme:)];
+        memeCommentButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-com"] andBound:CGRectMake(20, 5, 25, 25) target:self selector:@selector(showComment:)];
         tag = 0;
         self.navigationItem.rightBarButtonItems = @[memeShareButton, memeDownloadButton, memeCommentButton, memeLikeButton];
     }

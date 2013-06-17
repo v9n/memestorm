@@ -14,5 +14,6 @@
 + (UIBarButtonItem *)styledCancelBarButtonItemWithTarget:(id)target selector:(SEL)selector;
 + (UIBarButtonItem *)styledSubmitBarButtonItemWithTitle:(NSString *)title target:(id)target selector:(SEL)selector;
 + (UIBarButtonItem *)transparentButtonWithImage:(UIImage *)image target:(id)target selector:(SEL)selector;
++ (UIBarButtonItem *)transparentButtonWithImage:(UIImage *)image andBound:(CGRect)bound target:(id)target selector:(SEL)selector;
 
 @end

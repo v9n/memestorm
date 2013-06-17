@@ -130,6 +130,12 @@
     [self.memeSourceTable setEditing:edit];
 }
 
+- (IBAction)showSourceList:(id)sender {
+//showLeftPanelAnimated
+    AXSidePanelController * rootViewController =  (AXSidePanelController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    [rootViewController showLeftPanelAnimated:YES];
+}
+
 /**
  Come from side panel. 
  Need to refresh the meme list
@@ -138,6 +144,9 @@
 - (void)didShowCenterPanel
 {
     [self loadMemeSource];
+    if (memeSourceData!=nil && [memeSourceData count]>0) {
+        [chooseMemeButton setHidden:YES];
+    }
     [self.memeSourceTable reloadData];
 }
 

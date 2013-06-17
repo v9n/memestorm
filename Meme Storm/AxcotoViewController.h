@@ -29,4 +29,6 @@
 - (void) loadMemeSource;
 - (void) cleanMemeCache;
 - (void) reorderSite;
+- (IBAction)showSourceList:(id)sender;
+
 @end

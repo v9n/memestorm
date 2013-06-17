@@ -66,7 +66,7 @@
 
 - (UIBarButtonItem *)leftButtonForCenterPanel {
     UIBarButtonItem * item;
-    item = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"site-toggle"] target:self selector:@selector(toggleLeftPanel:)];
+    item = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"site-toggle"] andBound:CGRectMake(10, 5, 30, 30) target:self selector:@selector(toggleLeftPanel:)];
     
 //    item = [[UIBarButtonItem alloc] initWithImage:[[self class] defaultImage] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];;
     
