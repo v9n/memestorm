@@ -35,9 +35,6 @@
     cache = [AXCache instance];
     [self prepare];    
     [self loadMemeSource];
-    if (memeSourceData!=nil && [memeSourceData count]>0) {
-        [chooseMemeButton setHidden:YES];
-    }
 }
 
 /**
@@ -123,7 +120,6 @@
  
 - (void) loadMemeSource {
     memeSourceData = (NSMutableArray *) [cache getByKey:@"selected_sources"];
-
 }
 
 - (void) reorderSite
@@ -138,12 +134,30 @@
  Come from side panel. 
  Need to refresh the meme list
  */
-# pragma mark - AXSidePanelDelegate
+# pragma mark - AXSidePanelDelegate method
 - (void)didShowCenterPanel
 {
     [self loadMemeSource];
     [self.memeSourceTable reloadData];
 }
+
+# pragma mark - UIView method
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (memeSourceData!=nil && [memeSourceData count]>0) {
+        [chooseMemeButton setHidden:YES];
+    }
+    [self.memeSourceTable reloadData];
+}
+
+/**
+ Left panel is hide. We shold update the list
+ */
+//#pragma mark - AXSidePanelDelegate method
+//- (void) didHideLeftPanel {
+//    [self loadMemeSource];
+//    [self.memeSourceTable reloadData];
+//}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -221,7 +235,7 @@
     
     NSMutableDictionary * memeSource =  (NSMutableDictionary *)[memeSourceData objectAtIndex:aPath.row];
     NSDateFormatter * date = [[NSDateFormatter alloc] init];
-    [date setDateFormat:@"dd-mm-yyyy HH:mm"];
+    [date setDateFormat:@"MM-dd-yyyy HH:mm"];
     [memeSource setObject:[date stringFromDate:[NSDate date]] forKey:@"last_read"];
     [cache saveForKey:@"selected_sources" withValue:memeSourceData];
     
@@ -250,14 +264,6 @@
             }
         }
     }
-}
-
-/**
- Left panel is hide. We shold update the list
- */
-- (void) didHideLeftPanel {
-    [self loadMemeSource];
-    [self.memeSourceTable reloadData];
 }
 
 @end

@@ -118,7 +118,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     imgContainer.bouncesZoom = YES;
     imgContainer.clipsToBounds = YES;
 //    memeTitleLbl.frame = CGRectMake(0, metaMemeView.frame.origin.y - metaMemeView.frame.size.height - memeTitleLbl.frame.size.height, screenWidth, memeTitleLbl.frame.size.height);
-    [memeTitleLbl setBackgroundColor:[UIColor clearColor]];
+//    [memeTitleLbl setBackgroundColor:[UIColor clearColor]];
     
     NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/d.jpg"];
     NSString * resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/%@", AXMemeBackground];
@@ -200,18 +200,22 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
  We use paging of UIScrollView now so we don't need this anymore
  */
 - (void) bindSwipeEvent {
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    [doubleTap setNumberOfTapsRequired:2];
+    [doubleTap setEnabled:YES];
+    
+    [imgContainer addGestureRecognizer:doubleTap];
+    
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap)];
     singleTap.numberOfTapsRequired = 1;
     singleTap.enabled = YES;
+    [singleTap requireGestureRecognizerToFail:doubleTap];
     
     [imgContainer addGestureRecognizer:singleTap];
     
-//    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    
 //    UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
     
-//    [imgViewUi addGestureRecognizer:doubleTap];
-//    [imgViewUi addGestureRecognizer:twoFingerTap];
-//    
 //    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
 //    rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
 //    rightSwipe.numberOfTouchesRequired = 1;
@@ -331,10 +335,14 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 
 #pragma mark Gesture method
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
-    // zoom in
-    float newScale = [imgContainer zoomScale] * ZOOM_STEP;
-    CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
-    [imgContainer zoomToRect:zoomRect animated:YES];
+
+    //calculate minimum scale to perfectly fit image width, and begin at that scale
+//    float minimumScale = [currentScroolView frame].size.width  / currentImgView.image.size.width;
+//    float newScale = minimumScale;
+//    CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
+
+    currentScroolView.zoomScale = currentScroolView.minimumZoomScale;
+//    [currentScroolView zoomToRect:zoomRect animated:YES];
 }
 
 /**
@@ -518,14 +526,17 @@ Caculate which image we should load and show on screen
         {
             float h = minimumScale * [currentImgView frame].size.height;
             NSLog(@"Size after scale is: %fx%f", [currentScroolView frame].size.width, h);
-            if ( h < screenHeigh) {
-                currentScroolView.frame = CGRectMake(screenWidth, (screenHeigh - h)/2, screenWidth, h);
-//                currentIView.frame = CGRectMake(screenWidth, (screenHeigh - h)/2, screenWidth, h);
-            } else {
-                currentScroolView.frame = CGRectMake(screenWidth, 0, screenWidth, screenHeigh);
-            }
+    
+            currentScroolView.frame = CGRectMake(screenWidth, 0, screenWidth, screenHeigh);
+            
             currentScroolView.minimumZoomScale = minimumScale;
             currentScroolView.zoomScale = minimumScale;
+
+            if ( h < screenHeigh) {
+//                currentScroolView.frame = CGRectMake(screenWidth, (screenHeigh - h)/2, screenWidth, h);
+                currentImgView.frame = CGRectMake(0, (screenHeigh - h)/2, screenWidth, h);
+            }
+            
             break;
         }
     }
@@ -569,9 +580,10 @@ Caculate which image we should load and show on screen
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
     NSLog(@"- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale %@, %@, %f", scrollView, view, scale);
     NSLog(@"Zoom ration: %f", scale);
-    float h = view.frame.size.height * scale;
-    if (h<screenHeigh) {
-        scrollView.frame = CGRectMake(screenWidth, (screenHeigh - h)/2, scrollView.frame.size.width * scale, scrollView.frame.size.height * scale);
+    float h = currentImgView.image.size.height * scale;
+    float w = currentImgView.image.size.width * scale;
+    if (h < screenHeigh) {
+        currentImgView.frame = CGRectMake( (screenWidth - w) /2, (screenHeigh - h)/2, w, h);
     }
    // [self centerImgView:view atScale:scale];
 }
@@ -726,6 +738,7 @@ Caculate which image we should load and show on screen
 - (void) showMemeListView
 {    
     [[self navigationController] popViewControllerAnimated:YES];
+    
 }
 
 @end

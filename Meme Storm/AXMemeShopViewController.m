@@ -143,7 +143,7 @@
         }
         
         NSDateFormatter * date = [[NSDateFormatter alloc] init];
-        [date setDateFormat:@"dd-mm-yyyy HH:mm"];
+        [date setDateFormat:@"MM-dd-yyyy HH:mm"];
         [cache saveForKey:@"last_sync" withValue:[date stringFromDate:[NSDate date]]];
         
         supportedMemeSite = [s objectFromJSONData];
@@ -162,10 +162,17 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [hud hide:YES];
+            [self.memeSourceTable reloadData];
         });
         
         
     });
+}
+
+# pragma mark - UIView method
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.memeSourceTable reloadData];
 }
 
 /**
