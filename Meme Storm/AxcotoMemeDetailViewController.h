@@ -62,4 +62,6 @@ NSString * const AXMemeBackground;
 # pragma mark
 - (void)image:(UIImage *)img didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo;
 
+- (NSUInteger) fetchFromSource:(NSUInteger)pageToDownload withTag:(NSUInteger)aTag runIfFound:(void (^)(void))execBlock orNotFound:(void (^)(void))failBlock;
+    
 @end

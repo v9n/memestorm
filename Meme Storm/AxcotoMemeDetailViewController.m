@@ -72,7 +72,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     currentMemePage = 0;
     memesList = [NSMutableArray arrayWithCapacity:5]; //NSMutuableArrat auto expand when needed. This is just to allocate an enought amount for initalize this array. So, 5 is an affordable number for this purpose.
     [memesList insertObject:@"marked_bound_page" atIndex:0];
-    [self download];
     
     CGRect c = [[UIScreen mainScreen] bounds];
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
@@ -95,7 +94,8 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     
     [self setUpImageViewer];
     [self bindSwipeEvent];
-    [self handleSingleTap];    
+    [self handleSingleTap];
+    [self download];
 }
 
 /**
@@ -120,15 +120,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 //    memeTitleLbl.frame = CGRectMake(0, metaMemeView.frame.origin.y - metaMemeView.frame.size.height - memeTitleLbl.frame.size.height, screenWidth, memeTitleLbl.frame.size.height);
 //    [memeTitleLbl setBackgroundColor:[UIColor clearColor]];
     
-    NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/d.jpg"];
-    NSString * resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/%@", AXMemeBackground];
-    
-    NSFileManager * fileMan = [NSFileManager defaultManager];
-    if ([fileMan fileExistsAtPath:imgPath]==FALSE) {
-        NSError * error;
-        [fileMan copyItemAtPath:resourcePath toPath:imgPath error:&error];
-        NSLog(@"%@", error);
-    }
   
     prevScroolView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeigh)];
     nextScroolView = [[UIView alloc] initWithFrame:CGRectMake(screenWidth * 2, 0, screenWidth, screenHeigh)];
@@ -143,7 +134,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     currentScroolView.maximumZoomScale=6.0;
     currentScroolView.zoomScale = 2;
     
-    currentImgView =[[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]]];
+    currentImgView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default"]];
     [currentScroolView addSubview:currentImgView];
     currentScroolView.contentSize = [currentImgView frame].size;
         
@@ -250,7 +241,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     
     NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * doc = [path objectAtIndex:0];
-    NSString * memeFolder = [doc stringByAppendingFormat:@"/meme/%@",self.memeSource];
     
     [downloadProgress setHidden:FALSE];
     [downloadProgress startAnimating];
@@ -258,7 +248,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     //We cannot run it on main queu to avoid block UI thread
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         tag++;
-        [self fetchFromSource:pageToDownload withTag:tag thenRun: ^{
+        [self fetchFromSource:pageToDownload withTag:tag runIfFound: ^{
             // We are updating UI so let do it on mean thread
             dispatch_async(dispatch_get_main_queue(), ^{
                 downloading = NO;
@@ -270,6 +260,17 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
                 [downloadProgress stopAnimating];
             });
             
+        } orNotFound:^{
+            // We are updating UI so let do it on mean thread
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Cannot find any meme!"
+                                                                  message:@"It seems the meme source is down. Try again later."
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
+                [message show];
+
+            });
         }];
         
     });
@@ -278,9 +279,9 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 
 
 /**
-* fetchFromSource should be in Asyntask or run on anothe thread instad of meain thread ot avoid block ui
+fetchFromSource should be in Asyntask or run on anothe thread instad of meain thread ot avoid block ui
 **/
-- (void) fetchFromSource:(NSUInteger)pageToDownload withTag:(NSUInteger) aTag thenRun:(void (^)(void))execBlock{
+- (NSUInteger) fetchFromSource:(NSUInteger)pageToDownload withTag:(NSUInteger) aTag runIfFound:(void (^)(void))execBlock orNotFound:(void (^)(void))failBlock {
     //get '/m/:source/:section,:start_id,:end_id:,:quantity' do |source,section,start_id,end_id,quantity|
     NSString * start_id;
     NSString * end_id;
@@ -308,15 +309,22 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     NSLog(@"Start to fetch from this URL%@", url);    
     NSData * dataSource = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     NSArray * memes = (NSArray *)[dataSource objectFromJSONData];
-    NSLog(@"%@", memes);
-   [memesList insertObject:memes atIndex:currentMemePage];
+    NSLog(@"Meme JSON Data: %@", memes);
     
     if (tag==aTag) {
-        NSLog(@"Looks good. Go ahead and load download image to view");        
-        execBlock();
+        if( [memes isEqual:nil] || [memes count]==0) {
+            NSLog(@"No meme found");
+            failBlock();
+            return 0;
+        } else {
+            NSLog(@"Looks good. Inset meme data into current page.");            
+            [memesList insertObject:memes atIndex:currentMemePage];
+            execBlock();
+        }
     } else {
-        NSLog(@"Download finish but ignire loading. It seems user move to another step already");
+        NSLog(@"memePage is fetched succesfully. However, ignore loading. It seems user navigate and another download action triggered. So ignore it to avoid override current data. This is a old action.");
     }
+    return [memes count];
 }
 
 - (void)viewDidUnload {

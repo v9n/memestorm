@@ -212,9 +212,12 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     [cell setMemeTitle:[[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"t"]];
-    NSString * avatarFile = [avatarFolder stringByAppendingPathComponent:[[[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"name"] stringByAppendingString:@".png"]];
-    NSLog(@"Load thumbnail image %@", avatarFile);
-    [cell setAvatar:[UIImage imageWithContentsOfFile:avatarFile]];
+
+//  Disable avatar temoiraruly now
+//    NSString * avatarFile = [avatarFolder stringByAppendingPathComponent:[[[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"name"] stringByAppendingString:@".png"]];
+//    NSLog(@"Load thumbnail image %@", avatarFile);
+//    [cell setAvatar:[UIImage imageWithContentsOfFile:avatarFile]];
+    
     [cell setLastRead:[[memeSourceData objectAtIndex:indexPath.row] objectForKey:@"last_read"]];
 
     UIView *bgSelectedView = [[UIView alloc] init];
