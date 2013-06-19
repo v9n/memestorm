@@ -11,17 +11,12 @@
 
 @implementation AXSHKConfigurator
 
-/*
- App Description
- ---------------
- These values are used by any service that shows 'shared from XYZ'
- */
 - (NSString*)appName {
-	return @"Share From Meme Storm";
+	return @"Meme Storm";
 }
 
 - (NSString*)appURL {
-	return [NSString stringWithFormat:@"%@", AX_SPIDER_URL];
+	return @"http://memestorm.axcoto.com";
 }
 
 /*
@@ -41,11 +36,32 @@
  leaving that decision up to the user.
  */
 
-
 // Vkontakte
 // SHKVkontakteAppID is the Application ID provided by Vkontakte
 - (NSString*)vkontakteAppId {
-	return @"2706858";
+	return @"";
+}
+
+
+
+//Change if your app needs some special Facebook permissions only. In most cases you can leave it as it is.
+
+// new with the 3.1 SDK facebook wants you to request read and publish permissions separatly. If you don't
+// you won't get a smooth login/auth flow. Since ShareKit does not require any read permissions.
+- (NSArray*)facebookWritePermissions {
+    return [NSArray arrayWithObjects:@"publish_actions", nil];
+}
+- (NSArray*)facebookReadPermissions {
+    return nil;	// this is the defaul value for the SDK and will afford basic read permissions
+}
+
+/*
+ If you want to force use of old-style, posting path that does not use the native sheet. One of the troubles
+ with the native sheet is that it gives IOS6 props on facebook instead of your app. This flag has no effect
+ on the auth path. It will try to use native auth if availible.
+ */
+- (NSNumber*)forcePreIOS6FacebookPosting {
+	return [NSNumber numberWithBool:YES];
 }
 
 // Facebook - https://developers.facebook.com/apps
@@ -66,18 +82,6 @@
 	return @"";
 }
 
-- (NSNumber*)forcePreIOS6FacebookPosting {
-	return [NSNumber numberWithBool:false];
-}
-
-// Read It Later - http://readitlaterlist.com/api/signup/
-- (NSString*)readItLaterKey {
-	return @"11388-eb66014a5b3f78055f0d2880";
-}
-// Diigo - http://diigo.com/api_dev
--(NSString*)diigoKey {
-    return @"f401ddc3546cdf3c";
-}
 // Twitter - http://dev.twitter.com/apps/new
 /*
  Important Twitter settings to get right:
