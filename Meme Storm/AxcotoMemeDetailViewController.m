@@ -675,14 +675,8 @@ Caculate which image we should load and show on screen
     NSLog(@"URL %@\nTitle: %@", url, [ameme objectForKey:@"title"]);
     SHKItem *item = [SHKItem URL:url title:[ameme objectForKey:@"title"] contentType:SHKURLContentTypeWebpage];
     
-    // Get the ShareKit action sheet
     SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
-    
-    // ShareKit detects top view controller (the one intended to present ShareKit UI) automatically,
-    // but sometimes it may not find one. To be safe, set it explicitly
     [SHK setRootViewController:self];
-    
-    // Display the action sheet
     [actionSheet showInView:self.metaMemeView];
     //[actionSheet showFromToolbar:self.metaMemeView];
 }
