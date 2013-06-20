@@ -91,10 +91,6 @@
 									<boolean value="NO" key="IBUIIsAccessibilityElement"/>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">smiley@2x.png</string>
-								</object>
 							</object>
 							<object class="IBUIImageView" id="194526246">
 								<reference key="NSNextResponder" ref="480972019"/>
@@ -106,10 +102,6 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">lolhappen.png</string>
-								</object>
 							</object>
 							<object class="IBUILabel" id="671674032">
 								<reference key="NSNextResponder" ref="480972019"/>
@@ -341,10 +333,6 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="lolhappen.png">{150, 40}</string>
-			<string key="smiley@2x.png">{48, 48}</string>
-		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

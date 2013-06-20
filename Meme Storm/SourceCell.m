@@ -91,7 +91,7 @@
 //    [topPath addLineToPoint:CGPointMake(56, 56)];
     
     [topPath stroke];
-
+    UIGraphicsEndImageContext();
     
 }
 
