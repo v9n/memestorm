@@ -31,5 +31,5 @@
 - (void) cleanMemeCache;
 - (void) reorderSite;
 - (IBAction)showSourceList:(id)sender;
-
+- (void)showSettingKit:(id)sender;
 @end

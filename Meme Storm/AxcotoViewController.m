@@ -62,6 +62,8 @@
 //    self.navigationController.navigationBar.translucent = NO;
 //    self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(reorderSite) withTitle:@"Edit"];
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(reorderSite)];
+    UIBarButtonItem * settingButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"igear"] andBound:CGRectMake(0, 5, 30, 30) target:self selector:@selector(showSettingKit:)];
+    self.navigationItem.rightBarButtonItems = @[settingButton];
     
     [self.memeSourceTable setBackgroundColor:[UIColor clearColor]];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"light_noise_diagonal.png"]]];
@@ -135,6 +137,13 @@
 //showLeftPanelAnimated
     AXSidePanelController * rootViewController =  (AXSidePanelController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
     [rootViewController showLeftPanelAnimated:YES];
+}
+
+/**
+ Display IASKSettingKit
+ */
+- (void)showSettingKit:(id)sender {
+        
 }
 
 /**
@@ -241,6 +250,7 @@
 
     NSLog(@"Selected source: %@", memeSite);
     [readerView setMemeSource:memeSite];
+    [readerView setRefresh:YES];
     [[self navigationController] pushViewController:readerView animated:YES];
 }
 

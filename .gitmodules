@@ -13,3 +13,6 @@
 [submodule "Submodules/MMP"]
 	path = Submodules/MMP
 	url = git://github.com/jdg/MBProgressHUD.git
+[submodule "Submodules/IASK"]
+	path = Submodules/IASK
+	url = https://github.com/futuretap/InAppSettingsKit.git
