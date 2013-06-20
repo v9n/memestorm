@@ -551,6 +551,7 @@ Caculate which image we should load and show on screen
     }
     
     currentScroolView.maximumZoomScale = 6.0;
+    [downloadProgress hide:YES]; //now, f inished download, finish loading Viewm show hide the progress icon
 }
 
 #pragma mark SDWebImageDownloaderDelegate method 
@@ -559,7 +560,6 @@ Caculate which image we should load and show on screen
     NSLog(@"Finish downloading image. Start to redraw it");
     [self drawImgToScrool:image];
     NSLog(@"Finish redrawing");
-    [downloadProgress hide:YES];
 }
 
 #pragma mark UIScroolViewDelegate method
