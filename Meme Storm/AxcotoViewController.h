@@ -13,6 +13,12 @@
 #import "AXSidePanelController.h"
 #import "AxcotoMemeDetailViewController.h"
 
+#if USES_IASK_STATIC_LIBRARY
+#import "InAppSettingsKit/IASKAppSettingsViewController.h"
+#else
+#import "IASKAppSettingsViewController.h"
+#endif
+
 @interface AxcotoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, AXSidePanelDelegate>
 
 @property (unsafe_unretained, nonatomic) IBOutlet UITableView *memeSourceTable;
@@ -22,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *chooseMemeButton;
 
 @property (strong, nonatomic) AxcotoMemeDetailViewController *readerView;
-
+@property (nonatomic, retain) IASKAppSettingsViewController *appSettingViewController;
 - (void) didHideLeftPanel;
 - (void) didShowCenterPanel;
 

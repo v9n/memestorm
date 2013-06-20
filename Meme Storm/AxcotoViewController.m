@@ -21,10 +21,8 @@
     NSMutableArray *memeSourceData;
 }
 
-@synthesize avatarFolder;
-@synthesize cache;
-@synthesize chooseMemeButton;
-@synthesize readerView;
+@synthesize avatarFolder, cache, chooseMemeButton;
+@synthesize readerView, appSettingViewController;
 
 - (void)viewDidLoad
 {
@@ -38,6 +36,14 @@
     readerView = [[AxcotoMemeDetailViewController alloc]
                                                   initWithNibName:@"AxcotoMemeDetailViewController"
                                                   bundle:nil];
+    //[viewController setShowCreditsFooter:NO];   // Uncomment to not display InAppSettingsKit credits for creators.
+	// But we encourage you no to uncomment. Thank you!
+	if (!appSettingViewController) {
+		appSettingViewController = [[IASKAppSettingsViewController alloc] init];
+		appSettingViewController.delegate = self;
+		BOOL enabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"AutoConnect"];
+		appSettingViewController.hiddenKeys = enabled ? nil : [NSSet setWithObjects:@"AutoConnectLogin", @"AutoConnectPassword", nil];
+	}
 }
 
 /**
@@ -143,7 +149,8 @@
  Display IASKSettingKit
  */
 - (void)showSettingKit:(id)sender {
-        
+	self.appSettingViewController.showDoneButton = NO;
+	[self.navigationController pushViewController:self.appSettingViewController animated:YES];    
 }
 
 /**
