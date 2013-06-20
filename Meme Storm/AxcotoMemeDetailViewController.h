@@ -11,6 +11,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "AXMemeCommentViewController.h"
 
 NSString * const AXMemeBackground;
 @interface AxcotoMemeDetailViewController : UIViewController <UIScrollViewDelegate, SDWebImageManagerDelegate> {
@@ -48,7 +49,7 @@ NSString * const AXMemeBackground;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *metaMemeView;
 
 @property (strong, nonatomic) MBProgressHUD *downloadProgress;
-
+@property (retain, nonatomic) AXMemeCommentViewController *commetViewController;
 @property NSUInteger tag;
 
 - (IBAction)showComment:(id)sender;

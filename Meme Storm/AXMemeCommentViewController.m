@@ -35,9 +35,15 @@
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem styledBackBarButtonItemWithTarget:self selector:@selector(back)];
     
-	[self loadCommentsView];
+
 
 }
+
+- (void) viewWillAppear:(BOOL)animated
+{
+	[self loadCommentsView];
+}
+
 
 - (void) back
 {

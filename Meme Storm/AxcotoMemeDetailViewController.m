@@ -38,6 +38,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 @synthesize memeShareButton, memeCommentButton, memeLikeButton, memeDownloadButton;
 @synthesize memeTitleLbl;
 @synthesize tag;
+@synthesize commetViewController;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -58,6 +59,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         downloadProgress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         downloadProgress.mode = MBProgressHUDAnimationFade;
         downloadProgress.labelText = @"Download Meme...";
+        commetViewController = [[AXMemeCommentViewController alloc] initWithNibName:@"AXMemeCommentViewController" bundle:nil];        
     }
     return self;
 }
@@ -671,8 +673,10 @@ Caculate which image we should load and show on screen
  Show comment view with a WEBUIVIew to loading a comment web page (usually a facebook social comment plugin)
  */
 - (IBAction)showComment:(id)sender {
-    AXMemeCommentViewController * commetViewController;
-    commetViewController = [[AXMemeCommentViewController alloc] initWithNibName:@"AXMemeCommentViewController" bundle:nil];
+    
+    if (commetViewController == nil) {
+        commetViewController = [[AXMemeCommentViewController alloc] initWithNibName:@"AXMemeCommentViewController" bundle:nil];
+    }
     commetViewController.commentUrl = [[[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex] objectForKey:@"comment_url"];
     NSLog(@"About to load %@", commetViewController.commentUrl);
     
