@@ -133,8 +133,9 @@
         {
             attempt++;
             NSLog(@"Attempt #%d to get memesource list", attempt);
+            NSError *e;
             @try {
-                s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+                s =  [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url] options:NSDataReadingUncached error:&e];
             }
             @catch (NSException * e){
                 s= nil;
@@ -162,6 +163,8 @@
         [cache saveForKey:@"last_sync" withValue:[date stringFromDate:[NSDate date]]];
         
         supportedMemeSite = [s objectFromJSONData];
+        NSLog(@"Downloaded Meme Source Data : %@", supportedMemeSite);
+        
         [cache saveForKey:@"sources" withValue:[s objectFromJSONData]];
 
 //                    //No longer support avatar
@@ -169,14 +172,10 @@
 //
 //            [self downloadAvatarForSite:(NSDictionary *)[supportedMemeSite objectAtIndex:count]];
 //        }
-        
-        if (memeSourceData == nil) {
+        if ([memeSourceData count] > 0 ) {
             memeSourceData = supportedMemeSite; //On the first time, we show all meme site we supported, or we can define
+            [cache saveForKey:@"sources" withValue:memeSourceData];
         }
-        [cache saveForKey:@"sources" withValue:memeSourceData];
-        
-        
-        NSLog(@"Meme Source Data: %@", memeSourceData);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [hud hide:YES];
