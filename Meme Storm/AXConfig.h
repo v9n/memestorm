@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-//#ifndef AX_SPIDER_URL
 #define AX_SPIDER_URL  @"http://meme-spider.axcoto.com"
-//#endif
+#define AX_MEME_STORM_VERSION @"0.2.0-rc1-b20130619"
 
 @interface AXConfig : NSObject
 {
