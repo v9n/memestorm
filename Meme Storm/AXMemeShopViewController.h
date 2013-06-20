@@ -24,7 +24,7 @@
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *memeSourceTable;
-@property (strong, nonatomic) NSArray *memeSourceData;
+@property (strong, nonatomic) NSMutableArray *memeSourceData;
 @property (strong, nonatomic) NSMutableArray *selectedMarks; // You need probably to save the selected cells for use in the future.
 @property (strong, nonatomic) AXCache *cache;
 @property NSString * avatarFolder;

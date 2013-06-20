@@ -142,7 +142,8 @@
 - (IBAction)showSourceList:(id)sender {
 //showLeftPanelAnimated
     AXSidePanelController * rootViewController =  (AXSidePanelController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-    [rootViewController showLeftPanelAnimated:YES];
+    [rootViewController  toggleLeftPanel:self];
+
 }
 
 /**

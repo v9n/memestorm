@@ -81,9 +81,8 @@
 - (void) saveSelectedSource
 {
     NSMutableArray * selectedSource = [[NSMutableArray alloc] initWithCapacity:[selectedMarks count]];
-    NSArray * sources = [cache getByKey:@"sources"];
     
-    for (NSDictionary * d in sources)
+    for (NSMutableDictionary * d in memeSourceData)
     {
         if ([selectedMarks containsObject:[d objectForKey:@"u"]])
         {
@@ -95,7 +94,7 @@
 }
 
 - (void) loadMemeSource {
-    memeSourceData= (NSArray *) [cache getByKey:@"sources"];
+    memeSourceData= (NSMutableArray *) [cache getByKey:@"sources"];
     
     NSArray * selectedSource = (NSArray *) [cache getByKey:@"selected_sources"];
     if ( selectedSource!=nil && ([selectedSource count] > 0) ) {
@@ -125,7 +124,7 @@
     
     dispatch_async(dispatch_get_global_queue(0,0), ^ {
         NSData *s = Nil;
-        NSArray * supportedMemeSite;
+        NSMutableArray * supportedMemeSite;
         
         int attempt =0;
         
@@ -172,8 +171,13 @@
 //
 //            [self downloadAvatarForSite:(NSDictionary *)[supportedMemeSite objectAtIndex:count]];
 //        }
-        if ([memeSourceData count] > 0 ) {
-            memeSourceData = supportedMemeSite; //On the first time, we show all meme site we supported, or we can define
+        if ([supportedMemeSite count] > 0 ) {
+            memeSourceData = [[NSMutableArray alloc] initWithCapacity:[supportedMemeSite count]];
+            //make sure all NSDictionary inside array is converted to NSMUtableDictionary
+            for (NSUInteger i=0, l=[supportedMemeSite count]; i<l; i++) {
+                NSMutableDictionary * d = [[supportedMemeSite objectAtIndex:i] mutableCopy];                
+                [memeSourceData addObject:d];
+            }
             [cache saveForKey:@"sources" withValue:memeSourceData];
         }
         
