@@ -52,9 +52,9 @@
 							<bytes key="NS.bytes">TWVtZSBzdG9ybSBpcyBqdXN0IGEgcmVhZGVyIHRvIHNob3cgY29udGVudHMgZnJvbSB0aGlyZCBwYXJ0
 eSBzb3VyY2VzIHN1Y2ggYXMgbWVtZSB3ZWJzaXRlcy4gTWVtZSBzdG9ybSBkb2VzIG5vdCBoYXZlIGFu
 eSByZWxhdGlvbiB0byB0aG9zZSB0aGlyZCBwYXJ0aWVzIGFzIHdlbGwgYXMgaG9sZGluZyBhbnkgY29w
-eXJpZ2h0IG9uIHRoZSBjb250ZW50cy7igKjigKjigKhUbyBzdWdnZXN0IHN1cHBvcnQgYSBuZXcgbWVt
-ZSB3ZWJzaXRlLCBvciByZXBvcnRpbmcgYnVncywgdmlzaXQg4oCo4oCoaHR0cDovL21lbWUuYXhjb3Rv
-LmNvbeKAqOKAqG9yIGVtYWlsOuKAqOKAqG1lbWVAYXhjb3RvLmNvbQ</bytes>
+eXJpZ2h0IG9uIHRoZSBjb250ZW50cy7igKgg4oCoIOKAqFRvIHN1Z2dlc3Qgc3VwcG9ydCBhIG5ldyBt
+ZW1lIHdlYnNpdGUsIG9yIHJlcG9ydGluZyBidWdzLCB2aXNpdDog4oCoICAg4oCoaHR0cDovL21lbWUu
+YXhjb3RvLmNvbeKAqCAgIOKAqG9yIGVtYWlsOuKAqCAgIOKAqG1lbWVAYXhjb3RvLmNvbQ</bytes>
 						</object>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
@@ -65,7 +65,7 @@ LmNvbeKAqOKAqG9yIGVtYWlsOuKAqOKAqG1lbWVAYXhjb3RvLmNvbQ</bytes>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">9</float>
 						<int key="IBUINumberOfLines">0</int>
-						<int key="IBUILineBreakMode">1</int>
+						<int key="IBUILineBreakMode">0</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<string key="name">STHeitiSC-Light</string>
 							<string key="family">Heiti SC</string>
@@ -155,6 +155,7 @@ LmNvbeKAqOKAqG9yIGVtYWlsOuKAqOKAqG1lbWVAYXhjb3RvLmNvbQ</bytes>
 						<reference key="object" ref="15743022"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">info</string>
 					</object>
 				</array>
 			</object>

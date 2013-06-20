@@ -10,7 +10,8 @@
                 <key>Type</key>
                 <string>PSGroupSpecifier</string>
                 <key>FooterText</key>
-                <string>Meme storm is just a reader to show contents from third party sources such as meme websites. Meme storm does not have any relation to those third parties as well as holding any copyright on the contents.</string>
+                <string>Meme storm is just a reader to show contents from third party sources such as meme websites. Meme storm does not have any relation to those third parties as well as holding any copyright on the contents.
+</string>
                
             </dict>
             
@@ -114,9 +115,11 @@
                 <key>Type</key>
                 <string>PSTextFieldSpecifier</string>
                 <key>Title</key>
-                <string>GPL</string>
+                <string>License</string>
                 <key>Key</key>
                 <string></string>
+                <key>DefaultValue</key>
+                <string>GPL</string>
             </dict>
 
             
