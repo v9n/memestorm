@@ -49,7 +49,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"arrow-left"] andBound:CGRectMake(10, 5, 30, 30) target:self selector:@selector(showMemeListView)];
         memeSource = @"";
         refresh = YES;
-        memeLikeButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-like"] andBound:CGRectMake(0, 5, 25, 25) target:self selector:@selector(showComment:)];
+        memeLikeButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-like"] andBound:CGRectMake(0, 5, 25, 25) target:self selector:@selector(likeMeme:)];
         memeShareButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-share-b"] andBound:CGRectMake(20, 5, 25, 25) target:self selector:@selector(shareMeme:)];
         memeDownloadButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-download"] andBound:CGRectMake(20, 5, 25, 25) target:self selector:@selector(downloadMeme:)];
         memeCommentButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-com"] andBound:CGRectMake(20, 5, 25, 25) target:self selector:@selector(showComment:)];
@@ -684,6 +684,34 @@ Caculate which image we should load and show on screen
     [self.navigationController pushViewController:commetViewController animated:NO];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
     [UIView commitAnimations];
+}
+
+- (void)likeMeme:(id)sender {
+    NSString * meme_id=  [[[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex] objectForKey:@"id"];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/m/like",AX_SPIDER_URL]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    NSDictionary *d = [NSDictionary dictionaryWithObjects:@[self.memeSource,meme_id] forKeys:@[@"site",@"id"]];
+    NSData * postData = [d JSONData];
+    NSLog(@"Data to send: %@", postData);
+    
+    [request setHTTPMethod:@"POST"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
+    NSURLConnection * connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+}
+
+# pragma mark - NSConnection delegate method
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    NSLog(@"Did fail with error %@" , [error localizedDescription]);
+}
+
+# pragma mark - NSConnection delegate method
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
+    NSHTTPURLResponse *httpResponse;
+    httpResponse = (NSHTTPURLResponse *)response;
+    int statusCode = [httpResponse statusCode];
+    NSLog(@"Status code was %d", statusCode);
 }
 
 /**
