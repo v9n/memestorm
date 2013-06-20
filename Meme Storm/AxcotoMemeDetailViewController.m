@@ -430,6 +430,15 @@ Caculate which image we should load and show on screen
     }
 }
 
+- (NSString *) cleanTitle:(NSString *) lbl
+{
+    NSRange r;
+    while ((r = [lbl rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound) {        
+        lbl = [lbl stringByReplacingCharactersInRange:r withString:@""];
+    }
+    return lbl;
+}
+
 /**
  Show a specified to view. We use UIViewScrool and implement a effect of infinitive scrool.
  Basically, we have 3 sub view inside a scroolview. Once we swipte to previous or next view, we load the imgae for the middle view and force UIScroolView come back to this view after finishing navigating.
@@ -451,7 +460,7 @@ Caculate which image we should load and show on screen
 //            
 //        }
         
-        [memeTitleLbl setText:[memeToLoad objectForKey:@"title"]];
+        [memeTitleLbl setText:[self cleanTitle:[memeToLoad objectForKey:@"title"]]];
         
         NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/%@/%@", self.memeSource, [fileUrl lastPathComponent]];
         
@@ -681,8 +690,9 @@ Caculate which image we should load and show on screen
     // Create the item to share (in this example, a url)
     NSDictionary * ameme = [[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex];
     NSURL *url = [NSURL URLWithString:[ameme objectForKey:@"url"]];
-    NSLog(@"URL %@\nTitle: %@", url, [ameme objectForKey:@"title"]);
-    SHKItem *item = [SHKItem URL:url title:[ameme objectForKey:@"title"] contentType:SHKURLContentTypeWebpage];
+    NSString * title = [self cleanTitle:[ameme objectForKey:@"title"]];
+    NSLog(@"URL %@\nTitle: %@", url, title);
+    SHKItem *item = [SHKItem URL:url title:title contentType:SHKURLContentTypeWebpage];
     
     SHKActionSheet *actionSheet = [SHKActionSheet actionSheetForItem:item];
     [SHK setRootViewController:self];
