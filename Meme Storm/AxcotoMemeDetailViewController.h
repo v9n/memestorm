@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "JSONKit.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+
 #import "SDWebImage/UIImageView+WebCache.h"
 
 NSString * const AXMemeBackground;
@@ -24,8 +26,6 @@ NSString * const AXMemeBackground;
 }
 
 @property (strong, nonatomic) NSString *memeSource ;
-
-@property (unsafe_unretained, nonatomic) IBOutlet UIActivityIndicatorView *downloadProgress;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIScrollView *imgContainer;
 
@@ -46,6 +46,7 @@ NSString * const AXMemeBackground;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *memeTitleLbl;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *metaMemeView;
 
+@property (strong, nonatomic) MBProgressHUD *downloadProgress;
 @property NSUInteger tag;
 
 - (IBAction)showComment:(id)sender;

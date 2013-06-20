@@ -11,16 +11,17 @@
 #import "UIBarButtonItem+StyledButton.h"
 #import "AXCache.h"
 #import "AXSidePanelController.h"
+#import "AxcotoMemeDetailViewController.h"
 
 @interface AxcotoViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, AXSidePanelDelegate>
 
 @property (unsafe_unretained, nonatomic) IBOutlet UITableView *memeSourceTable;
 
-@property (unsafe_unretained, nonatomic) IBOutlet UIActivityIndicatorView *downloadProgress;
 @property (strong, nonatomic)    AXCache * cache ;
 
 @property (weak, nonatomic) IBOutlet UIButton *chooseMemeButton;
 
+@property (strong, nonatomic) AxcotoMemeDetailViewController *readerView;
 
 - (void) didHideLeftPanel;
 - (void) didShowCenterPanel;

@@ -7,7 +7,6 @@
 //
 
 #import "AxcotoViewController.h"
-#import "AxcotoMemeDetailViewController.h"
 #import "SourceCell.h"
 #import "AXConfig.h"
 #import "UINavigationBar+CustomBackground.h"
@@ -22,10 +21,10 @@
     NSMutableArray *memeSourceData;
 }
 
-@synthesize downloadProgress;
 @synthesize avatarFolder;
 @synthesize cache;
 @synthesize chooseMemeButton;
+@synthesize readerView;
 
 - (void)viewDidLoad
 {
@@ -35,6 +34,10 @@
     cache = [AXCache instance];
     [self prepare];    
     [self loadMemeSource];
+
+    readerView = [[AxcotoMemeDetailViewController alloc]
+                                                  initWithNibName:@"AxcotoMemeDetailViewController"
+                                                  bundle:nil];
 }
 
 /**
@@ -92,8 +95,6 @@
 
 - (void)viewDidUnload {
     [self setMemeSourceTable:nil];
-    [self setDownloadProgress:nil];
-    [self setDownloadProgress:nil];
     [self setChooseMemeButton:nil];
     [super viewDidUnload];
 }
@@ -231,22 +232,16 @@
     [self readMemeFor:s atRow:indexPath];
 }
 
--(IBAction)readMemeFor:(id)sender atRow:(NSIndexPath *) aPath{
-    AxcotoMemeDetailViewController *secondView = [[AxcotoMemeDetailViewController alloc]
-                                    initWithNibName:@"AxcotoMemeDetailViewController"
-                                    bundle:nil];
-    NSLog(@"Selected source: %@", (NSString *) sender);
-    [secondView setMemeSource:(NSString *)sender];
-    
+-(IBAction)readMemeFor:(NSString *)memeSite atRow:(NSIndexPath *) aPath{
     NSMutableDictionary * memeSource =  (NSMutableDictionary *)[memeSourceData objectAtIndex:aPath.row];
     NSDateFormatter * date = [[NSDateFormatter alloc] init];
     [date setDateFormat:@"MM-dd-yyyy HH:mm"];
     [memeSource setObject:[date stringFromDate:[NSDate date]] forKey:@"last_read"];
     [cache saveForKey:@"selected_sources" withValue:memeSourceData];
-    
-    
-    [[self navigationController] pushViewController:secondView animated:YES];
 
+    NSLog(@"Selected source: %@", memeSite);
+    [readerView setMemeSource:memeSite];
+    [[self navigationController] pushViewController:readerView animated:YES];
 }
 
 - (void) cleanMemeCache

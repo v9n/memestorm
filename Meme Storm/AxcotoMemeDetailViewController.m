@@ -39,19 +39,24 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 @synthesize memeTitleLbl;
 @synthesize tag;
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[self navigationController] setNavigationBarHidden:NO];
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"arrow-left"] andBound:CGRectMake(10, 5, 30, 30) target:self selector:@selector(showMemeListView)];
-        
+        memeSource = @"";
         memeLikeButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-like"] andBound:CGRectMake(0, 5, 25, 25) target:self selector:@selector(showComment:)];
         memeShareButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-share-b"] andBound:CGRectMake(20, 5, 25, 25) target:self selector:@selector(shareMeme:)];
         memeDownloadButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-download"] andBound:CGRectMake(20, 5, 25, 25) target:self selector:@selector(downloadMeme:)];
         memeCommentButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-com"] andBound:CGRectMake(20, 5, 25, 25) target:self selector:@selector(showComment:)];
         tag = 0;
         self.navigationItem.rightBarButtonItems = @[memeShareButton, memeDownloadButton, memeCommentButton, memeLikeButton];
+        
+        downloadProgress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        downloadProgress.mode = MBProgressHUDAnimationFade;
+        downloadProgress.labelText = @"Download Meme...";
     }
     return self;
 }
@@ -95,6 +100,12 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     [self setUpImageViewer];
     [self bindSwipeEvent];
     [self handleSingleTap];
+
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    NSLog(@"Start to read meme source: ", memeSource);
     [self download];
 }
 
@@ -139,8 +150,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     currentScroolView.contentSize = [currentImgView frame].size;
         
     [imgContainer scrollRectToVisible:CGRectMake(screenWidth, 0, screenWidth, screenHeigh) animated:NO];
-    
-    downloadProgress.frame = CGRectMake((screenWidth - downloadProgress.frame.size.width) / 2, 100, downloadProgress.frame.size.width, downloadProgress.frame.size.height);
 }
 
 /**
@@ -184,7 +193,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     [imgContainer scrollRectToVisible:CGRectMake(screenWidth * 1, 0, screenWidth * 1, screenHeigh) animated:NO];
    
     [self centerImgView:currentImgView atScale:1];
-    downloadProgress.frame = CGRectMake((screenWidth - downloadProgress.frame.size.width) / 2, 100, downloadProgress.frame.size.width, downloadProgress.frame.size.height);
 }
 
 /**
@@ -242,8 +250,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     NSArray * path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * doc = [path objectAtIndex:0];
     
-    [downloadProgress setHidden:FALSE];
-    [downloadProgress startAnimating];
+    [self.downloadProgress show:YES];
     downloading = YES;
     //We cannot run it on main queu to avoid block UI thread
     dispatch_async(dispatch_get_global_queue(0,0), ^{
@@ -256,8 +263,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
                 if (show) {
                     [self loadImage:0];
                 }
-                [downloadProgress setHidden:TRUE];
-                [downloadProgress stopAnimating];
+                [downloadProgress hide:YES];
             });
             
         } orNotFound:^{
@@ -464,7 +470,7 @@ Caculate which image we should load and show on screen
             }
             
             //Use SDWeb to load imag async
-            [downloadProgress startAnimating];
+            [downloadProgress show:YES];
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
             tag++;
             [manager downloadWithURL:fileUrl
@@ -558,7 +564,7 @@ Caculate which image we should load and show on screen
     NSLog(@"Finish downloading image. Start to redraw it");
     [self drawImgToScrool:image];
     NSLog(@"Finish redrawing");
-    [downloadProgress stopAnimating];
+    [downloadProgress hide:YES];
 }
 
 #pragma mark UIScroolViewDelegate method
@@ -694,7 +700,7 @@ Caculate which image we should load and show on screen
 */
 -(void)downloadMeme:(id) sender
 {
-    if ([downloadProgress isAnimating]) {
+    if (FALSE==[downloadProgress isHidden]) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Cannot save!"
                                                           message:@"Meme is downloading. Try again later."
                                                          delegate:nil
