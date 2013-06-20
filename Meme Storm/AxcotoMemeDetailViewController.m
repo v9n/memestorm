@@ -109,8 +109,8 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         refresh = NO;
         [self download];
     }
-    isToolbarVisible = NO;
-    [self handleSingleTap];    
+    isToolbarVisible = YES;
+    [self handleSingleTap];
 }
 
 /**
@@ -141,7 +141,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     currentScroolView.maximumZoomScale=6.0;
     currentScroolView.zoomScale = 2;
     
-    currentImgView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default"]];
+    currentImgView =[[UIImageView alloc] init];
     [currentScroolView addSubview:currentImgView];
     currentScroolView.contentSize = [currentImgView frame].size;
         
