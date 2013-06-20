@@ -1,59 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>PreferenceSpecifiers</key>
-	<array>
-		<dict>
-			<key>Title</key>
-			<string>Download</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSMultiValueSpecifier</string>
-			<key>Title</key>
-			<string></string>
-			<key>Key</key>
-			<string></string>
-			<key>DefaultValue</key>
-			<string></string>
-		</dict>
-		<dict>
-			<key>DefaultValue</key>
-			<false/>
-			<key>Key</key>
-			<string>bundle_download</string>
-			<key>Title</key>
-			<string>Bundle download</string>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Cache Size</string>
-		</dict>
-		<dict>
-			<key>DefaultValue</key>
-			<integer>100</integer>
-			<key>Key</key>
-			<string>cache_size</string>
-			<key>MaximumValue</key>
-			<integer>20</integer>
-			<key>MaximumValueImage</key>
-			<string></string>
-			<key>MinimumValue</key>
-			<integer>1000</integer>
-			<key>MinimumValueImage</key>
-			<string></string>
-			<key>Type</key>
-			<string>PSSliderSpecifier</string>
-		</dict>
-	</array>
-	<key>StringsTable</key>
-	<string>Root</string>
-</dict>
+    <dict>
+        <key>PreferenceSpecifiers</key>
+        <array>
+            <dict>
+                <key>Title</key>
+                <string>Meme Data</string>
+                <key>Type</key>
+                <string>PSGroupSpecifier</string>
+                <key>FooterText</key>
+                <string>All meme data belong to meme website itself. Meme Storm is just a reader to show the content from third party sources. Meme storm does not have any relation to those third parties as well as holding any copyright on the content.</string>
+               
+            </dict>
+            
+            <dict>
+                <key>Type</key>
+                <string>PSTitleValueSpecifier</string>
+                <key>Title</key>
+                <string>Cache Time</string>
+                <key>Key</key>
+                <string></string>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSSliderSpecifier</string>
+                <key>Key</key>
+                <string>pingTimeout</string>
+                <key>DefaultValue</key>
+                <integer>300000</integer>
+                <key>MinimumValue</key>
+                <integer>200000</integer>
+                <key>MaximumValue</key>
+                <integer>5000000</integer>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSToggleSwitchSpecifier</string>
+                <key>Title</key>
+                <string>Auto Sync Metadata</string>
+                <key>Key</key>
+                <string>autoSongSuggest</string>
+                <key>DefaultValue</key>
+                <true/>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSMultiValueSpecifier</string>
+                <key>Title</key>
+                <string>Download</string>
+                <key>Key</key>
+                <string>karaokeMode</string>
+                <key>DefaultValue</key>
+                <string>norm</string>
+                <key>Titles</key>
+                <array>
+                    <string>Background</string>
+                    <string>Normal</string>
+                </array>
+                <key>Values</key>
+                <array>
+                    <string>bg</string>
+                    <string>norm</string>
+                </array>
+            </dict>
+            
+ 
+            <dict>
+                <key>DefaultValue</key>
+                <true/>
+                <key>Key</key>
+                <string>app_info</string>
+                <key>Title</key>
+                <string>App Info</string>
+                <key>Type</key>
+                <string>PSGroupSpecifier</string>
+                <key>FooterText</key>
+                <string>Request support a new meme website, or bug reporting at: http://meme.axcoto.com
+                </string>
+            </dict>
+            
+            <dict>
+                <key>Type</key>
+                <string>PSTitleValueSpecifier</string>
+                <key>Title</key>
+                <string>Version</string>
+                <key>Key</key>
+                <string>version</string>
+                <key>DefaultValue</key>
+                <string>0.2.0-rc1-b130619</string>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSTitleValueSpecifier</string>
+                <key>Title</key>
+                <string>Release date</string>
+                <key>Key</key>
+                <string>release-date</string>
+                <key>DefaultValue</key>
+                <string>2013/06/20</string>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSTitleValueSpecifier</string>
+                <key>Title</key>
+                <string>Copyright</string>
+                <key>Key</key>
+                <string>copyright</string>
+                <key>DefaultValue</key>
+                <string>http://meme.axcoto.com</string>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSTextFieldSpecifier</string>
+                <key>Title</key>
+                <string>GPL</string>
+                <key>Key</key>
+                <string></string>
+            </dict>
+
+            
+        </array>
+        <key>StringsTable</key>
+        <string>Root</string>
+        <key>Title</key>
+        <string>iCeeNee Setting</string>
+    </dict>
 </plist>
