@@ -8,6 +8,9 @@
 
 #import "AXMemeShopViewController.h"
 
+#define kAXDATE_FORMAT @"MM-dd-yyyy HH:mm"
+#define kAX_CACHE_SOURCE 60 * 60 * 24 * 1 //In seconds
+
 @interface AXMemeShopViewController ()
 
 @end
@@ -15,6 +18,8 @@
 @implementation AXMemeShopViewController
 
 @synthesize memeSourceTable, memeSourceData, selectedMarks, cache, avatarFolder;
+
+@synthesize textPull, textRelease, textLoading, refreshHeaderView, refreshLabel, refreshArrow;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,6 +29,9 @@
         selectedMarks = [[NSMutableArray alloc] init];
         cache = [AXCache instance];
         [self loadMemeSource];
+        textPull = @"Pull down to refresh...";
+        textRelease = @"Release to refresh...";
+        textLoading = @"Loading...";
     }
     return self;
 }
@@ -31,6 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self addPullToRefresh];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -53,11 +62,17 @@
     if (t == nil) { //never sync before
         [self updateSourceList];
     } else {
-        //synced. check the time diff to see if we need to resync
-//        NSDate *d =
+//        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//        [dateFormat setDateFormat:@"hhmm'Z' MM/dd/yy"];
+//        NSDate *date = [dateFormat dateFromString:string];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:kAXDATE_FORMAT];
+        NSDate *d = [dateFormatter dateFromString:t];
+        NSTimeInterval diff = [d timeIntervalSinceNow];
+        if ( (diff + kAX_CACHE_SOURCE) < 0 ) {
+            [self updateSourceList];
+        }
     }
-    
-    [self updateSourceList];
 }
 
 /**
@@ -143,15 +158,18 @@
         }
         
         NSDateFormatter * date = [[NSDateFormatter alloc] init];
-        [date setDateFormat:@"MM-dd-yyyy HH:mm"];
+        [date setDateFormat:kAXDATE_FORMAT];
         [cache saveForKey:@"last_sync" withValue:[date stringFromDate:[NSDate date]]];
         
         supportedMemeSite = [s objectFromJSONData];
         [cache saveForKey:@"sources" withValue:[s objectFromJSONData]];
+
+//                    //No longer support avatar
+//        for (int count=0; count<[supportedMemeSite count]; count++) {
+//
+//            [self downloadAvatarForSite:(NSDictionary *)[supportedMemeSite objectAtIndex:count]];
+//        }
         
-        for (int count=0; count<[supportedMemeSite count]; count++) {
-            [self downloadAvatarForSite:(NSDictionary *)[supportedMemeSite objectAtIndex:count]];
-        }
         if (memeSourceData == nil) {
             memeSourceData = supportedMemeSite; //On the first time, we show all meme site we supported, or we can define
         }
@@ -163,6 +181,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [hud hide:YES];
             [self.memeSourceTable reloadData];
+            [self stopLoading];
         });
         
         
@@ -228,6 +247,29 @@
     }
 }
 
+/**
+ add pull to refresh header for table view
+ */
+- (void) addPullToRefresh
+{
+    refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, 320, REFRESH_HEADER_HEIGHT)];
+    refreshHeaderView.backgroundColor = [UIColor clearColor];
+    
+    refreshLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 250, REFRESH_HEADER_HEIGHT)];
+    refreshLabel.backgroundColor = [UIColor clearColor];
+    refreshLabel.font = [UIFont boldSystemFontOfSize:12.0];
+    refreshLabel.textAlignment = NSTextAlignmentCenter;
+    
+    refreshArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
+    refreshArrow.frame = CGRectMake(floorf((REFRESH_HEADER_HEIGHT - 27) / 2),
+                                    (floorf(REFRESH_HEADER_HEIGHT - 44) / 2),
+                                    27, 44);
+    
+    
+    [refreshHeaderView addSubview:refreshLabel];
+    [refreshHeaderView addSubview:refreshArrow];
+    [self.memeSourceTable addSubview:refreshHeaderView];
+}
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -277,6 +319,82 @@
     else
         [selectedMarks addObject:text];
     [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (isLoading) return;
+    isDragging = YES;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (isLoading) {
+        // Update the content inset, good for section headers
+        if (scrollView.contentOffset.y > 0) {
+            self.memeSourceTable.contentInset = UIEdgeInsetsZero;
+        } else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT) {
+            self.memeSourceTable.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+        }
+    } else if (isDragging && scrollView.contentOffset.y < 0) {
+        // Update the arrow direction and label
+        [UIView animateWithDuration:0.25 animations:^{
+            if (scrollView.contentOffset.y < -REFRESH_HEADER_HEIGHT) {
+                // User is scrolling above the header
+                refreshLabel.text = self.textRelease;
+//                [refreshArrow layer].transform = CATransform3DMakeRotation(M_PI, 0, 0, 1);
+            } else {
+                // User is scrolling somewhere within the header
+                refreshLabel.text = self.textPull;
+//                [refreshArrow layer].transform = CATransform3DMakeRotation(M_PI * 2, 0, 0, 1);
+            }
+        }];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (isLoading) return;
+    isDragging = NO;
+    if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT) {
+        // Released above the header
+        [self startLoading];
+    }
+}
+
+- (void)startLoading {
+    isLoading = YES;
+    
+    // Show the header
+    [UIView animateWithDuration:0.3 animations:^{
+        self.memeSourceTable.contentInset = UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0);
+        refreshLabel.text = self.textLoading;
+        refreshArrow.hidden = YES;        
+    }];
+    
+    // Refresh action!
+    [self refresh];
+}
+
+- (void)stopLoading {
+    isLoading = NO;
+    // Hide the header
+    [UIView animateWithDuration:0.3 animations:^{
+        self.memeSourceTable.contentInset = UIEdgeInsetsZero;
+//        [refreshArrow layer].transform = CATransform3DMakeRotation(M_PI * 2, 0, 0, 1);
+    }
+                     completion:^(BOOL finished) {
+                         [self performSelector:@selector(stopLoadingComplete)];
+                     }];
+}
+
+- (void)stopLoadingComplete {
+    // Reset the header
+    refreshLabel.text = self.textPull;
+    refreshArrow.hidden = NO;
+}
+
+- (void)refresh {
+    [self updateSourceList];
 }
 
 @end
