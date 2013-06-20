@@ -16,7 +16,7 @@
 //#import "TapDetemtingImageView.h"
 #import "AXConfig.h"
 
-#define MEME_META_VIEW_HEIGHT 27
+#define MEME_META_VIEW_HEIGHT 30
 #define ZOOM_STEP 1.5
 #define AX_VIEW_MARGIN 10
 
@@ -99,14 +99,14 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     
     [self setUpImageViewer];
     [self bindSwipeEvent];
-    [self handleSingleTap];
-
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     NSLog(@"Start to read meme source: ", memeSource);
     [self download];
+    isToolbarVisible = NO;
+    [self handleSingleTap];    
 }
 
 /**
@@ -119,19 +119,11 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     imgContainer.pagingEnabled = YES;
     imgContainer.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
     NSLog(@"The height of imgContainer is %f", imgContainer.frame.size.height);
-    
-    metaMemeView.frame = CGRectMake(0, screenHeigh - self.navigationController.navigationBar.bounds.size.height -  MEME_META_VIEW_HEIGHT - 20 , screenWidth, MEME_META_VIEW_HEIGHT); //20 is heigh of status bar
-    
-    [metaMemeView setHidden:FALSE];
-//    [metaMemeView setBackgroundColor:[UIColor whiteColor]];
-//    [metaMemeView setAlpha:0.7];
-    
     imgContainer.bouncesZoom = YES;
     imgContainer.clipsToBounds = YES;
-//    memeTitleLbl.frame = CGRectMake(0, metaMemeView.frame.origin.y - metaMemeView.frame.size.height - memeTitleLbl.frame.size.height, screenWidth, memeTitleLbl.frame.size.height);
-//    [memeTitleLbl setBackgroundColor:[UIColor clearColor]];
+
+    metaMemeView.frame = CGRectMake(0, screenHeigh  -  MEME_META_VIEW_HEIGHT - 40 - 20 , screenWidth, MEME_META_VIEW_HEIGHT); //20 is heigh of status bar, 44 is heigh of UINavigaitonba
     
-  
     prevScroolView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeigh)];
     nextScroolView = [[UIView alloc] initWithFrame:CGRectMake(screenWidth * 2, 0, screenWidth, screenHeigh)];
     currentScroolView = [[UIScrollView alloc] initWithFrame:CGRectMake(screenWidth, 0, screenWidth , screenHeigh)];
@@ -364,11 +356,10 @@ fetchFromSource should be in Asyntask or run on anothe thread instad of meain th
  */
 - (void)handleSingleTap
 {
-    static Boolean clicked = NO;
-    [[self navigationController] setNavigationBarHidden:clicked];
-    [[self metaMemeView] setHidden:clicked];
-    [[self memeTitleLbl] setHidden:clicked];
-    clicked = !clicked;    
+    isToolbarVisible = !isToolbarVisible;
+    [[self navigationController] setNavigationBarHidden:isToolbarVisible];
+    [[self metaMemeView] setHidden:isToolbarVisible];
+    [[self memeTitleLbl] setHidden:isToolbarVisible];
 }
 
 /**

@@ -63,7 +63,7 @@
 }
 
 - (void) setMemeTitle:(NSString *)title {
-    nameLbl.font = [UIFont fontWithName:@"Montserrat-Regular" size:14.00];
+    nameLbl.font = [UIFont fontWithName:@"Lato Regular" size:18.00];
     [nameLbl setTextColor:[UIColor blackColor]];
     [nameLbl setText:title];
 

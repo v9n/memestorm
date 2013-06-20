@@ -21,7 +21,7 @@ NSString * const AXMemeBackground;
     float screenHeigh;
     float screenWidth;
     bool downloading;
-    
+    bool isToolbarVisible;
     CGSize currentImageSize;
 }
 
@@ -47,6 +47,7 @@ NSString * const AXMemeBackground;
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *metaMemeView;
 
 @property (strong, nonatomic) MBProgressHUD *downloadProgress;
+
 @property NSUInteger tag;
 
 - (IBAction)showComment:(id)sender;
