@@ -256,12 +256,12 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         [self fetchFromSource:pageToDownload withTag:tag runIfFound: ^{
             // We are updating UI so let do it on mean thread
             dispatch_async(dispatch_get_main_queue(), ^{
-                downloading = NO;
                 [imgContainer setHidden:FALSE];
                 if (show) {
                     [self loadImage:0];
                 }
                 [downloadProgress hide:YES];
+                downloading = NO;                
             });
             
         } orNotFound:^{
@@ -390,7 +390,7 @@ fetchFromSource should be in Asyntask or run on anothe thread instad of meain th
  Don't move if we are downling. Wait until it finishes
  */
 - (void) handleLeftSwipe:(UISwipeGestureRecognizer *) swipeGestureRecognizer {
-    if ([downloadProgress isHidden]) {
+    if (!downloading) {
         [self loadImage:1];
         NSLog(@"%d", currentMemeIndex);
     } else {
@@ -737,7 +737,7 @@ Caculate which image we should load and show on screen
 */
 -(void)downloadMeme:(id) sender
 {
-    if (FALSE==[downloadProgress isHidden]) {
+    if (downloading) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Cannot save!"
                                                           message:@"Meme is downloading. Try again later."
                                                          delegate:nil
