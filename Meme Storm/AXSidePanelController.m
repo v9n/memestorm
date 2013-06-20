@@ -15,14 +15,26 @@
 
 @implementation AXSidePanelController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+//{
+//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+//    if (self) {
+//        // Custom initialization
+//        [self setAllowLeftSwipe:NO];
+//        [self setAllowRightSwipe:NO];
+//    }
+//    return self;
+//}
+
+- (id)init {
+    if (self = [super init]) {
+        [self setAllowLeftSwipe:NO];
+        [self setAllowRightSwipe:NO];
+        [self setCanUnloadRightPanel:YES];
     }
     return self;
 }
+
 
 - (void)viewDidLoad
 {
@@ -104,6 +116,13 @@
         [centerView didShowCenterPanel];
     }
     
+}
+
+/**
+ * Completely disable swipe npw
+ */
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    return NO;
 }
 
 @end
