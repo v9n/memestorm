@@ -29,7 +29,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 
 @implementation AxcotoMemeDetailViewController
 
-@synthesize memeSource;
+@synthesize memeSource, refresh;
 @synthesize imgContainer, downloadProgress, metaMemeView;
 
 @synthesize prevScroolView, currentScroolView, currentScroolViewContainer, nextScroolView;
@@ -47,6 +47,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         [[self navigationController] setNavigationBarHidden:NO];
         self.navigationItem.leftBarButtonItem = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"arrow-left"] andBound:CGRectMake(10, 5, 30, 30) target:self selector:@selector(showMemeListView)];
         memeSource = @"";
+        refresh = YES;
         memeLikeButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-like"] andBound:CGRectMake(0, 5, 25, 25) target:self selector:@selector(showComment:)];
         memeShareButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-share-b"] andBound:CGRectMake(20, 5, 25, 25) target:self selector:@selector(shareMeme:)];
         memeDownloadButton = [UIBarButtonItem transparentButtonWithImage:[UIImage imageNamed:@"mini-download"] andBound:CGRectMake(20, 5, 25, 25) target:self selector:@selector(downloadMeme:)];
@@ -104,7 +105,10 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 - (void) viewWillAppear:(BOOL)animated
 {
     NSLog(@"Start to read meme source: ", memeSource);
-    [self download];
+    if (refresh) {
+        refresh = NO;
+        [self download];
+    }
     isToolbarVisible = NO;
     [self handleSingleTap];    
 }

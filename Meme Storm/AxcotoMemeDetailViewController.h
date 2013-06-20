@@ -26,6 +26,7 @@ NSString * const AXMemeBackground;
 }
 
 @property (strong, nonatomic) NSString *memeSource ;
+@property BOOL refresh;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIScrollView *imgContainer;
 
