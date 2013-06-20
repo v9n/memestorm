@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "JSONKit.h"
-#import <MBProgressHUD/MBProgressHUD.h>
+#import "MBProgressHUD.h"
 
-#import "SDWebImage/UIImageView+WebCache.h"
+#import "UIImageView+WebCache.h"
 #import "AXMemeCommentViewController.h"
 
 NSString * const AXMemeBackground;

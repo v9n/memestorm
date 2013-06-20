@@ -12,7 +12,7 @@
 #import "AXConfig.h"
 #import "AXCache.h"
 #import "AXSidePanelController.h"
-#import <MBProgressHUD/MBProgressHUD.h>
+#import "MBProgressHUD.h"
 
 #define kMarkColor kYellowColor;
 #define REFRESH_HEADER_HEIGHT 52.0f
