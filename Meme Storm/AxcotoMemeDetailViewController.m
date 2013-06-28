@@ -128,7 +128,11 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     imgContainer.bouncesZoom = YES;
     imgContainer.clipsToBounds = YES;
 
-    metaMemeView.frame = CGRectMake(0, screenHeigh  -  MEME_META_VIEW_HEIGHT - 40 - 20 , screenWidth, MEME_META_VIEW_HEIGHT); //20 is heigh of status bar, 44 is heigh of UINavigaitonba
+    metaMemeView.frame = CGRectMake(0, screenHeigh  -  MEME_META_VIEW_HEIGHT - 40 - 20 , screenWidth, MEME_META_VIEW_HEIGHT); //20 is heigh of status bar, 44 is heigh of UINavigaitonbar
+    CGRect f = metaMemeView.frame;
+    [metaMemeView setFrame:CGRectMake(0, f.origin.y, screenWidth, f.size.height)];
+    [memeTitleLbl setFrame:CGRectMake(0, 0, f.size.width, f.size.height)];
+
     
     prevScroolView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeigh)];
     nextScroolView = [[UIView alloc] initWithFrame:CGRectMake(screenWidth * 2, 0, screenWidth, screenHeigh)];
