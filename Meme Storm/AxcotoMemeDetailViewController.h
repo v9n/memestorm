@@ -26,6 +26,8 @@ NSString * const AXMemeBackground;
     CGSize currentImageSize;
 }
 
+@property (weak, nonatomic) IBOutlet UIButton *refreshButton;
+
 @property (strong, nonatomic) NSString *memeSource ;
 @property BOOL refresh;
 
@@ -55,7 +57,8 @@ NSString * const AXMemeBackground;
 - (IBAction)showComment:(id)sender;
 - (IBAction)shareMeme:(id)sender;
 - (void) downloadMeme:(id)sender;
-
+- (IBAction)refresh:(id)sender;
+    
 - (void) showMemeListView;
 
 - (void)caculateViewerDim;
