@@ -36,7 +36,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 @synthesize prevImgView, currentImgView, nextImgView;
 
 @synthesize memeShareButton, memeCommentButton, memeLikeButton, memeDownloadButton;
-@synthesize memeTitleLbl;
+@synthesize memeTitleLbl, refreshButton;
 @synthesize tag;
 @synthesize commetViewController;
 
@@ -58,7 +58,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
         
         downloadProgress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         downloadProgress.mode = MBProgressHUDAnimationFade;
-        downloadProgress.labelText = @"Download Meme...";
+        downloadProgress.labelText = @"Downloading...";
         commetViewController = [[AXMemeCommentViewController alloc] initWithNibName:@"AXMemeCommentViewController" bundle:nil];        
     }
     return self;
@@ -106,13 +106,18 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    NSLog(@"Start to read meme source: ", memeSource);
+    NSLog(@"Start to read meme source: %@", memeSource);
+    
     if (refresh) {
+        currentMemeIndex = 0; //show the first picture
+        currentMemePage = 0;
         refresh = NO;
         [self download];
     }
     isToolbarVisible = YES;
     [self handleSingleTap];
+    [self.refreshButton setHidden:YES];
+    [currentImgView setImage:nil]; //clear image 
 }
 
 /**
@@ -238,10 +243,18 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 /**
  Default download command to download the first page after main view is loaded
  */
-- (void) download {
+- (void)download {
     currentMemePage++;
     currentMemeIndex=0;
-    [self download:1 andShow:YES];
+    [self download:currentMemePage andShow:YES];
+}
+
+/**
+ Once the app fails to download the meme. It shows this button to user can refresh. The button hide itself once pressing.
+ */
+- (IBAction)refresh:(id)sender {
+    [self.refreshButton setHidden:YES];
+    [self download];
 }
 
 /**
@@ -257,6 +270,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     //We cannot run it on main queu to avoid block UI thread
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         tag++;
+        
         [self fetchFromSource:pageToDownload withTag:tag runIfFound: ^{
             // We are updating UI so let do it on mean thread
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -270,6 +284,8 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
             
         } orNotFound:^{
             // We are updating UI so let do it on mean thread
+            currentMemePage--;
+            currentMemeIndex=0;
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Cannot find any meme!"
                                                                   message:@"It seems the meme source is down. Try again later."
@@ -277,7 +293,8 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
                                                         cancelButtonTitle:@"OK"
                                                         otherButtonTitles:nil];
                 [message show];
-
+                [downloadProgress hide:YES];                
+                [self.refreshButton setHidden:NO];
             });
         }];
         
@@ -293,6 +310,9 @@ fetchFromSource should be in Asyntask or run on anothe thread instad of meain th
     //get '/m/:source/:section,:start_id,:end_id:,:quantity' do |source,section,start_id,end_id,quantity|
     NSString * start_id;
     NSString * end_id;
+    NSData * dataSource;
+    NSArray * memes;
+    
     NSUInteger section;
     int quantity = 0;
     section = pageToDownload;
@@ -300,12 +320,7 @@ fetchFromSource should be in Asyntask or run on anothe thread instad of meain th
         start_id = @"0";
         end_id = @"0";
         quantity = 10;
-    } else //(pageToDownload==2) {
-//        start_id = @"0";
-//        end_id = @"0";
-//        quantity = [[memesList objectAtIndex:(pageToDownload -1)] count];
-//    } else {
-    {
+    } else  {
         start_id = [[[memesList objectAtIndex:(pageToDownload - 1)] objectAtIndex:0] objectForKey:@"id"];
         end_id = [[[memesList objectAtIndex:(pageToDownload - 1)] lastObject] objectForKey:@"id"];
         quantity = [[memesList objectAtIndex:(pageToDownload -1)] count];
@@ -314,10 +329,22 @@ fetchFromSource should be in Asyntask or run on anothe thread instad of meain th
     NSString * url = [NSString stringWithFormat:@"%@/m/%@/%d,%@,%@,%d", AX_SPIDER_URL, memeSource,pageToDownload, start_id, end_id, quantity];
     //NSString * url = [NSString stringWithFormat:@"http://127.0.0.1:9393/m/%@/%d,%@,%@,%d", memeSource,pageToDownload, start_id, end_id, quantity];
     
-    NSLog(@"Start to fetch from this URL%@", url);    
-    NSData * dataSource = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-    NSArray * memes = (NSArray *)[dataSource objectFromJSONData];
-    NSLog(@"Meme JSON Data: %@", memes);
+    NSLog(@"Start to fetch from this URL%@", url);
+
+    @try {
+        dataSource = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+        memes = (NSArray *)[dataSource objectFromJSONData];
+        NSLog(@"Meme JSON Data: %@", memes);
+    }
+    @catch (NSException *e) {
+        failBlock();
+        return 0;
+    };
+    
+    if (memes == nil || [memes isEqual:nil] || [memes count]==0) {
+        failBlock();
+        return 0;
+    }
     
     if (tag==aTag) {
         if( [memes isEqual:nil] || [memes count]==0) {
@@ -346,6 +373,7 @@ fetchFromSource should be in Asyntask or run on anothe thread instad of meain th
     [self setMetaMemeView:nil];
     [self setMetaMemeView:nil];
     [self setMemeTitleLbl:nil];
+    [self setRefreshButton:nil];
     [super viewDidUnload];
 }
 
@@ -470,7 +498,7 @@ Caculate which image we should load and show on screen
         
         NSString * imgPath = [docRoot stringByAppendingFormat:@"/meme/%@/%@", self.memeSource, [fileUrl lastPathComponent]];
         
-        NSLog(@"About to load: %@", fileUrl);
+        NSLog(@"About to load: %@", [fileUrl absoluteString]);
         //if ([[NSFileManager defaultManager] fileExistsAtPath:imgPath]) {
             //So, we need to remove old image view
             for (UIView * v in currentScroolView.subviews) {
