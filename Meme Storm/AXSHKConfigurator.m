@@ -61,7 +61,7 @@
  on the auth path. It will try to use native auth if availible.
  */
 - (NSNumber*)forcePreIOS6FacebookPosting {
-	return [NSNumber numberWithBool:YES];
+	return [NSNumber numberWithBool:NO];
 }
 
 // Facebook - https://developers.facebook.com/apps
