@@ -814,8 +814,8 @@ Caculate which image we should load and show on screen
         [message show];
 
     } else {
+        [downloadProgress show:YES];
         UIImageWriteToSavedPhotosAlbum(currentImgView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-        
     }
 
 }
@@ -833,7 +833,6 @@ Caculate which image we should load and show on screen
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
         [message show];
-
     } else {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Photo saved!"
                                                           message:@"Meme is saved to your iOS album"
@@ -841,8 +840,8 @@ Caculate which image we should load and show on screen
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
         [message show];
-        
     }
+    [downloadProgress hide:YES];
 }
 
 /**
