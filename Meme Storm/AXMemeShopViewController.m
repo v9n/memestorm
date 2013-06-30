@@ -128,7 +128,7 @@
         
         int attempt =0;
         
-        while (attempt<=5 && s==Nil)
+        while (attempt<=10 && s==Nil)
         {
             attempt++;
             NSLog(@"Attempt #%d to get memesource list", attempt);
@@ -151,8 +151,6 @@
                                                         otherButtonTitles:nil];
                 [message show];
                 return;
-                
-                
             });
             return;
         }
