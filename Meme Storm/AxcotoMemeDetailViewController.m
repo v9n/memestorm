@@ -384,8 +384,13 @@ fetchFromSource should be in Asyntask or run on anothe thread instad of meain th
 //    float minimumScale = [currentScroolView frame].size.width  / currentImgView.image.size.width;
 //    float newScale = minimumScale;
 //    CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
-
-    currentScroolView.zoomScale = currentScroolView.minimumZoomScale;
+    if (currentScroolView.zoomScale == currentScroolView.minimumZoomScale)
+    {
+        currentScroolView.zoomScale = 2;
+    } else
+    {
+        currentScroolView.zoomScale = currentScroolView.minimumZoomScale;
+    }
 //    [currentScroolView zoomToRect:zoomRect animated:YES];
 }
 
