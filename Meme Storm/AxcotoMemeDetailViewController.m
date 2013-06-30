@@ -36,7 +36,8 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
 @synthesize prevImgView, currentImgView, nextImgView;
 
 @synthesize memeShareButton, memeCommentButton, memeLikeButton, memeDownloadButton;
-@synthesize memeTitleLbl, refreshButton;
+
+@synthesize memeTitleLbl, refreshButton, redownloadMemeButton;
 @synthesize tag;
 @synthesize commetViewController;
 
@@ -124,8 +125,12 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
  Prepare controller and object. Set their location, initalizr their value or so
  */
 - (void) setUpImageViewer {
+    CGRect f;
     self.view.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
-
+    
+    [redownloadMemeButton setFrame:CGRectMake((screenWidth-redownloadMemeButton.frame.size.width)/2, 230, 128, 128)];
+    [refreshButton setFrame:CGRectMake((screenWidth-refreshButton.frame.size.width)/2, 100, refreshButton.frame.size.width, refreshButton.frame.size.height)];
+    
     imgContainer.delegate = self;
     imgContainer.pagingEnabled = YES;
     imgContainer.frame = CGRectMake(0, 0, screenWidth, screenHeigh);
@@ -134,7 +139,7 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     imgContainer.clipsToBounds = YES;
 
     metaMemeView.frame = CGRectMake(0, screenHeigh  -  MEME_META_VIEW_HEIGHT - 40 - 20 , screenWidth, MEME_META_VIEW_HEIGHT); //20 is heigh of status bar, 44 is heigh of UINavigaitonbar
-    CGRect f = metaMemeView.frame;
+    f = metaMemeView.frame;
     [metaMemeView setFrame:CGRectMake(0, f.origin.y, screenWidth, f.size.height)];
     [memeTitleLbl setFrame:CGRectMake(0, 0, f.size.width, f.size.height)];
 
@@ -257,6 +262,14 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     [self download];
 }
 
+/*
+ Failt to download the image. Allow user re-download it.
+ */
+- (IBAction)retryDownloadMeme:(id) sender {
+    [redownloadMemeButton setHidden:YES];
+    [self loadImageAtPage:currentMemePage withIndex:currentMemeIndex];
+}
+
 /**
  Download the data via the other thread and device if we should show sth after finishing
  */
@@ -374,6 +387,7 @@ fetchFromSource should be in Asyntask or run on anothe thread instad of meain th
     [self setMetaMemeView:nil];
     [self setMemeTitleLbl:nil];
     [self setRefreshButton:nil];
+    [self setRedownloadMemeButton:nil];
     [super viewDidUnload];
 }
 
@@ -483,21 +497,13 @@ Caculate which image we should load and show on screen
  Basically, we have 3 sub view inside a scroolview. Once we swipte to previous or next view, we load the imgae for the middle view and force UIScroolView come back to this view after finishing navigating.
  */
 - (void) loadImageAtPage:(NSUInteger) page withIndex:(int)index {
+    memeReady = NO;
     @try {
         NSDictionary * memeToLoad = [[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex];
         NSURL * fileUrl = [NSURL URLWithString:[memeToLoad objectForKey:@"src"]];
         
         NSString * likeCount = [[memeToLoad objectForKey:@"info"] objectForKey:@"like"];
         NSString * commentCount = [[memeToLoad objectForKey:@"info"] objectForKey:@"comment"];
-        
-//        if ([likeCount isEqualToString:@""]) {
-////            [socialMetric setText:[NSString stringWithFormat:@"%@ Comment", commentCount]];
-////            
-//        } else {
-//            
-////            [socialMetric setText:[NSString stringWithFormat:@"%@ Comment, %@ Likes", commentCount, likeCount]];
-//            
-//        }
         
         [memeTitleLbl setText:[self cleanTitle:[memeToLoad objectForKey:@"title"]]];
         
@@ -521,27 +527,23 @@ Caculate which image we should load and show on screen
                              options:0
                              success:^(UIImage *image, BOOL cached)
                              {
+                                 memeReady = YES;
                                //do something with image
                                  NSLog(@"Success to download the image from: %@", cached? @"cache":@"network");
                                  if (cached) {
-                                     //try to write it down
-//                                     NSData * imgData = UIImageJPEGRepresentation(image, 100);
-//                                     [imgData writeToFile:imgPath atomically:YES];
                                  }
                              }
                              failure:^(NSError * error) {
+                                 memeReady = NO;
                                  NSLog(@"Cannot download the image: %@", error);
+                                [redownloadMemeButton setHidden:NO];
+                                [downloadProgress hide:YES];
                              }];
-            //End SDWeb
-            
-            //Show place holder image
-//            UIImage * img = [UIImage imageNamed:@"bg"];
-//            UIImage * img = [UIImage imageWithData:[NSData dataWithContentsOfFile:imgPath]];
-//            [self drawImgToScrool:img];
-        
-        //}
     } @catch (NSException * e) {
-    //    NSLog(@"Eror%@", e.reason);
+        memeReady = NO;
+        NSLog(@"Cannot download the image. Error: %@", e);
+        [redownloadMemeButton setHidden:NO];
+        [downloadProgress hide:YES];
     }
 }
 
@@ -603,12 +605,27 @@ Caculate which image we should load and show on screen
 }
 
 #pragma mark SDWebImageDownloaderDelegate method 
+/*
+ At this point, the image is downloaded properly. We can start to do whateer w/ it.
+ */
 - (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image
 {
     NSLog(@"Finish downloading image. Start to redraw it");
     [self drawImgToScrool:image];
     NSLog(@"Finish redrawing");
 }
+
+- (void)webImageManager:(SDWebImageDownloader *)downloader didFailWithError:(NSError *)error
+{
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Cannot download meme!"
+                                                      message:@"Check internet connection.You can retry or ignore and move to next meme."
+                                                     delegate:nil
+                                            cancelButtonTitle:@"OK"
+                                            otherButtonTitles:nil];
+    [message show];
+    NSLog(@"Error. %@", error);
+}
+
 
 #pragma mark UIScroolViewDelegate method
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
@@ -710,6 +727,9 @@ Caculate which image we should load and show on screen
  Show comment view with a WEBUIVIew to loading a comment web page (usually a facebook social comment plugin)
  */
 - (IBAction)showComment:(id)sender {
+    if (!memeReady) {
+        return;
+    }
     
     if (commetViewController == nil) {
         commetViewController = [[AXMemeCommentViewController alloc] initWithNibName:@"AXMemeCommentViewController" bundle:nil];
@@ -724,6 +744,10 @@ Caculate which image we should load and show on screen
 }
 
 - (void)likeMeme:(id)sender {
+    if (!memeReady) {
+        return;
+    }
+    
     NSString * meme_id=  [[[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex] objectForKey:@"id"];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/m/like",AX_SPIDER_URL]];
@@ -756,6 +780,9 @@ Caculate which image we should load and show on screen
  It handles sharing featue via twitter and facebook
  */
 - (IBAction)shareMeme:(id)sender {
+    if (!memeReady) {
+        return;
+    }
     // Create the item to share (in this example, a url)
     NSDictionary * ameme = [[memesList objectAtIndex:currentMemePage] objectAtIndex:currentMemeIndex];
     NSURL *url = [NSURL URLWithString:[ameme objectForKey:@"url"]];
@@ -774,6 +801,10 @@ Caculate which image we should load and show on screen
 */
 -(void)downloadMeme:(id) sender
 {
+    if (!memeReady) {
+        return;
+    }
+
     if (downloading) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Cannot save!"
                                                           message:@"Meme is downloading. Try again later."

@@ -24,9 +24,11 @@ NSString * const AXMemeBackground;
     bool downloading;
     bool isToolbarVisible;
     CGSize currentImageSize;
+    bool memeReady;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *refreshButton;
+@property (weak, nonatomic) IBOutlet UIButton *redownloadMemeButton;
 
 @property (strong, nonatomic) NSString *memeSource ;
 @property BOOL refresh;
@@ -58,6 +60,7 @@ NSString * const AXMemeBackground;
 - (IBAction)shareMeme:(id)sender;
 - (void) downloadMeme:(id)sender;
 - (IBAction)refresh:(id)sender;
+- (IBAction)retryDownloadMeme:(id) sender;
     
 - (void) showMemeListView;
 
@@ -65,6 +68,7 @@ NSString * const AXMemeBackground;
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
 
 - (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image;
+- (void)webImageManager:(SDWebImageDownloader *)downloader didFailWithError:(NSError *)error;
 
 # pragma mark
 - (void)image:(UIImage *)img didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo;

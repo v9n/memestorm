@@ -51,6 +51,21 @@
  */
 - (void) drawUi
 {
+    CGRect c = [[UIScreen mainScreen] bounds];
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    NSInteger n ;
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+            n = c.size.width;
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+            n = c.size.height;
+            break;
+    }
+
+    [self.chooseMemeButton setFrame:CGRectMake((n-self.chooseMemeButton.frame.size.width)/2, 100, chooseMemeButton.frame.size.width, chooseMemeButton.frame.size.height)];
+    
     UINavigationBar * bar =  self.navigationController.navigationBar;
     if ([[UINavigationBar class]respondsToSelector:@selector(appearance)]) {
 //        UIImage * bg = [bar createImageWithColor:[UIColor colorWithRed:35/255.0f green:35/255.0f blue:35/255.0f alpha:1.0f]];

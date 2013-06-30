@@ -61,7 +61,7 @@
 								<string key="NSFrameSize">{320, 30}</string>
 								<reference key="NSSuperview" ref="123647582"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="822953834"/>
+								<reference key="NSNextKeyView" ref="195513864"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">2</int>
@@ -108,13 +108,13 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIButton" id="822953834">
+					<object class="IBUIButton" id="195513864">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{128, 120}, {64, 64}}</string>
+						<string key="NSFrame">{{96, 120}, {128, 128}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="1034488908"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -125,7 +125,7 @@
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
-						<object class="NSColor" key="IBUINormalTitleShadowColor">
+						<object class="NSColor" key="IBUINormalTitleShadowColor" id="536125238">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
@@ -140,6 +140,38 @@
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">15</double>
+							<int key="NSfFlags">16</int>
+						</object>
+					</object>
+					<object class="IBUIButton" id="1034488908">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">-2147483347</int>
+						<string key="NSFrame">{{96, 210}, {128, 128}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<string key="IBUINormalTitle">Retry </string>
+						<reference key="IBUIHighlightedTitleColor" ref="845909804"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzE0IDAuMzA5ODAzOTIxNiAwLjUyMTU2ODYyNzUAA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="536125238"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">reload@2x.png</string>
+						</object>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<int key="type">2</int>
+							<int key="size">2</int>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">18</double>
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
@@ -212,18 +244,35 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">refreshButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="822953834"/>
+						<reference key="destination" ref="195513864"/>
 					</object>
 					<int key="connectionID">148</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">redownloadMemeButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1034488908"/>
+					</object>
+					<int key="connectionID">154</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">refresh:</string>
-						<reference key="source" ref="822953834"/>
+						<reference key="source" ref="195513864"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">147</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">retryDownloadMeme:</string>
+						<reference key="source" ref="1034488908"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">152</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -240,7 +289,8 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="884972655"/>
 							<reference ref="123647582"/>
-							<reference ref="822953834"/>
+							<reference ref="195513864"/>
+							<reference ref="1034488908"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -262,6 +312,7 @@
 							<reference ref="338338589"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">Meta Meme</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">105</int>
@@ -277,9 +328,15 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">146</int>
-						<reference key="object" ref="822953834"/>
+						<reference key="object" ref="195513864"/>
 						<reference key="parent" ref="191373211"/>
-						<string key="objectName">Refresh Button</string>
+						<string key="objectName">Refresh Page</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">150</int>
+						<reference key="object" ref="1034488908"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">Redownload Meme</string>
 					</object>
 				</array>
 			</object>
@@ -292,13 +349,14 @@
 				<string key="105.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="134.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="146.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="150.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="20.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">148</int>
+			<int key="maxID">154</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -307,12 +365,17 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="refresh:">id</string>
+						<string key="retryDownloadMeme:">id</string>
 						<string key="shareMeme:">id</string>
 						<string key="showComment:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="refresh:">
 							<string key="name">refresh:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="retryDownloadMeme:">
+							<string key="name">retryDownloadMeme:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="shareMeme:">
@@ -328,6 +391,7 @@
 						<string key="imgContainer">UIScrollView</string>
 						<string key="memeTitleLbl">UILabel</string>
 						<string key="metaMemeView">UIView</string>
+						<string key="redownloadMemeButton">UIButton</string>
 						<string key="refreshButton">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -342,6 +406,10 @@
 						<object class="IBToOneOutletInfo" key="metaMemeView">
 							<string key="name">metaMemeView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="redownloadMemeButton">
+							<string key="name">redownloadMemeButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="refreshButton">
 							<string key="name">refreshButton</string>
@@ -359,10 +427,10 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">refresh@2x.png</string>
-			<string key="NS.object.0">{128, 128}</string>
-		</object>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="refresh@2x.png">{256, 256}</string>
+			<string key="reload@2x.png">{256, 256}</string>
+		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>
