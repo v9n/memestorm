@@ -1,6 +1,9 @@
-0.3.0 (2012-12-28 -> ?)
-Road map
-	
+
+0.5.0
+* Fix crash issue #10
+* Fix meme get clear when coming back from comment. issue #11	
+* Notification for like  icon
+
 0.2.0 (2012-12-28 -> ?)
 
 * Use to Flat UI
