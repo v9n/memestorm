@@ -118,7 +118,6 @@ NSString * const AXBarBkgImg = @"toolbar-bg";
     isToolbarVisible = YES;
     [self handleSingleTap];
     [self.refreshButton setHidden:YES];
-    [currentImgView setImage:nil]; //clear image 
 }
 
 /**
@@ -359,6 +358,8 @@ fetchFromSource should be in Asyntask or run on anothe thread instad of meain th
         return 0;
     }
     
+    NSLog(@"Fetch succesfully d1");
+    
     if (tag==aTag) {
         if( [memes isEqual:nil] || [memes count]==0) {
             NSLog(@"No meme found");
@@ -372,6 +373,7 @@ fetchFromSource should be in Asyntask or run on anothe thread instad of meain th
     } else {
         NSLog(@"memePage is fetched succesfully. However, ignore loading. It seems user navigate and another download action triggered. So ignore it to avoid override current data. This is a old action.");
     }
+        NSLog(@"Fetch succesfully d2");
     return [memes count];
 }
 
@@ -848,9 +850,9 @@ Caculate which image we should load and show on screen
  Navigate to meme source list. Then user can choose to read another meme site.
  */
 - (void) showMemeListView
-{    
+{
+    [currentImgView setImage:nil]; //clear image     
     [[self navigationController] popViewControllerAnimated:YES];
-    
 }
 
 @end
