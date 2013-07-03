@@ -762,6 +762,14 @@ Caculate which image we should load and show on screen
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
     NSURLConnection * connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Thank you!"
+                                                      message:@"Your like contributed to the source site."
+                                                     delegate:nil
+                                            cancelButtonTitle:@"OK"
+                                            otherButtonTitles:nil];
+    [message show];
+    
 }
 
 # pragma mark - NSConnection delegate method
@@ -851,8 +859,17 @@ Caculate which image we should load and show on screen
  */
 - (void) showMemeListView
 {
-    [currentImgView setImage:nil]; //clear image     
+    [self resetMemeViewerStatus];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
+/**
+ Generally reset status of meme viewer
+ Clear the viewport of meme. Empty the title.
+ */
+- (void) resetMemeViewerStatus
+{
+    [currentImgView setImage:nil]; //clear image
+    [memeTitleLbl setText:@"Loading..."];
+}
 @end
