@@ -84,7 +84,7 @@
 			<key>Key</key>
 			<string>version</string>
 			<key>DefaultValue</key>
-			<string>0.4.2</string>
+			<string>0.5.0 b299</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -94,7 +94,7 @@
 			<key>Key</key>
 			<string>release-date</string>
 			<key>DefaultValue</key>
-			<string>2013/06/29</string>
+			<string>2013/07/02</string>
 		</dict>
 		<dict>
 			<key>Type</key>
